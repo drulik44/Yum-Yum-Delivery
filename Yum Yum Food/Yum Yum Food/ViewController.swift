@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         let label: UILabel = {
             let label = UILabel()
             label.text = "Hello, World!"
-            label.font = .Rubick.regular.size(of: 30)
+            label.font = .Rubick.boldItalic.size(of: 30)
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
