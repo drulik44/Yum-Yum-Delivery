@@ -12,13 +12,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = AppColors.backgroundCell
+        view.backgroundColor = AppColors.background
         
         let label: UILabel = {
             let label = UILabel()
             label.text = "Hello, World!"
             label.font = .Rubick.boldItalic.size(of: 30)
             label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = AppColors.textColorMain
             return label
         }()
         
