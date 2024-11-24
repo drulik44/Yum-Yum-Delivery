@@ -6,14 +6,30 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        
+        let label: UILabel = {
+            let label = UILabel()
+            label.text = "Hello, World!"
+            label.font = .Rubick.regular.size(of: 30)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        view.addSubview(label)
+        
+        label.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        
     }
 
 
 }
-

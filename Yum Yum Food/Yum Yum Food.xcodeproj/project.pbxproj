@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A32270D22CF2AA6B00D9BEC3 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yum Yum Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "Yum Yum Food";
 			packageProductDependencies = (
+				A32270D22CF2AA6B00D9BEC3 /* SnapKit */,
 			);
 			productName = "Yum Yum Food";
 			productReference = A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = A32270B02CF2A21500D9BEC3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A32270BA2CF2A21500D9BEC3 /* Products */;
 			projectDirPath = "";
@@ -333,6 +342,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A32270D22CF2AA6B00D9BEC3 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A32270B12CF2A21500D9BEC3 /* Project object */;
 }
