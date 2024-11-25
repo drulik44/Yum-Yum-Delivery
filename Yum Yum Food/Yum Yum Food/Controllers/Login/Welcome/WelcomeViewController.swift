@@ -54,6 +54,8 @@ class WelcomeViewController: UIViewController {
         return button
     }()
     
+    let googleButto = UIButton()
+    
     func setupBackground() {
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "WelcomePhoto")
