@@ -24,7 +24,7 @@ class MainCoordinator: Coordinator {
 
     func isLoggedIn() -> Bool {
         // Логика проверки, залогинен ли пользователь
-        return true
+        return false
     }
 
     func showWelcomeScreen() {
