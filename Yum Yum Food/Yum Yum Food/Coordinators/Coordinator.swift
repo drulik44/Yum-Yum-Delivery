@@ -39,6 +39,12 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(loginVC, animated: true)
     }
 
+    func showsignInScreen() {
+        let signUpVC = SignInViewController()
+        signUpVC.coordinator = self
+        navigationController.pushViewController(signUpVC, animated: true)
+    }
+    
     func showMainTabBar() {
         let tabBarController = MainTabBarController()
         

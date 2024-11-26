@@ -17,6 +17,9 @@ class WelcomeViewController: UIViewController {
         addToSuperview()
         setupConstraints()
         setupAccountSection()
+        startWithEmailButton.addTarget(self, action: #selector(startWithEmailButtonTapped), for: .touchUpInside)
+
+        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
     }
     
     let welcomeLabel: UILabel = {
@@ -137,6 +140,7 @@ class WelcomeViewController: UIViewController {
         button.titleLabel?.font = .Rubick.regular.size(of: 15)
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -183,6 +187,8 @@ class WelcomeViewController: UIViewController {
         view.addSubview(googleButton)
         view.addSubview(facebookButton)
     }
+    
+    
     
     func setupConstraints() {
         welcomeLabel.snp.makeConstraints { make in
@@ -236,5 +242,19 @@ class WelcomeViewController: UIViewController {
             make.width.equalTo(320)
             make.height.equalTo(40)
         }
+        
+        
     }
+    
+    //MARK: - Функціі для натискання
+    
+    @objc func startWithEmailButtonTapped() {
+        coordinator?.showLoginScreen()
+    }
+    
+    @objc func signInButtonTapped() {
+        coordinator?.showsignInScreen()
+    }
+    
+    
 }

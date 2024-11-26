@@ -1,21 +1,22 @@
 //
-//  LoginViewController.swift
+//  SignInViewController.swift
 //  Yum Yum Food
 //
-//  Created by Руслан Жидких on 24.11.2024.
+//  Created by Руслан Жидких on 26.11.2024.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class SignInViewController: UIViewController {
     weak var coordinator: MainCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
+        view.backgroundColor = .green
     }
     
+
     func setupUI() {
         // Скрываем кнопку "назад"
         navigationItem.hidesBackButton = true
