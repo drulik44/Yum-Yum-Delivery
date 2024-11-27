@@ -44,6 +44,8 @@
 		A3C20E622CF60F760082E881 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E372CF60F760082E881 /* AppColors.swift */; };
 		A3C20E632CF60F760082E881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E392CF60F760082E881 /* AppDelegate.swift */; };
 		A3C20E642CF60F760082E881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E3E2CF60F760082E881 /* SceneDelegate.swift */; };
+		A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */; };
+		A3C20E702CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E6F2CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,7 @@
 		A3C20E3B2CF60F760082E881 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3C20E3C2CF60F760082E881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3C20E3E2CF60F760082E881 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A3C20E6F2CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkyFloatingLabelTextField+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -101,6 +104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */,
+				A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +234,7 @@
 				A3C20E222CF60F760082E881 /* UIColor+Extension.swift */,
 				A3C20E232CF60F760082E881 /* UIFont+Extension.swift */,
 				A3C20E242CF60F760082E881 /* UIImage+Resize.swift */,
+				A3C20E6F2CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 			name = "Yum Yum Food";
 			packageProductDependencies = (
 				A32270D22CF2AA6B00D9BEC3 /* SnapKit */,
+				A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */,
 			);
 			productName = "Yum Yum Food";
 			productReference = A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */;
@@ -348,6 +354,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A3C20E6C2CF61E300082E881 /* XCRemoteSwiftPackageReference "SkyFloatingLabelTextField" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A32270BA2CF2A21500D9BEC3 /* Products */;
@@ -399,6 +406,7 @@
 				A3C20E572CF60F760082E881 /* RestaurantsViewController.swift in Sources */,
 				A3C20E582CF60F760082E881 /* MainTabBarController.swift in Sources */,
 				A3C20E592CF60F760082E881 /* Coordinator.swift in Sources */,
+				A3C20E702CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift in Sources */,
 				A3C20E5A2CF60F760082E881 /* FavoriteCoordinator.swift in Sources */,
 				A3C20E5B2CF60F760082E881 /* HomeCoordinator.swift in Sources */,
 				A3C20E5C2CF60F760082E881 /* ProfileCoordinator.swift in Sources */,
@@ -632,6 +640,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		A3C20E6C2CF61E300082E881 /* XCRemoteSwiftPackageReference "SkyFloatingLabelTextField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Skyscanner/SkyFloatingLabelTextField";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -639,6 +655,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3C20E6C2CF61E300082E881 /* XCRemoteSwiftPackageReference "SkyFloatingLabelTextField" */;
+			productName = SkyFloatingLabelTextField;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
