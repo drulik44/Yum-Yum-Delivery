@@ -89,7 +89,7 @@ class WelcomeViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Continue with Google", for: .normal)
+        button.setTitle("  Continue with Google", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         button.setImage(UIImage(named: "Gicon"), for: .normal)
@@ -110,7 +110,7 @@ class WelcomeViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Continue with Facebook", for: .normal)
+        button.setTitle(" Continue with Facebook", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         button.setImage(UIImage(named: "Facebook"), for: .normal)
