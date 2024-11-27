@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         passwordTextField.rightView = passwordToggleButton
             passwordTextField.rightViewMode = .always
+        tapped()
         
         view.backgroundColor = AppColors.background
         setupAddToSuperview()
@@ -36,7 +37,7 @@ class LoginViewController: UIViewController {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
-        label.textColor = AppColors.gray
+        label.textColor = AppColors.subTitleColor
         label.font = .Rubick.bold.size(of:16)
         return label
     }()
@@ -44,7 +45,7 @@ class LoginViewController: UIViewController {
     let emailLabel: UILabel = {
         let label = UILabel()
         label.text = "Email"
-        label.textColor = AppColors.gray
+        label.textColor = AppColors.subTitleColor
         label.font = .Rubick.bold.size(of:16)
         return label
     }()
@@ -52,11 +53,19 @@ class LoginViewController: UIViewController {
     let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
-        label.textColor = AppColors.gray
+        label.textColor = AppColors.subTitleColor
         label.font = .Rubick.bold.size(of:16)
         return label
     }()
     
+    let accountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Already have an account? "
+        label.font = .Rubick.regular.size(of: 15)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     //MARK: - TextField
     
@@ -140,15 +149,7 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    let accountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Already have an account? "
-        label.font = .Rubick.regular.size(of: 15)
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+   
     
     let loginButton: UIButton = {
         let button = UIButton()
@@ -156,7 +157,6 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = .Rubick.regular.size(of: 15)
         button.setTitleColor(AppColors.main, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
     
@@ -206,7 +206,7 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Continue with Google", for: .normal)
+        button.setTitle("  Continue with Google", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         button.setImage(UIImage(named: "Gicon"), for: .normal)
@@ -227,7 +227,7 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Continue with Facebook", for: .normal)
+        button.setTitle(" Continue with Facebook", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         button.setImage(UIImage(named: "Facebook"), for: .normal)
@@ -240,9 +240,6 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    func setupUI() {
-        navigationItem.hidesBackButton = true
-    }
     
     func setupAddToSuperview() {
         view.addSubview(singUpLabel)
@@ -278,7 +275,13 @@ class LoginViewController: UIViewController {
 
 
     
+        func tapped() {
+            loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    }
     
+    @objc func loginButtonTapped() {
+        coordinator?.showsignInScreen()
+    }
     
     func setupConstraints() {
         singUpLabel.snp.makeConstraints { make in
@@ -336,7 +339,7 @@ class LoginViewController: UIViewController {
         }
         
         signInWithLabel.snp.makeConstraints { make in
-            make.top.equalTo(signUpButton.snp.bottom).offset(50)
+            make.top.equalTo(signUpButton.snp.bottom).offset(60)
             make.centerX.equalTo(signUpButton)
         }
         
@@ -356,7 +359,7 @@ class LoginViewController: UIViewController {
         
         googleButton.snp.makeConstraints { make in
             make.centerX.equalTo(signInWithLabel)
-            make.top.equalTo(signInWithLabel.snp.bottom).offset(30)
+            make.top.equalTo(signInWithLabel.snp.bottom).offset(20)
             make.width.equalTo(320)
             make.height.equalTo(40)
         }

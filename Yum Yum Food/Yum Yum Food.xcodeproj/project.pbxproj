@@ -46,6 +46,7 @@
 		A3C20E642CF60F760082E881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E3E2CF60F760082E881 /* SceneDelegate.swift */; };
 		A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */; };
 		A3C20E702CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E6F2CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift */; };
+		A3C20E732CF74AEF0082E881 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C20E712CF74AEF0082E881 /* SignInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,15 +89,8 @@
 		A3C20E3C2CF60F760082E881 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3C20E3E2CF60F760082E881 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A3C20E6F2CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkyFloatingLabelTextField+Extensions.swift"; sourceTree = "<group>"; };
+		A3C20E712CF74AEF0082E881 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		A3C20E652CF618FD0082E881 /* Sign in */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Sign in";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A32270B62CF2A21500D9BEC3 /* Frameworks */ = {
@@ -178,7 +172,7 @@
 		A3C20E152CF60F760082E881 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A3C20E652CF618FD0082E881 /* Sign in */,
+				A3C20E722CF74AEF0082E881 /* Sign in */,
 				A3C20E0E2CF60F760082E881 /* Login */,
 				A3C20E142CF60F760082E881 /* Welcome */,
 			);
@@ -301,6 +295,14 @@
 			path = "Yum Yum Food";
 			sourceTree = "<group>";
 		};
+		A3C20E722CF74AEF0082E881 /* Sign in */ = {
+			isa = PBXGroup;
+			children = (
+				A3C20E712CF74AEF0082E881 /* SignInViewController.swift */,
+			);
+			path = "Sign in";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -315,9 +317,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				A3C20E652CF618FD0082E881 /* Sign in */,
 			);
 			name = "Yum Yum Food";
 			packageProductDependencies = (
@@ -397,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3C20E732CF74AEF0082E881 /* SignInViewController.swift in Sources */,
 				A3C20E512CF60F760082E881 /* HomeViewController.swift in Sources */,
 				A3C20E522CF60F760082E881 /* FavoriteViewController.swift in Sources */,
 				A3C20E532CF60F760082E881 /* LoginViewController.swift in Sources */,
