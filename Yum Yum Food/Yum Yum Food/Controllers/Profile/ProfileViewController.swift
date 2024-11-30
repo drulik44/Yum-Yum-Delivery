@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import SnapKit
 
 class ProfileViewController: UIViewController {
     weak var coordinator: ProfileCoordinator?
@@ -13,18 +16,65 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = AppColors.background
+        setupUI()
+        setupConstraints()
+        fetchUserData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - USER INFO
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColors.textColorMain
+        label.font = .Rubick.bold.size( of: 25)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let emailLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColors.subTitleColor
+        label.font = .Rubick.regular.size( of: 18)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    //MARK: - Setup user info
+    private func fetchUserData() {
+        if let user = Auth.auth().currentUser {
+            self.nameLabel.text = user.displayName ?? "No name"
+            self.emailLabel.text = user.email
+        }
     }
-    */
-
+    
+    //MARK: - Setup UI
+    func setupUI() {
+        view.addSubview(nameLabel)
+        view.addSubview(emailLabel)
+        
+    }
+    
+    
+    
+    
+    //MARK: - SETUP CONSTRAINTS
+    
+    func setupConstraints() {
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+        }
+        
+        
+    }
+    
 }

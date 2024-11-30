@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
@@ -9,7 +10,8 @@ protocol Coordinator: AnyObject {
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-
+    private let authService = AuthService()
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -23,8 +25,8 @@ class MainCoordinator: Coordinator {
     }
 
     func isLoggedIn() -> Bool {
-        // Логика проверки, залогинен ли пользователь
-        return false
+      // return false
+         return Auth.auth().currentUser != nil
     }
 
     func showWelcomeScreen() {
@@ -52,27 +54,27 @@ class MainCoordinator: Coordinator {
         let homeNavController = UINavigationController()
         let homeCoordinator = HomeCoordinator(navigationController: homeNavController)
         homeCoordinator.start()
-        homeNavController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        homeNavController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "Home"), tag: 0)
         
         let restaurantsNavController = UINavigationController()
         let restaurantsCoordinator = RestaurantsCoordinator(navigationController: restaurantsNavController)
         restaurantsCoordinator.start()
-        restaurantsNavController.tabBarItem = UITabBarItem(title: "Restaurants", image: UIImage(systemName: "fork.knife"), tag: 1)
+        restaurantsNavController.tabBarItem = UITabBarItem(title: "Restaurants", image: UIImage(named: "Restaurants"), tag: 1)
         
         let searchNavController = UINavigationController()
         let searchCoordinator = SearchCoordinator(navigationController: searchNavController)
         searchCoordinator.start()
-        searchNavController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
+        searchNavController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "Search"), tag: 2)
         
         let favoriteNavController = UINavigationController()
         let favoriteCoordinator = FavoriteCoordinator(navigationController: favoriteNavController)
         favoriteCoordinator.start()
-        favoriteNavController.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "star"), tag: 3)
+        favoriteNavController.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(named: "Favorite"), tag: 3)
         
         let profileNavController = UINavigationController()
         let profileCoordinator = ProfileCoordinator(navigationController: profileNavController)
         profileCoordinator.start()
-        profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 4)
+        profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "Profile"), tag: 4)
         
         tabBarController.viewControllers = [homeNavController, restaurantsNavController, searchNavController, favoriteNavController, profileNavController]
         navigationController.setViewControllers([tabBarController], animated: false)
