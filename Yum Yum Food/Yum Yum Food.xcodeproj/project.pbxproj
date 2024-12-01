@@ -54,6 +54,7 @@
 		A3C20E832CF7DB680082E881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3C20E822CF7DB680082E881 /* GoogleService-Info.plist */; };
 		A3C421342CF8934200A53BD8 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C421332CF8934200A53BD8 /* AuthService.swift */; };
 		A3C421362CF8940D00A53BD8 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C421352CF8940D00A53BD8 /* UserData.swift */; };
+		A3C4214F2CFBE00D00A53BD8 /* UserOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C4214E2CFBE00D00A53BD8 /* UserOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		A3C20E822CF7DB680082E881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3C421332CF8934200A53BD8 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A3C421352CF8940D00A53BD8 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		A3C4214E2CFBE00D00A53BD8 /* UserOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				A3C421352CF8940D00A53BD8 /* UserData.swift */,
+				A3C4214E2CFBE00D00A53BD8 /* UserOption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 		A3C20E3F2CF60F760082E881 /* Yum Yum Food */ = {
 			isa = PBXGroup;
 			children = (
+				A3C4214D2CFBDEA700A53BD8 /* Views */,
 				A3C421322CF8929400A53BD8 /* Services */,
 				A3C20E1A2CF60F760082E881 /* Controllers */,
 				A3C20E212CF60F760082E881 /* Coordinators */,
@@ -334,6 +338,13 @@
 				A3C421332CF8934200A53BD8 /* AuthService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A3C4214D2CFBDEA700A53BD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +465,7 @@
 				A3C20E5E2CF60F760082E881 /* SearchCoordinator.swift in Sources */,
 				A3C20E5F2CF60F760082E881 /* UIColor+Extension.swift in Sources */,
 				A3C421362CF8940D00A53BD8 /* UserData.swift in Sources */,
+				A3C4214F2CFBE00D00A53BD8 /* UserOption.swift in Sources */,
 				A3C20E602CF60F760082E881 /* UIFont+Extension.swift in Sources */,
 				A3C20E612CF60F760082E881 /* UIImage+Resize.swift in Sources */,
 				A3C20E622CF60F760082E881 /* AppColors.swift in Sources */,
