@@ -18,6 +18,8 @@ class WelcomeViewController: UIViewController {
         setupConstraints()
         setupAccountSection()
         startWithEmailButton.addTarget(self, action: #selector(startWithEmailButtonTapped), for: .touchUpInside)
+        navigationItem.hidesBackButton = true
+
 
         signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
     }

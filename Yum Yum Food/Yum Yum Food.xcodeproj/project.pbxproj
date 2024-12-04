@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A30881D42CFFAEBC00FDA87D /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30881D32CFFAEBC00FDA87D /* OrderViewController.swift */; };
+		A30881D62CFFB1FD00FDA87D /* PaymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30881D52CFFB1FD00FDA87D /* PaymentsViewController.swift */; };
+		A30881D82CFFB21100FDA87D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30881D72CFFB21100FDA87D /* SettingsViewController.swift */; };
+		A30881DA2CFFB22C00FDA87D /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30881D92CFFB22C00FDA87D /* ContactViewController.swift */; };
+		A30881DC2CFFB41100FDA87D /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30881DB2CFFB41100FDA87D /* UserProfileViewController.swift */; };
+		A30881DE2D00F85100FDA87D /* HelpFAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30881DD2D00F85100FDA87D /* HelpFAQViewController.swift */; };
 		A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A32270D22CF2AA6B00D9BEC3 /* SnapKit */; };
 		A3C20E402CF60F760082E881 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3C20E272CF60F760082E881 /* Rubik-Black.ttf */; };
 		A3C20E412CF60F760082E881 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3C20E282CF60F760082E881 /* Rubik-BlackItalic.ttf */; };
@@ -58,6 +64,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A30881D32CFFAEBC00FDA87D /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		A30881D52CFFB1FD00FDA87D /* PaymentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsViewController.swift; sourceTree = "<group>"; };
+		A30881D72CFFB21100FDA87D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A30881D92CFFB22C00FDA87D /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		A30881DB2CFFB41100FDA87D /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		A30881DD2D00F85100FDA87D /* HelpFAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFAQViewController.swift; sourceTree = "<group>"; };
 		A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yum Yum Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3C20E092CF60F760082E881 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A3C20E0B2CF60F760082E881 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +178,12 @@
 			isa = PBXGroup;
 			children = (
 				A3C20E0F2CF60F760082E881 /* ProfileViewController.swift */,
+				A30881D32CFFAEBC00FDA87D /* OrderViewController.swift */,
+				A30881D52CFFB1FD00FDA87D /* PaymentsViewController.swift */,
+				A30881D72CFFB21100FDA87D /* SettingsViewController.swift */,
+				A30881D92CFFB22C00FDA87D /* ContactViewController.swift */,
+				A30881DB2CFFB41100FDA87D /* UserProfileViewController.swift */,
+				A30881DD2D00F85100FDA87D /* HelpFAQViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -447,20 +465,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3C20E732CF74AEF0082E881 /* SignInViewController.swift in Sources */,
+				A30881DC2CFFB41100FDA87D /* UserProfileViewController.swift in Sources */,
 				A3C421342CF8934200A53BD8 /* AuthService.swift in Sources */,
 				A3C20E512CF60F760082E881 /* HomeViewController.swift in Sources */,
 				A3C20E522CF60F760082E881 /* FavoriteViewController.swift in Sources */,
 				A3C20E532CF60F760082E881 /* LoginViewController.swift in Sources */,
 				A3C20E542CF60F760082E881 /* ProfileViewController.swift in Sources */,
+				A30881DE2D00F85100FDA87D /* HelpFAQViewController.swift in Sources */,
 				A3C20E552CF60F760082E881 /* SearchViewController.swift in Sources */,
 				A3C20E562CF60F760082E881 /* WelcomeViewController.swift in Sources */,
 				A3C20E572CF60F760082E881 /* RestaurantsViewController.swift in Sources */,
 				A3C20E582CF60F760082E881 /* MainTabBarController.swift in Sources */,
 				A3C20E592CF60F760082E881 /* Coordinator.swift in Sources */,
 				A3C20E702CF6266B0082E881 /* SkyFloatingLabelTextField+Extensions.swift in Sources */,
+				A30881DA2CFFB22C00FDA87D /* ContactViewController.swift in Sources */,
 				A3C20E5A2CF60F760082E881 /* FavoriteCoordinator.swift in Sources */,
 				A3C20E5B2CF60F760082E881 /* HomeCoordinator.swift in Sources */,
 				A3C20E5C2CF60F760082E881 /* ProfileCoordinator.swift in Sources */,
+				A30881D42CFFAEBC00FDA87D /* OrderViewController.swift in Sources */,
 				A3C20E5D2CF60F760082E881 /* RestaurantsCoordinator.swift in Sources */,
 				A3C20E5E2CF60F760082E881 /* SearchCoordinator.swift in Sources */,
 				A3C20E5F2CF60F760082E881 /* UIColor+Extension.swift in Sources */,
@@ -468,7 +490,9 @@
 				A3C4214F2CFBE00D00A53BD8 /* UserOption.swift in Sources */,
 				A3C20E602CF60F760082E881 /* UIFont+Extension.swift in Sources */,
 				A3C20E612CF60F760082E881 /* UIImage+Resize.swift in Sources */,
+				A30881D82CFFB21100FDA87D /* SettingsViewController.swift in Sources */,
 				A3C20E622CF60F760082E881 /* AppColors.swift in Sources */,
+				A30881D62CFFB1FD00FDA87D /* PaymentsViewController.swift in Sources */,
 				A3C20E632CF60F760082E881 /* AppDelegate.swift in Sources */,
 				A3C20E642CF60F760082E881 /* SceneDelegate.swift in Sources */,
 			);

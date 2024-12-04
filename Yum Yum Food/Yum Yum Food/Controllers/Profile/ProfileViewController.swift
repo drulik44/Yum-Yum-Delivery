@@ -12,25 +12,46 @@ import SnapKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     weak var coordinator: ProfileCoordinator?
-
-    private let tableView = UITableView()
+    private let service = AuthService()
+    
+    
+    
     private let cellIdentifier = "ProfileOptionCell"
-
+    
     // Данные для таблицы
     private let options = UserOption.options
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func loadView() {
+        super.loadView()
         view.backgroundColor = AppColors.background
 
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //view.backgroundColor = AppColors.background
+        
         setupUI()
         setupConstraints()
         fetchUserData()
     }
     
     // MARK: - USER INFO
-    private let nameLabel: UILabel = {
+    
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 50 // Половина ширины/высоты для круговой маски
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = AppColors.main.cgColor
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 25)
@@ -39,7 +60,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return label
     }()
     
-    private let emailLabel: UILabel = {
+    private lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColors.gray
         label.font = .Rubick.regular.size(of: 18)
@@ -57,19 +78,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         button.setTitle("Log Out", for: .normal)
         button.setTitleColor(AppColors.main, for: .normal)
         button.titleLabel?.font = .Rubick.regular.size(of: 18)
-        button.setImage(UIImage(named: "Gicon"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         
-        button.layer.borderWidth = 1 // Ширина обводки
+        // Установка обводки
+        button.layer.borderWidth = 1
         button.layer.borderColor = AppColors.main.cgColor
+        
         if let originalImage = UIImage(named: "Log out") {
             let resizedImage = originalImage.resized(to: CGSize(width: 26, height: 26))
             let tintedImage = resizedImage.withRenderingMode(.alwaysTemplate)
-            button.setImage(resizedImage, for: .normal)
-            button.tintColor = AppColors.main
+            button.setImage(tintedImage, for: .normal)
         }
+        
+        button.tintColor = AppColors.main
         return button
     }()
+    
     
     // MARK: - Setup user info
     private func fetchUserData() {
@@ -78,26 +102,45 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.emailLabel.text = user.email
         }
     }
+   
+    
+    lazy var tableView: UITableView = {
+        let tv = UITableView(frame: .zero , style: .grouped)
+        tv.delegate = self
+        tv.dataSource = self
+        tv.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tv.showsVerticalScrollIndicator = false
+        tv.scrollsToTop = false
+        tv.separatorColor  = UIColor.clear
+        tv.separatorStyle = .none
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.backgroundColor = AppColors.background
+        return tv
+    }()
     
     // MARK: - Setup UI
     private func setupUI() {
+        view.addSubview(profileImageView)
         view.addSubview(nameLabel)
         view.addSubview(emailLabel)
         view.addSubview(tableView)
         view.addSubview(logOut)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = AppColors.background
-
+       
+        logOut.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
+        
     }
     
     // MARK: - Setup Constraints
     private func setupConstraints() {
+        profileImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(100)
+            make.top.equalToSuperview().offset(100)
+        }
+        
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.top.equalTo(profileImageView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         
@@ -109,13 +152,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.snp.makeConstraints { make in
             make.top.equalTo(emailLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(logOut.snp.top).offset(-25)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-75)
         }
         
         logOut.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(20)
-           // make.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-150) // Убедитесь, что кнопка видна
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50) // Убедитесь, что кнопка
             make.height.equalTo(40)
             make.width.equalTo(120)
         }
@@ -133,7 +175,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.imageView?.image = option.icon
         cell.textLabel?.font = .Rubick.regular.size(of: 18)
         cell.textLabel?.textColor = AppColors.textColorMain
-        cell.imageView?.tintColor = AppColors.main // Если используете SF Symbols
+        cell.imageView?.tintColor = AppColors.main
         cell.selectionStyle = .none
         
         cell.backgroundColor = UIColor.clear
@@ -143,11 +185,35 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedOption = options[indexPath.row].title
-       /* switch selectedOption{
-        case "My Profile":
-            
-        default:
-            break
-        }*/
+        DispatchQueue.main.async {
+            switch selectedOption {
+            case "My Profile":
+                self.coordinator?.showUserProfile()
+            case "My Orders":
+                self.coordinator?.showOrderScreen()
+                
+            case "Payments Methods":
+                self.coordinator?.showPaymentsScreen()
+            case "Contact Us":
+                self.coordinator?.showContactScreen()
+            case "Settings":
+                self.coordinator?.showSettingsScreen()
+            case "Help & FAQ":
+                self.coordinator?.showHelpScreen()
+            default:
+                break
+            }
+        }
     }
+
+    
+    @objc private func logOutTapped() {
+        do {
+            try Auth.auth().signOut()
+            coordinator?.showWelcomeScreen() // Переход к экрану входа
+        } catch let error as NSError {
+            print("Ошибка выхода из аккаунта: \(error.localizedDescription)")
+        }
+    }
+
 }

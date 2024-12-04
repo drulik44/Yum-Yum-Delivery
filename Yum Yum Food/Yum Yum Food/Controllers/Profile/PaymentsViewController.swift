@@ -1,19 +1,20 @@
 //
-//  HomeViewController.swift
+//  PaymentsViewController.swift
 //  Yum Yum Food
 //
-//  Created by Руслан Жидких on 24.11.2024.
+//  Created by Руслан Жидких on 03.12.2024.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController {
-    weak var coordinator: HomeCoordinator?
+class PaymentsViewController: UIViewController {
+    weak var coordinator: ProfileCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = AppColors.background
+
+        // Do any additional setup after loading the view.
     }
     
 
