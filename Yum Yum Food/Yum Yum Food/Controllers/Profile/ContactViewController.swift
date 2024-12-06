@@ -15,6 +15,8 @@ class ContactViewController: UIViewController {
         view.backgroundColor = AppColors.background
         setupUI()
         setupConstraints()
+        navigationController?.setupCustomBackButton(for: self)
+
     }
 
     //MARK: - Setup UI

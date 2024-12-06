@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 
 class AuthService {
     
@@ -31,17 +32,32 @@ class AuthService {
                     return
                 }
                 
-                // Отправить письмо для подтверждения электронной почты (если требуется Firebase)
-                result?.user.sendEmailVerification { error in
+                // Сохранить данные пользователя в Firestore
+                guard let uid = result?.user.uid else { return }
+                let userRef = Firestore.firestore().collection("users").document(uid)
+                userRef.setData([
+                    "name": user.name ?? "",
+                    "email": user.email,
+                    "surname": "" // Поле для фамилии, которое можно будет заполнить позже
+                ]) { error in
                     if let error = error {
-                        print("Ошибка отправки письма для подтверждения: \(error.localizedDescription)")
-                    } else {
-                        print("Письмо для подтверждения электронной почты отправлено.")
+                        print("Ошибка сохранения данных пользователя: \(error.localizedDescription)")
+                        completion(.failure(error))
+                        return
                     }
+
+                    // Отправить письмо для подтверждения электронной почты (если требуется Firebase)
+                    result?.user.sendEmailVerification { error in
+                        if let error = error {
+                            print("Ошибка отправки письма для подтверждения: \(error.localizedDescription)")
+                        } else {
+                            print("Письмо для подтверждения электронной почты отправлено.")
+                        }
+                    }
+
+                    self.signOut()
+                    completion(.success(true))
                 }
-                
-                self.signOut()
-                completion(.success(true))
             }
         }
     }
@@ -80,5 +96,6 @@ enum SigInError: Error {
     case invalidUser
     case notVerified
 }
+
 
 

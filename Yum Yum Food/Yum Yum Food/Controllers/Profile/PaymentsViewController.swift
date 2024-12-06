@@ -6,26 +6,80 @@
 //
 
 import UIKit
+import SnapKit
 
 class PaymentsViewController: UIViewController {
     weak var coordinator: ProfileCoordinator?
 
+    private var options = paymentMethodData
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
-
-        // Do any additional setup after loading the view.
+        navigationController?.setupCustomBackButton(for: self)
+        setupUI()
     }
-    
 
-    /*
-    // MARK: - Navigation
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColors.textColorMain
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold) // Настройка шрифта и размера текста
+        label.textAlignment = .left
+        label.text = "Payment Methods"
+        return label
+    }()
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private lazy var paymentTableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.register(PaymentOptionCell.self, forCellReuseIdentifier: PaymentOptionCell.reuseableId)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+
+    private func setupUI() {
+        view.addSubview(titleLabel)
+        view.addSubview(paymentTableView)
+
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+
+        paymentTableView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
-    */
+}
 
+extension PaymentsViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PaymentOptionCell.reuseableId, for: indexPath) as! PaymentOptionCell
+        let option = options[indexPath.row]
+        cell.setup(for: option)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        for (index, _) in options.enumerated() {
+            options[index].selected = index == indexPath.row
+        }
+        tableView.reloadData()
+    }
 }

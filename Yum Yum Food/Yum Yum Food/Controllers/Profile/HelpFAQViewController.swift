@@ -10,7 +10,16 @@ import SnapKit
 
 class HelpFAQViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private let tableView = UITableView()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "faqCell")
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+
     private let faqData = [
         ("General Questions", [
             "How to place an order?",
@@ -55,14 +64,11 @@ class HelpFAQViewController: UIViewController, UITableViewDelegate, UITableViewD
         title = "Help & FAQ"
         view.backgroundColor = AppColors.background
         setupTableView()
+        navigationController?.setupCustomBackButton(for: self)
+
     }
 
     private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "faqCell")
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
@@ -116,7 +122,7 @@ class HelpFAQViewController: UIViewController, UITableViewDelegate, UITableViewD
         headerLabel.text = faqData[section].0
         headerLabel.font = .boldSystemFont(ofSize: 18)
         headerLabel.textColor = .white
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         headerView.addSubview(headerLabel)
 
         headerLabel.snp.makeConstraints { make in
@@ -128,3 +134,4 @@ class HelpFAQViewController: UIViewController, UITableViewDelegate, UITableViewD
         return headerView
     }
 }
+

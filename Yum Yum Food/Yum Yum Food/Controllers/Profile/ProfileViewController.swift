@@ -4,17 +4,17 @@
 //
 //  Created by Руслан Жидких on 24.11.2024.
 //
+
 import UIKit
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 import SnapKit
 
-
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     weak var coordinator: ProfileCoordinator?
     private let service = AuthService()
-    
-    
     
     private let cellIdentifier = "ProfileOptionCell"
     
@@ -24,17 +24,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func loadView() {
         super.loadView()
         view.backgroundColor = AppColors.background
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //view.backgroundColor = AppColors.background
-        
         setupUI()
         setupConstraints()
+        fetchUserProfileImage()
         fetchUserData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(userProfileUpdated), name: NSNotification.Name("UserProfileUpdated"), object: nil)
     }
     
     // MARK: - USER INFO
@@ -47,9 +47,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = AppColors.main.cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentImagePicker))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
-
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -94,24 +96,100 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return button
     }()
     
-    
     // MARK: - Setup user info
+    
     private func fetchUserData() {
         if let user = Auth.auth().currentUser {
-            self.nameLabel.text = user.displayName ?? "No name"
-            self.emailLabel.text = user.email
+            let userRef = Firestore.firestore().collection("users").document(user.uid)
+            userRef.getDocument { document, error in
+                if let error = error {
+                    print("Ошибка получения данных пользователя: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let document = document, document.exists, let data = document.data() else { return }
+                self.nameLabel.text = data["name"] as? String ?? "No name"
+                self.emailLabel.text = data["email"] as? String
+                
+                
+                
+                }
+            }
+        }
+    
+    
+    private func fetchUserProfileImage() {
+        if let imagePath = UserDefaults.standard.string(forKey: "profileImagePath"),
+           let image = UIImage(contentsOfFile: imagePath) {
+            profileImageView.image = image
         }
     }
-   
     
+    private func saveProfileImageToLocal(_ image: UIImage) {
+        guard let data = image.jpegData(compressionQuality: 0.8) else { return }
+        
+        // Создаем путь для сохранения изображения
+        let filename = getDocumentsDirectory().appendingPathComponent("profileImage.jpg")
+        
+        do {
+            // Сохраняем файл
+            try data.write(to: filename)
+            UserDefaults.standard.set(filename.path, forKey: "profileImagePath") // Сохраняем путь в UserDefaults
+            print("Изображение профиля успешно сохранено!")
+        } catch {
+            print("Ошибка сохранения изображения: \(error.localizedDescription)")
+        }
+    }
+
+   
+
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    @objc private func userProfileUpdated() {
+        fetchUserData()
+    }
+    
+    // MARK: - UIImagePickerController
+    
+    @objc private func presentImagePicker() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            return
+        }
+        
+        profileImageView.image = selectedImage
+        dismiss(animated: true, completion: nil)
+        
+        // Сохранение изображения локально
+        saveProfileImageToLocal(selectedImage)
+        
+       
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+  
+
     lazy var tableView: UITableView = {
-        let tv = UITableView(frame: .zero , style: .grouped)
+        let tv = UITableView(frame: .zero, style: .grouped)
         tv.delegate = self
         tv.dataSource = self
         tv.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tv.showsVerticalScrollIndicator = false
         tv.scrollsToTop = false
-        tv.separatorColor  = UIColor.clear
+        tv.separatorColor = UIColor.clear
         tv.separatorStyle = .none
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = AppColors.background
@@ -119,6 +197,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
     
     // MARK: - Setup UI
+    
     private func setupUI() {
         view.addSubview(profileImageView)
         view.addSubview(nameLabel)
@@ -126,12 +205,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         view.addSubview(tableView)
         view.addSubview(logOut)
         
-       
         logOut.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
-        
     }
     
     // MARK: - Setup Constraints
+    
     private func setupConstraints() {
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -167,7 +245,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let option = options[indexPath.row]
@@ -177,12 +254,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.textLabel?.textColor = AppColors.textColorMain
         cell.imageView?.tintColor = AppColors.main
         cell.selectionStyle = .none
-        
         cell.backgroundColor = UIColor.clear
         return cell
     }
     
     // MARK: - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedOption = options[indexPath.row].title
         DispatchQueue.main.async {
@@ -191,7 +268,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.coordinator?.showUserProfile()
             case "My Orders":
                 self.coordinator?.showOrderScreen()
-                
             case "Payments Methods":
                 self.coordinator?.showPaymentsScreen()
             case "Contact Us":
@@ -205,7 +281,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
-
+    
+    // MARK: - Log Out
     
     @objc private func logOutTapped() {
         do {
@@ -215,5 +292,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("Ошибка выхода из аккаунта: \(error.localizedDescription)")
         }
     }
-
 }
+
+
+
+

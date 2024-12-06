@@ -14,28 +14,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        // Настраиваем внешний вид кнопки "Назад"
-               let appearance = UINavigationBar.appearance()
-        appearance.tintColor = AppColors.textColorMain // Цвет текста кнопки назад
-               appearance.titleTextAttributes = [
-                .font: UIFont.Rubick.bold.size(of: 17)  , // Шрифт кнопки
-                   .foregroundColor: AppColors.textColorMain // Цвет шрифта
-               ]
-        
+        let appearance = UINavigationBar.appearance()
+        appearance.tintColor = AppColors.textColorMain
+        appearance.titleTextAttributes = [
+            .font: UIFont.Rubick.bold.size(of: 17),
+            .foregroundColor: AppColors.textColorMain
+        ]
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let navigationController = UINavigationController()
         mainCoordinator = MainCoordinator(navigationController: navigationController)
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         mainCoordinator?.start()
-        
-        window?.makeKeyAndVisible()
-    
-        
-        
-    }
 
+        window?.makeKeyAndVisible()
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

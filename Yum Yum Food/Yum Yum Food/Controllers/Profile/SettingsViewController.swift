@@ -13,7 +13,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
-        
+        navigationController?.setupCustomBackButton(for: self)
+
         title = "Settings"
         
     }
