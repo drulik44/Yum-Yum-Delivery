@@ -32,6 +32,7 @@ extension UINavigationController: @retroactive UINavigationControllerDelegate, @
         // Устанавливаем констрейнты для backButton
         backButton.snp.makeConstraints { make in
             make.width.height.equalTo(40)
+             // Устанавливаем края равными супервью (контейнеру)
         }
     }
 

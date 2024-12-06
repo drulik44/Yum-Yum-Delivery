@@ -10,17 +10,15 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 import SnapKit
+import SkyFloatingLabelTextField
 
 class UserProfileViewController: UIViewController {
     
-    private let nameTextField = UITextField()
-    private let surnameTextField = UITextField()
-    private let emailTextField = UITextField()
-    private let saveButton = UIButton()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = AppColors.background
         
         setupUI()
         setupConstraints()
@@ -29,49 +27,161 @@ class UserProfileViewController: UIViewController {
 
     }
     
+    
+    
+    private let emailTextField: SkyFloatingLabelTextField = {
+        let textField = SkyFloatingLabelTextField()
+        textField.configureBorderTextField(
+            placeholder: "   Your email",
+            tintColor: AppColors.backgroundCell,
+            textColor: AppColors.textColorMain,
+            borderColor: AppColors.gray,
+            selectedBorderColor: AppColors.main,
+            cornerRadius: 15.0
+        )
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private let nameTextField: SkyFloatingLabelTextField = {
+        let textField = SkyFloatingLabelTextField()
+        textField.configureBorderTextField(
+            placeholder: "   Your name",
+            tintColor: AppColors.backgroundCell,
+            textColor: AppColors.textColorMain,
+            borderColor: AppColors.gray,
+            selectedBorderColor: AppColors.main,
+            cornerRadius: 15.0
+        )
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private let surnameTextField: SkyFloatingLabelTextField = {
+        let textField = SkyFloatingLabelTextField()
+        textField.configureBorderTextField(
+            placeholder: "   Your surname",
+            tintColor: AppColors.backgroundCell,
+            textColor: AppColors.textColorMain,
+            borderColor: AppColors.gray,
+            selectedBorderColor: AppColors.main,
+            cornerRadius: 15.0
+        )
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    lazy var saveButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Save", for: .normal)
+        button.backgroundColor = AppColors.main
+            button.setTitleColor(.white, for: .normal)
+            button.titleLabel?.font = .Rubick.regular.size(of: 20)
+            button.layer.cornerRadius = 25
+            button.clipsToBounds = true
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+        
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColors.textColorMain
+        label.font = .Rubick.bold.size(of: 30)
+        label.textAlignment = .center
+        label.text = "Edit Profile"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Email"
+        label.textColor = AppColors.subTitleColor
+        label.font = .Rubick.bold.size(of:16)
+        return label
+    }()
+    
+    lazy var  nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Name"
+        label.textColor = AppColors.subTitleColor
+        label.font = .Rubick.bold.size(of:16)
+        return label
+    }()
+    
+    lazy var  surnameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Surname"
+        label.textColor = AppColors.subTitleColor
+        label.font = .Rubick.bold.size(of:16)
+        return label
+    }()
+    
     private func setupUI() {
-        nameTextField.placeholder = "Имя"
-        nameTextField.borderStyle = .roundedRect
+        view.addSubview(titleLabel)
+        view.addSubview(nameLabel)
+        view.addSubview(surnameLabel)
+        view.addSubview(emailLabel)
+        
+        
         view.addSubview(nameTextField)
         
-        surnameTextField.placeholder = "Фамилия"
-        surnameTextField.borderStyle = .roundedRect
+       
         view.addSubview(surnameTextField)
         
-        emailTextField.placeholder = "Email"
-        emailTextField.borderStyle = .roundedRect
+       
         emailTextField.keyboardType = .emailAddress
         view.addSubview(emailTextField)
         
-        saveButton.setTitle("Сохранить", for: .normal)
-        saveButton.backgroundColor = .systemBlue
-        saveButton.layer.cornerRadius = 10
+        
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         view.addSubview(saveButton)
     }
     
     private func setupConstraints() {
-        nameTextField.snp.makeConstraints { make in
+        
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(40)
         }
         
+        surnameLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(20)
+        }
+        
         surnameTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(20)
+            make.top.equalTo(surnameLabel.snp.bottom).offset(5)
             make.left.right.equalTo(nameTextField)
             make.height.equalTo(40)
         }
         
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(surnameTextField.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(20)
+        }
+        
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(surnameTextField.snp.bottom).offset(20)
+            make.top.equalTo(emailLabel.snp.bottom).offset(5)
             make.left.right.equalTo(nameTextField)
             make.height.equalTo(40)
         }
         
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
+            make.top.equalTo(emailTextField.snp.bottom).offset(30)
             make.left.right.equalTo(nameTextField)
             make.height.equalTo(50)
         }

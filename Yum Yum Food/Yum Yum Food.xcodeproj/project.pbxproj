@@ -65,6 +65,7 @@
 		A3D604F12D01E30500846F06 /* PaymentOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */; };
 		A3D604F32D01E5FB00846F06 /* SectionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F22D01E5FB00846F06 /* SectionOption.swift */; };
 		A3D604F52D0240C300846F06 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A3D604F42D0240C300846F06 /* FirebaseFirestore */; };
+		A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		A3D604BC2D01E29F00846F06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionCell.swift; sourceTree = "<group>"; };
 		A3D604F22D01E5FB00846F06 /* SectionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOption.swift; sourceTree = "<group>"; };
+		A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAddressWithMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 		A3D604892D01E29F00846F06 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */,
 				A3D604822D01E29F00846F06 /* ContactViewController.swift */,
 				A3D604832D01E29F00846F06 /* HelpFAQViewController.swift */,
 				A3D604842D01E29F00846F06 /* OrderViewController.swift */,
@@ -518,6 +521,7 @@
 				A3D604ED2D01E29F00846F06 /* UIImage+Resize.swift in Sources */,
 				A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */,
 				A3D604EF2D01E29F00846F06 /* HomeCoordinator.swift in Sources */,
+				A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

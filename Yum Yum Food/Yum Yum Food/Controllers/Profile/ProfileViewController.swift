@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = AppColors.main.cgColor
         imageView.image = UIImage(named: "Profile imageView")
-        imageView.tintColor = AppColors.subTitleColor
+        imageView.tintColor = AppColors.gray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
         return imageView
@@ -210,6 +210,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.coordinator?.showUserProfile()
             case "My Orders":
                 self.coordinator?.showOrderScreen()
+            case "Delivery Address":
+                self.coordinator?.showDeliveryScreen()
             case "Payments Methods":
                 self.coordinator?.showPaymentsScreen()
             case "Contact Us":

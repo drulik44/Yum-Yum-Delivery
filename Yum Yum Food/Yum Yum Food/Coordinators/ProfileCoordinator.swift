@@ -61,5 +61,10 @@ class ProfileCoordinator: Coordinator {
     func showHelpScreen() {
         let helpViewController = HelpFAQViewController();navigationController.pushViewController(helpViewController, animated: true)
     }
+    
+    func showDeliveryScreen() {
+        let deliveryViewController = DeliveryAddressWithMapViewController();
+        navigationController.pushViewController(deliveryViewController, animated: true)
+    }
 }
 

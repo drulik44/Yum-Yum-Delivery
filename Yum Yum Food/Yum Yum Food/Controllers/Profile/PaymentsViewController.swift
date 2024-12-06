@@ -23,7 +23,7 @@ class PaymentsViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColors.textColorMain
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold) // Настройка шрифта и размера текста
+        label.font = .Rubick.bold.size(of: 30) 
         label.textAlignment = .left
         label.text = "Payment Methods"
         return label
