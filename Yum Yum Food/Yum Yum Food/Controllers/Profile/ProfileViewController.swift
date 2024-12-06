@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         setupUI()
         setupConstraints()
-        fetchUserProfileImage()
         fetchUserData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(userProfileUpdated), name: NSNotification.Name("UserProfileUpdated"), object: nil)
@@ -44,12 +43,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 50 // Половина ширины/высоты для круговой маски
         imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 2
+        imageView.layer.borderWidth = 3
         imageView.layer.borderColor = AppColors.main.cgColor
+        imageView.image = UIImage(named: "Profile imageView")
+        imageView.tintColor = AppColors.subTitleColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentImagePicker))
         imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
     
@@ -118,67 +117,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     
     
-    private func fetchUserProfileImage() {
-        if let imagePath = UserDefaults.standard.string(forKey: "profileImagePath"),
-           let image = UIImage(contentsOfFile: imagePath) {
-            profileImageView.image = image
-        }
-    }
-    
-    private func saveProfileImageToLocal(_ image: UIImage) {
-        guard let data = image.jpegData(compressionQuality: 0.8) else { return }
-        
-        // Создаем путь для сохранения изображения
-        let filename = getDocumentsDirectory().appendingPathComponent("profileImage.jpg")
-        
-        do {
-            // Сохраняем файл
-            try data.write(to: filename)
-            UserDefaults.standard.set(filename.path, forKey: "profileImagePath") // Сохраняем путь в UserDefaults
-            print("Изображение профиля успешно сохранено!")
-        } catch {
-            print("Ошибка сохранения изображения: \(error.localizedDescription)")
-        }
-    }
-
-   
-
-    
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-    
     @objc private func userProfileUpdated() {
         fetchUserData()
     }
     
-    // MARK: - UIImagePickerController
-    
-    @objc private func presentImagePicker() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-            return
-        }
-        
-        profileImageView.image = selectedImage
-        dismiss(animated: true, completion: nil)
-        
-        // Сохранение изображения локально
-        saveProfileImageToLocal(selectedImage)
-        
-       
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
     
   
 
