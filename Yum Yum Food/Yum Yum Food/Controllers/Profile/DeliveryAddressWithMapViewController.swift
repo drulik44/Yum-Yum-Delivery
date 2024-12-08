@@ -8,6 +8,9 @@ import SkyFloatingLabelTextField
 
 class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate {
 
+    var addressCompletion: ((String) -> Void)?
+
+    
     private let locationManager = CLLocationManager()
     private let mapView = MKMapView()
     private let addressLabel = UILabel()
@@ -196,7 +199,14 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         saveLocationToFirebase(coordinate: selectedLocation)
         // Логика сохранения адреса
         print("Адрес сохранён: \(selectedLocation.latitude), \(selectedLocation.longitude)")
-    }
+        if let address = addressTextField.text, !address.isEmpty {
+                  addressCompletion?(address) // Передача адреса через замыкание
+                  navigationController?.popViewController(animated: true) // Возврат назад
+              } else {
+                  print("Адрес не введен")
+              }
+          }
+    
     
     @objc private func searchButtonTapped() {
         guard let address = addressTextField.text, !address.isEmpty else { return }

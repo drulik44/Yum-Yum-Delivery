@@ -77,7 +77,7 @@ class ContactViewController: UIViewController {
     private lazy var facebookButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(" Facebook", for: .normal)
-        button.setTitleColor(AppColors.textColorMain, for: .normal)
+        button.setTitleColor(AppColors.backgroundCell, for: .normal)
         button.titleLabel?.font = .Rubick.regular.size(of: 20)
         
         if let image = UIImage(named: "facebook_icon")?.withRenderingMode(.alwaysOriginal) {
@@ -86,10 +86,10 @@ class ContactViewController: UIViewController {
         
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = AppColors.main
-        button.backgroundColor = .white
+        button.backgroundColor = AppColors.main
         button.layer.cornerRadius = 25
         button.layer.borderWidth = 2
-        button.layer.borderColor = AppColors.main.cgColor
+        button.layer.borderColor = AppColors.backgroundCell.cgColor
         button.addTarget(self, action: #selector(openFacebook), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -98,7 +98,7 @@ class ContactViewController: UIViewController {
     private lazy var instagramButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(" Instagram", for: .normal)
-        button.setTitleColor(AppColors.textColorMain, for: .normal)
+        button.setTitleColor(AppColors.backgroundCell, for: .normal)
         button.titleLabel?.font = .Rubick.regular.size(of: 20)
         if let image = UIImage(named: "instagram_icon")?.withRenderingMode(.alwaysOriginal) {
             button.setImage(image, for: .normal)
@@ -106,10 +106,10 @@ class ContactViewController: UIViewController {
         
         button.imageView?.contentMode = .scaleAspectFit
         button.tintColor = AppColors.main
-        button.backgroundColor = .white
+        button.backgroundColor = AppColors.main
         button.layer.cornerRadius = 25
         button.layer.borderWidth = 2
-        button.layer.borderColor = AppColors.main.cgColor
+        button.layer.borderColor = AppColors.backgroundCell.cgColor
         button.addTarget(self, action: #selector(openInstagram), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

@@ -75,7 +75,7 @@ class UserProfileViewController: UIViewController {
             let button = UIButton()
             button.setTitle("Save", for: .normal)
         button.backgroundColor = AppColors.main
-            button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(AppColors.backgroundCell, for: .normal)
             button.titleLabel?.font = .Rubick.regular.size(of: 20)
             button.layer.cornerRadius = 25
             button.clipsToBounds = true

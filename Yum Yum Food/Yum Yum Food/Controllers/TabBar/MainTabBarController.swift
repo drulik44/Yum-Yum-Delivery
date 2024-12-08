@@ -46,7 +46,7 @@ class MainTabBarController: UITabBarController {
         viewControllers = tabBarList
 
         tabBar.tintColor = AppColors.main
-        tabBar.unselectedItemTintColor = AppColors.gray
+        tabBar.unselectedItemTintColor = AppColors.black
         tabBar.barTintColor = UIColor.white
 
         tabBar.layer.cornerRadius = 20

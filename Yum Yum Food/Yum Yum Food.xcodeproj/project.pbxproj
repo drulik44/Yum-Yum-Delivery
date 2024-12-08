@@ -66,6 +66,10 @@
 		A3D604F32D01E5FB00846F06 /* SectionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F22D01E5FB00846F06 /* SectionOption.swift */; };
 		A3D604F52D0240C300846F06 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A3D604F42D0240C300846F06 /* FirebaseFirestore */; };
 		A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */; };
+		A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D605282D04FCBC00846F06 /* CustomAddressView.swift */; };
+		A3D6052B2D05F7D400846F06 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D6052A2D05F7D400846F06 /* SettingsCell.swift */; };
+		A3D6052D2D05F8B100846F06 /* SectionOptionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D6052C2D05F8B100846F06 /* SectionOptionSettings.swift */; };
+		A3D6052F2D05FCCD00846F06 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D6052E2D05FCCD00846F06 /* SettingsCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +127,10 @@
 		A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionCell.swift; sourceTree = "<group>"; };
 		A3D604F22D01E5FB00846F06 /* SectionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOption.swift; sourceTree = "<group>"; };
 		A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAddressWithMapViewController.swift; sourceTree = "<group>"; };
+		A3D605282D04FCBC00846F06 /* CustomAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddressView.swift; sourceTree = "<group>"; };
+		A3D6052A2D05F7D400846F06 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		A3D6052C2D05F8B100846F06 /* SectionOptionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOptionSettings.swift; sourceTree = "<group>"; };
+		A3D6052E2D05FCCD00846F06 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				A3D604BD2D01E29F00846F06 /* Yum Yum Food */,
-				A3D604BE2D01E29F00846F06 /* Cells */,
 				A3C20E792CF7D6F50082E881 /* Frameworks */,
 				A32270BA2CF2A21500D9BEC3 /* Products */,
 			);
@@ -280,6 +287,7 @@
 				A3D604942D01E29F00846F06 /* ProfileCoordinator.swift */,
 				A3D604952D01E29F00846F06 /* RestaurantsCoordinator.swift */,
 				A3D604962D01E29F00846F06 /* SearchCoordinator.swift */,
+				A3D6052E2D05FCCD00846F06 /* SettingsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -302,6 +310,7 @@
 				A3D6049E2D01E29F00846F06 /* UserData.swift */,
 				A3D6049F2D01E29F00846F06 /* UserOption.swift */,
 				A3D604F22D01E5FB00846F06 /* SectionOption.swift */,
+				A3D6052C2D05F8B100846F06 /* SectionOptionSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,6 +371,7 @@
 		A3D604BD2D01E29F00846F06 /* Yum Yum Food */ = {
 			isa = PBXGroup;
 			children = (
+				A3D605272D04FC9800846F06 /* View */,
 				A3D604902D01E29F00846F06 /* Controllers */,
 				A3D604972D01E29F00846F06 /* Coordinators */,
 				A3D6049D2D01E29F00846F06 /* Extensions */,
@@ -375,6 +385,7 @@
 				A3D604B92D01E29F00846F06 /* Info.plist */,
 				A3D604BB2D01E29F00846F06 /* LaunchScreen.storyboard */,
 				A3D604BC2D01E29F00846F06 /* SceneDelegate.swift */,
+				A3D604BE2D01E29F00846F06 /* Cells */,
 			);
 			path = "Yum Yum Food";
 			sourceTree = "<group>";
@@ -383,8 +394,17 @@
 			isa = PBXGroup;
 			children = (
 				A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */,
+				A3D6052A2D05F7D400846F06 /* SettingsCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		A3D605272D04FC9800846F06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A3D605282D04FCBC00846F06 /* CustomAddressView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,6 +511,7 @@
 				A3D604D02D01E29F00846F06 /* UserProfileViewController.swift in Sources */,
 				A3D604D12D01E29F00846F06 /* HomeViewController.swift in Sources */,
 				A3D604D22D01E29F00846F06 /* LoginViewController.swift in Sources */,
+				A3D6052B2D05F7D400846F06 /* SettingsCell.swift in Sources */,
 				A3D604D32D01E29F00846F06 /* FavoriteCoordinator.swift in Sources */,
 				A3D604D42D01E29F00846F06 /* MainTabBarController.swift in Sources */,
 				A3D604D52D01E29F00846F06 /* RestaurantsCoordinator.swift in Sources */,
@@ -498,6 +519,7 @@
 				A3D604D72D01E29F00846F06 /* RestaurantsViewController.swift in Sources */,
 				A3D604D82D01E29F00846F06 /* ProfileViewController.swift in Sources */,
 				A3D604D92D01E29F00846F06 /* AppDelegate.swift in Sources */,
+				A3D6052D2D05F8B100846F06 /* SectionOptionSettings.swift in Sources */,
 				A3D604DA2D01E29F00846F06 /* ContactViewController.swift in Sources */,
 				A3D604DB2D01E29F00846F06 /* OrderViewController.swift in Sources */,
 				A3D604DC2D01E29F00846F06 /* SearchViewController.swift in Sources */,
@@ -513,10 +535,12 @@
 				A3D604E52D01E29F00846F06 /* HelpFAQViewController.swift in Sources */,
 				A3D604E62D01E29F00846F06 /* UserData.swift in Sources */,
 				A3D604E72D01E29F00846F06 /* AuthService.swift in Sources */,
+				A3D6052F2D05FCCD00846F06 /* SettingsCoordinator.swift in Sources */,
 				A3D604E82D01E29F00846F06 /* Coordinator.swift in Sources */,
 				A3D604E92D01E29F00846F06 /* SearchCoordinator.swift in Sources */,
 				A3D604EA2D01E29F00846F06 /* UIFont+Extension.swift in Sources */,
 				A3D604EB2D01E29F00846F06 /* WelcomeViewController.swift in Sources */,
+				A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */,
 				A3D604EC2D01E29F00846F06 /* FavoriteViewController.swift in Sources */,
 				A3D604ED2D01E29F00846F06 /* UIImage+Resize.swift in Sources */,
 				A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */,
