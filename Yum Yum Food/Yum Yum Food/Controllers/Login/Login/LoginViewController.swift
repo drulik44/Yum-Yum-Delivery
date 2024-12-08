@@ -10,20 +10,39 @@ import SkyFloatingLabelTextField
 
 class LoginViewController: UIViewController {
     weak var coordinator: MainCoordinator?
+    private let service = AuthService()
+    
+    var name : String? {
+        return nameTextField.text
+    }
+    var email : String? {
+        return emailTextField.text
+    }
+    var password : String? {
+        return passwordTextField.text
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         passwordTextField.rightView = passwordToggleButton
-            passwordTextField.rightViewMode = .always
+        passwordTextField.rightViewMode = .always
         tapped()
         
         view.backgroundColor = AppColors.background
         setupAddToSuperview()
         setupConstraints()
         setupAccountSection()
+        
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
+    
+    
+    
+    
     
     //MARK: - Label
     let singUpLabel: UILabel = {
@@ -107,7 +126,7 @@ class LoginViewController: UIViewController {
             isSecure: true,
             cornerRadius: 15.0
             
-
+            
         )
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -126,9 +145,9 @@ class LoginViewController: UIViewController {
         }
         return button
     }()
-
     
-
+    
+    
     //MARK: - Button
     
     let signUpButton: UIButton = {
@@ -149,7 +168,7 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-   
+    
     
     let loginButton: UIButton = {
         let button = UIButton()
@@ -272,106 +291,136 @@ class LoginViewController: UIViewController {
             passwordToggleButton.setImage(resizedImage, for: .normal)
         }
     }
-
-
     
-        func tapped() {
-            loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    //MARK: - LAZY  allert
+    lazy var alertVerification: UIAlertController = {
+        let alert = UIAlertController(title: "Verification", message: "Please check your email for verification", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ок", style: .default) { (action) in
+            self.coordinator?.showsignInScreen()
+        }
+        alert.addAction(okAction)
+        return alert
+    }()
+    
+    
+    func tapped() {
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func signUpButtonTapped() {
+        guard let email = email, let password = password, let name = name else {
+            print("All fields are required.")
+            return
+        }
+        let user = UserData(email: email, password: password, name: name)
+        service.createUser(user: user) { result in
+            switch result {
+            case .success:
+                self.present(self.alertVerification, animated: true, completion: nil)
+            case .failure(let error):
+                print("Failed to create user: \(error.localizedDescription)")
+            }
+        }
     }
     
     @objc func loginButtonTapped() {
         coordinator?.showsignInScreen()
     }
     
-    func setupConstraints() {
-        singUpLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-        }
-        nameLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.top.equalTo(singUpLabel.snp.bottom).offset(30)
-        }
-        
-        nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(5)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
-        }
-        
-        emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-        }
-        emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailLabel.snp.bottom).offset(5)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
-        }
-        passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-        }
-        passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordLabel.snp.bottom).offset(5)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
-        }
-        
-        forgotPasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
-            make.right.equalToSuperview().offset(-20)
-        }
+    
         
         
-        signUpButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
-            make.height.equalTo(50)
-            make.width.equalTo(350)
-        }
         
-        signInWithLabel.snp.makeConstraints { make in
-            make.top.equalTo(signUpButton.snp.bottom).offset(60)
-            make.centerX.equalTo(signUpButton)
-        }
-        
-        leftLine.snp.makeConstraints { make in
-            make.centerY.equalTo(signInWithLabel)
-            make.right.equalTo(signInWithLabel.snp.left).offset(-8)
-            make.height.equalTo(1)
-            make.width.equalTo(100)
-        }
-        
-        rightLine.snp.makeConstraints { make in
-            make.centerY.equalTo(signInWithLabel)
-            make.left.equalTo(signInWithLabel.snp.right).offset(8)
-            make.height.equalTo(1)
-            make.width.equalTo(100)
-        }
-        
-        googleButton.snp.makeConstraints { make in
-            make.centerX.equalTo(signInWithLabel)
-            make.top.equalTo(signInWithLabel.snp.bottom).offset(20)
-            make.width.equalTo(320)
-            make.height.equalTo(40)
-        }
-        
+        func setupConstraints() {
+            singUpLabel.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+            }
+            nameLabel.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(singUpLabel.snp.bottom).offset(30)
+            }
+            
+            nameTextField.snp.makeConstraints { make in
+                make.top.equalTo(nameLabel.snp.bottom).offset(5)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+                make.height.equalTo(50)
+            }
+            
+            emailLabel.snp.makeConstraints { make in
+                make.top.equalTo(nameTextField.snp.bottom).offset(20)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+            }
+            emailTextField.snp.makeConstraints { make in
+                make.top.equalTo(emailLabel.snp.bottom).offset(5)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+                make.height.equalTo(50)
+            }
+            passwordLabel.snp.makeConstraints { make in
+                make.top.equalTo(emailTextField.snp.bottom).offset(20)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+            }
+            passwordTextField.snp.makeConstraints { make in
+                make.top.equalTo(passwordLabel.snp.bottom).offset(5)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+                make.height.equalTo(50)
+            }
+            
+            forgotPasswordButton.snp.makeConstraints { make in
+                make.top.equalTo(passwordTextField.snp.bottom).offset(20)
+                make.right.equalToSuperview().offset(-20)
+            }
+            
+            
+            signUpButton.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
+                make.height.equalTo(50)
+                make.width.equalTo(350)
+            }
+            
+            signInWithLabel.snp.makeConstraints { make in
+                make.top.equalTo(signUpButton.snp.bottom).offset(60)
+                make.centerX.equalTo(signUpButton)
+            }
+            
+            leftLine.snp.makeConstraints { make in
+                make.centerY.equalTo(signInWithLabel)
+                make.right.equalTo(signInWithLabel.snp.left).offset(-8)
+                make.height.equalTo(1)
+                make.width.equalTo(100)
+            }
+            
+            rightLine.snp.makeConstraints { make in
+                make.centerY.equalTo(signInWithLabel)
+                make.left.equalTo(signInWithLabel.snp.right).offset(8)
+                make.height.equalTo(1)
+                make.width.equalTo(100)
+            }
+            
+            googleButton.snp.makeConstraints { make in
+                make.centerX.equalTo(signInWithLabel)
+                make.top.equalTo(signInWithLabel.snp.bottom).offset(20)
+                make.width.equalTo(320)
+                make.height.equalTo(40)
+            }
+            
             facebookButton.snp.makeConstraints { make in
-            make.centerX.equalTo(signInWithLabel)
-            make.top.equalTo(googleButton.snp.bottom).offset(20)
-            make.width.equalTo(320)
-            make.height.equalTo(40)
+                make.centerX.equalTo(signInWithLabel)
+                make.top.equalTo(googleButton.snp.bottom).offset(20)
+                make.width.equalTo(320)
+                make.height.equalTo(40)
+            }
+            
+            
+            
         }
-        
-        
-        
     }
-}
+

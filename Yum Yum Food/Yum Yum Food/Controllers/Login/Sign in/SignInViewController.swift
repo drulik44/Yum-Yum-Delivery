@@ -11,6 +11,15 @@ import SkyFloatingLabelTextField
 
 class SignInViewController: UIViewController {
     weak var coordinator: MainCoordinator?
+    private let service = AuthService()
+    var email : String? {
+        return emailTextField.text
+    }
+    var password : String? {
+        return passwordTextField.text
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +33,7 @@ class SignInViewController: UIViewController {
         setupConstraints()
         setupAccountSection()
         tapped()
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - Label
@@ -224,9 +234,14 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    func setupUI() {
-        
-    }
+    //MARK: - Lazy alert
+    
+    lazy var alertEmpty : UIAlertController = {
+        let alert = UIAlertController(title: "Error", message: "Email or password are empty", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        return alert
+    }()
     
     func setupAddToSuperview() {
         view.addSubview(loginLabel)
@@ -265,9 +280,31 @@ class SignInViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector (signUpButtonTapped), for: .touchUpInside)
     }
     
+    
     @objc func signUpButtonTapped() {
         coordinator?.showLoginScreen()
     }
+    
+    @objc private func loginButtonTapped() {
+        guard let email = email, let password = password else {
+            //print("Email and password are empty")
+            self.present(self.alertEmpty, animated: true)
+            return
+        }
+        let user = UserData(email: email, password: password, name: nil)
+        service.signIn(user: user) { result in
+            switch result {
+            case .success:
+                print("User signed in successfully.")
+                self.coordinator?.showMainTabBar() // Перейти на главный экран
+            case .failure(let error):
+                print("Failed to sign in: \(error.localizedDescription)")
+                self.present(self.alertEmpty, animated: true)
+
+            }
+        }
+    }
+    
     
     func setupConstraints() {
         loginLabel.snp.makeConstraints { make in
