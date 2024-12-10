@@ -21,6 +21,29 @@ class FastestDeliveryCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
+        imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        return imageView
+    }()
+    
+    private let  deliverImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "delivery track")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let ratingImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "rate")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let deliveryTimeImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "time")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -36,6 +59,11 @@ class FastestDeliveryCell: UICollectionViewCell {
         label.font = .Rubick.regular.size(of: 14)
         label.textColor = AppColors.grayForTextCell
         label.numberOfLines = 1
+        
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 0.4
+        label.layer.shadowOffset = CGSize(width: 2, height: 4)
+        label.layer.shadowRadius = 4
         return label
     }()
     
@@ -100,12 +128,16 @@ class FastestDeliveryCell: UICollectionViewCell {
         contentView.addSubview(deliveryTimeLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(deliveryPriceLabel)
+        contentView.addSubview(deliverImage)
+        contentView.addSubview(ratingImage)
+        contentView.addSubview(deliveryTimeImage)
     }
     
     private func setupConstraints() {
         imageView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview().inset(8)
+            make.top.left.right.equalToSuperview()
             make.height.equalTo(110)
+           //make.width.equalTo(269)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -118,19 +150,34 @@ class FastestDeliveryCell: UICollectionViewCell {
             make.left.right.equalToSuperview().inset(8)
         }
         
-        deliveryPriceLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
+        deliverImage.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().inset (8)
         }
         
-        deliveryTimeLabel.snp.makeConstraints { make in
+        deliveryPriceLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
+            make.left.equalTo(deliverImage.snp.right).offset(2)
+        }
+        
+        deliveryTimeImage.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
             make.left.equalTo(deliveryPriceLabel.snp.right).offset(8)
         }
         
-        ratingLabel.snp.makeConstraints { make in
+        deliveryTimeLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
+            make.left.equalTo(deliveryTimeImage.snp.right).offset(2)
+        }
+        
+        ratingImage.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
             make.left.equalTo(deliveryTimeLabel.snp.right).offset(8)
+        }
+        
+        ratingLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
+            make.left.equalTo(ratingImage.snp.right).offset(2)
         }
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A32270D22CF2AA6B00D9BEC3 /* SnapKit */; };
+		A33B569D2D08786A0076375E /* CustomButtonHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */; };
 		A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */; };
 		A3C20E7B2CF7D6F50082E881 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E7A2CF7D6F50082E881 /* FirebaseAuth */; };
 		A3C20E7D2CF7D7060082E881 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E7C2CF7D7060082E881 /* FirebaseCore */; };
@@ -79,6 +80,7 @@
 
 /* Begin PBXFileReference section */
 		A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yum Yum Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonHomeVC.swift; sourceTree = "<group>"; };
 		A3D604772D01E29F00846F06 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		A3D604792D01E29F00846F06 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A3D6047B2D01E29F00846F06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			children = (
 				A3D605282D04FCBC00846F06 /* CustomAddressView.swift */,
 				A3D605502D0732B000846F06 /* CustomSegmentControll.swift */,
+				A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 			files = (
 				A3D604F32D01E5FB00846F06 /* SectionOption.swift in Sources */,
 				A3D604D02D01E29F00846F06 /* UserProfileViewController.swift in Sources */,
+				A33B569D2D08786A0076375E /* CustomButtonHomeVC.swift in Sources */,
 				A3D604D12D01E29F00846F06 /* HomeViewController.swift in Sources */,
 				A3D604D22D01E29F00846F06 /* LoginViewController.swift in Sources */,
 				A3D6052B2D05F7D400846F06 /* SettingsCell.swift in Sources */,

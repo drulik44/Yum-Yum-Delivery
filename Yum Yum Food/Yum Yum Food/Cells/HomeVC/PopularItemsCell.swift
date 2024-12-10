@@ -22,33 +22,47 @@ class PopularItemsCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
+        imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let priceView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "wallet-2")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .Rubick.bold.size(of: 13)
+        label.textColor = AppColors.topographyHome
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let ratingLabel: UILabel = {
+    private let nameRestaurantLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .gray
+        label.font = .Rubick.regular.size(of: 14)
+        label.textColor = AppColors.grayForTextCell
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let deliveryTimeLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .gray
+        label.font = .Rubick.regular.size(of: 14)
+        label.textColor = AppColors.grayForTextCell
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    
+    
+   
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,14 +81,16 @@ class PopularItemsCell: UICollectionViewCell {
     private func setupViews() {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(ratingLabel)
-        contentView.addSubview(deliveryTimeLabel)
+        contentView.addSubview(nameRestaurantLabel)
+        contentView.addSubview(priceLabel)
+        contentView.addSubview(priceView)
     }
     
     private func setupConstraints() {
         imageView.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview().inset(8)
+            //make.top.left.right.equalToSuperview().inset(8)
             make.height.equalTo(100)
+            make.width.equalTo(170)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -82,14 +98,19 @@ class PopularItemsCell: UICollectionViewCell {
             make.left.right.equalToSuperview().inset(8)
         }
         
-        ratingLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+        nameRestaurantLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.left.right.equalToSuperview().inset(8)
+        }
+       
+        priceView.snp.makeConstraints { make in
+            make.top.equalTo(nameRestaurantLabel.snp.bottom).offset(8)
             make.left.equalToSuperview().inset(8)
         }
         
-        deliveryTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(ratingLabel.snp.bottom).offset(4)
-            make.left.equalToSuperview().inset(8)
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameRestaurantLabel.snp.bottom).offset(8)
+            make.left.equalTo(priceView.snp.right).offset(2)
         }
     }
     
@@ -97,7 +118,7 @@ class PopularItemsCell: UICollectionViewCell {
         guard let item = data else { return }
         imageView.loadImage(from: item.imageUrl)
         titleLabel.text = item.name
-        ratingLabel.text = "Rating: \(item.rating)"
-        deliveryTimeLabel.text = "Time: \(item.deliveryTime)"
+        nameRestaurantLabel.text = item.nameRestaurant
+        priceLabel.text = item.price
     }
 }

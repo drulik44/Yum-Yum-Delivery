@@ -107,6 +107,9 @@ class HomeViewController: UIViewController {
         return collectionView
     }()
     
+    let  seeAllButton = CustomButton()
+    let seeAllButton2 = CustomButton()
+    
     // MARK: - Setup UI
     
     private func setupUI() {
@@ -116,8 +119,10 @@ class HomeViewController: UIViewController {
         contentView.addSubview(customAddressView)
         contentView.addSubview(bannerImageView)
         contentView.addSubview(fastestDeliveryLabel)
+        contentView.addSubview(seeAllButton)
         contentView.addSubview(fastestDeliveryCollectionView)
         contentView.addSubview(popularItemsLabel)
+        contentView.addSubview(seeAllButton2)
         contentView.addSubview(popularItemsCollectionView)
         
         fastestDeliveryCollectionView.dataSource = self
@@ -143,7 +148,7 @@ class HomeViewController: UIViewController {
             make.top.equalTo(contentView.snp.top).offset(-15) // Изменим отступ
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(70)
+            make.height.equalTo(80)
         }
         
         bannerImageView.snp.makeConstraints { make in
@@ -158,6 +163,12 @@ class HomeViewController: UIViewController {
             make.left.equalToSuperview().offset(20)
         }
         
+        seeAllButton.snp.makeConstraints { make in
+            make.centerY.equalTo(fastestDeliveryLabel)
+            make.right.equalToSuperview().offset(-30)
+            make.width.equalTo(80)
+        }
+        
         fastestDeliveryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(fastestDeliveryLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(10)
@@ -167,6 +178,14 @@ class HomeViewController: UIViewController {
         popularItemsLabel.snp.makeConstraints { make in
             make.top.equalTo(fastestDeliveryCollectionView.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
+        }
+        
+        
+        seeAllButton2.snp.makeConstraints { make in
+            make.centerY.equalTo(popularItemsLabel)
+            make.right.equalToSuperview().offset(-30)
+            make.width.equalTo(80)
+
         }
         
         popularItemsCollectionView.snp.makeConstraints { make in
@@ -201,9 +220,9 @@ class HomeViewController: UIViewController {
                     let rating = data["rating"] as? Double ?? 0.0
                     let deliveryTime = data["deliveryTime"] as? String ?? ""
                     let imageUrl = data["imageUrl"] as? String ?? ""
-                    let deliveryPrice = data["deliveryPrice"] as? Double ?? 0.0
+                    let deliveryPrice = data["deliveryPrice"] as? String ?? ""
                     let description = data["description"] as? String ?? ""
-                    return FoodItem(name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice , description: description)
+                    return FoodItem(name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice , description: description, nameRestaurant: "", price: "")
                 } ?? []
                 self?.fastestDeliveryCollectionView.reloadData()
             }
@@ -221,9 +240,11 @@ class HomeViewController: UIViewController {
                     let rating = data["rating"] as? Double ?? 0.0
                     let deliveryTime = data["deliveryTime"] as? String ?? ""
                     let imageUrl = data["imageUrl"] as? String ?? ""
-                    let deliveryPrice = data["deliveryPrice"] as? Double ?? 0.0
+                    let deliveryPrice = data["deliveryPrice"] as? String ?? ""
                     let description = data["description"] as? String ?? ""
-                    return FoodItem(name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice, description: description )
+                    let nameRestaurant = data["nameRestaurants"] as? String ?? ""
+                    let price = data["price"] as? String ?? ""
+                    return FoodItem(name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice, description: description, nameRestaurant: nameRestaurant, price:price )
                 } ?? []
                 self?.popularItemsCollectionView.reloadData()
             }
@@ -257,7 +278,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 270, height: 210)
+        if collectionView == fastestDeliveryCollectionView {
+            // Размер для ячеек в fastestDeliveryCollectionView
+            return CGSize(width: 270, height: 210)
+        } else if collectionView == popularItemsCollectionView {
+            // Размер для ячеек в popularItemsCollectionView
+            return CGSize(width: 170, height: 200) // Укажите нужный размер
+        }
+        return CGSize(width: 0, height: 0) // Значение по умолчанию (может быть не достигнуто)
     }
+
 }
 

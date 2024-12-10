@@ -16,8 +16,10 @@ struct FoodItem {
     let rating: Double
     let deliveryTime: String
     let imageUrl: String
-    let deliveryPrice: Double
+    let deliveryPrice: String
     let description: String
+    let nameRestaurant: String
+    let price: String
     
 }
 
