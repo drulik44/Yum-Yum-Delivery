@@ -49,6 +49,10 @@ class PopularItemsCell: UICollectionViewCell {
         label.font = .Rubick.regular.size(of: 14)
         label.textColor = AppColors.grayForTextCell
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 0.4
+        label.layer.shadowOffset = CGSize(width: 2, height: 4)
+        label.layer.shadowRadius = 4
         return label
     }()
     
