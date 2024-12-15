@@ -90,7 +90,7 @@ class RestaurantsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        //navigationController?.setNavigationBarHidden(true, animated: animated)
         
     }
 
@@ -197,6 +197,17 @@ extension RestaurantsViewController: UICollectionViewDelegate, UICollectionViewD
         }
     }
 
+    
+    //  MARK: - Tapped
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == restaurantsCollectionView {
+            let restaurant = restaurants[indexPath.item]
+            self.coordinator?.showRestaurantDetail(for: restaurant)
+        }
+    }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoriesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell

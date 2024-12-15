@@ -13,6 +13,9 @@
 		A353423C2D08FC5100C91C1C /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353423B2D08FC5100C91C1C /* RestaurantCell.swift */; };
 		A353423E2D09201700C91C1C /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353423D2D09201700C91C1C /* Restaurants.swift */; };
 		A35342412D0B9F3000C91C1C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35342402D0B9F3000C91C1C /* Category.swift */; };
+		A35B25F92D0E29A1004C4B69 /* RestaurantsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35B25F82D0E29A1004C4B69 /* RestaurantsDetailViewController.swift */; };
+		A35B25FC2D0E464D004C4B69 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A35B25FB2D0E464D004C4B69 /* SDWebImage */; };
+		A35B25FE2D0E464D004C4B69 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A35B25FD2D0E464D004C4B69 /* SDWebImageMapKit */; };
 		A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */; };
 		A3C20E7B2CF7D6F50082E881 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E7A2CF7D6F50082E881 /* FirebaseAuth */; };
 		A3C20E7D2CF7D7060082E881 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E7C2CF7D7060082E881 /* FirebaseCore */; };
@@ -89,6 +92,7 @@
 		A353423B2D08FC5100C91C1C /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantCell.swift; path = /Users/ruslanzidkih/Documents/dev/RestaurantCell.swift; sourceTree = "<absolute>"; };
 		A353423D2D09201700C91C1C /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
 		A35342402D0B9F3000C91C1C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		A35B25F82D0E29A1004C4B69 /* RestaurantsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsDetailViewController.swift; sourceTree = "<group>"; };
 		A3D604772D01E29F00846F06 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		A3D604792D01E29F00846F06 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A3D6047B2D01E29F00846F06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -159,7 +163,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3C20E7F2CF7D72B0082E881 /* FirebaseDatabase in Frameworks */,
+				A35B25FE2D0E464D004C4B69 /* SDWebImageMapKit in Frameworks */,
 				A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */,
+				A35B25FC2D0E464D004C4B69 /* SDWebImage in Frameworks */,
 				A3C20E7B2CF7D6F50082E881 /* FirebaseAuth in Frameworks */,
 				A3C20E7D2CF7D7060082E881 /* FirebaseCore in Frameworks */,
 				A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */,
@@ -281,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				A3D6048A2D01E29F00846F06 /* RestaurantsViewController.swift */,
+				A35B25F82D0E29A1004C4B69 /* RestaurantsDetailViewController.swift */,
 			);
 			path = Restaurants;
 			sourceTree = "<group>";
@@ -485,6 +492,8 @@
 				A3C20E7E2CF7D72B0082E881 /* FirebaseDatabase */,
 				A3C20E802CF7D73A0082E881 /* FirebaseStorage */,
 				A3D604F42D0240C300846F06 /* FirebaseFirestore */,
+				A35B25FB2D0E464D004C4B69 /* SDWebImage */,
+				A35B25FD2D0E464D004C4B69 /* SDWebImageMapKit */,
 			);
 			productName = "Yum Yum Food";
 			productReference = A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */;
@@ -518,6 +527,7 @@
 				A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				A3C20E6C2CF61E300082E881 /* XCRemoteSwiftPackageReference "SkyFloatingLabelTextField" */,
 				A3C20E762CF7D4A60082E881 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A35B25FA2D0E464D004C4B69 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A32270BA2CF2A21500D9BEC3 /* Products */;
@@ -591,6 +601,7 @@
 				A3D604E12D01E29F00846F06 /* AppColors.swift in Sources */,
 				A3D604E22D01E29F00846F06 /* UserOption.swift in Sources */,
 				A3D605512D0732B000846F06 /* CustomSegmentControll.swift in Sources */,
+				A35B25F92D0E29A1004C4B69 /* RestaurantsDetailViewController.swift in Sources */,
 				A3D604E32D01E29F00846F06 /* SignInViewController.swift in Sources */,
 				A3D604E42D01E29F00846F06 /* SkyFloatingLabelTextField+Extensions.swift in Sources */,
 				A3D604E52D01E29F00846F06 /* HelpFAQViewController.swift in Sources */,
@@ -832,6 +843,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		A35B25FA2D0E464D004C4B69 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.0;
+			};
+		};
 		A3C20E6C2CF61E300082E881 /* XCRemoteSwiftPackageReference "SkyFloatingLabelTextField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Skyscanner/SkyFloatingLabelTextField";
@@ -855,6 +874,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A32270D12CF2AA6B00D9BEC3 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		A35B25FB2D0E464D004C4B69 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A35B25FA2D0E464D004C4B69 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		A35B25FD2D0E464D004C4B69 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A35B25FA2D0E464D004C4B69 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 		A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */ = {
 			isa = XCSwiftPackageProductDependency;

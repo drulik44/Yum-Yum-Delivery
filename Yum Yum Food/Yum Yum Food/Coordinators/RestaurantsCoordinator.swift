@@ -10,6 +10,8 @@ import UIKit
 class RestaurantsCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    weak var parentCoordinator: MainCoordinator?
+
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -20,5 +22,14 @@ class RestaurantsCoordinator: Coordinator {
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
+    
+   
+        func showRestaurantDetail(for restaurant: Restaurant) {
+            let detailVC = RestaurantDetailViewController()
+            detailVC.restaurant = restaurant
+            navigationController.pushViewController(detailVC, animated: true)
+        }
+    }
 
-}
+
+
