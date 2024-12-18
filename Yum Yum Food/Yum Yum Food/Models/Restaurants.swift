@@ -11,7 +11,7 @@ import FirebaseFirestore
 struct Restaurant {
    
     
-    
+    var id: String
     let name: String
     let rating: Double
     let deliveryTime: String

@@ -88,11 +88,7 @@ class RestaurantsViewController: UIViewController {
         return collectionView
     }()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,11 +125,11 @@ class RestaurantsViewController: UIViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(800) // Задайте достаточную высоту для отображения всех элементов
+            make.height.equalTo(2500) // Задайте достаточную высоту для отображения всех элементов
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(5)
             make.left.equalToSuperview().offset(20)
         }
 
@@ -173,6 +169,7 @@ class RestaurantsViewController: UIViewController {
             } else {
                 self?.restaurants = querySnapshot?.documents.compactMap { document in
                     let data = document.data()
+                    let id = document.documentID
                     let name = data["name"] as? String ?? ""
                     let rating = data["rating"] as? Double ?? 0.0
                     let deliveryTime = data["deliveryTime"] as? String ?? ""
@@ -180,7 +177,7 @@ class RestaurantsViewController: UIViewController {
                     let deliveryPrice = data["deliveryPrice"] as? String ?? ""
                     let description = data["description"] as? String ?? ""
                    
-                    return Restaurant(name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice, description: description )
+                    return Restaurant(id: id, name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice, description: description )
                 } ?? []
                 self?.restaurantsCollectionView.reloadData()
             }
@@ -224,7 +221,7 @@ extension RestaurantsViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView ==  categoriesCollectionView{
-            return CGSize(width: 120, height: 160)
+            return CGSize(width: 120, height: 140)
         } else if collectionView == restaurantsCollectionView {
             return CGSize(width: 350, height: 250) // Укажите нужный размер
         }

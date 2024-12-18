@@ -7,12 +7,31 @@
 
 import UIKit
 import SnapKit
+import Firebase
+import FirebaseFirestore
 import SDWebImage
 
-class RestaurantDetailViewController: UIViewController {
+class RestaurantDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout  {
     weak var coordinator: RestaurantsCoordinator?
     var restaurant: Restaurant?
+    private let db = Firestore.firestore()
+    private var menuItems: [MenuItem] = []
+
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+
+
     private let restaurantImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -28,10 +47,12 @@ class RestaurantDetailViewController: UIViewController {
     }()
     
     private let likeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "Favorite"), for: .normal)
-        button.tintColor = .gray
-        button.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
+        let button = UIButton()
+        button.setImage(UIImage(named: "favorite 2"), for: .normal)
+        button.tintColor = AppColors.gray
+        button.contentMode = .scaleAspectFit
+
+
         return button
     }()
     
@@ -76,7 +97,7 @@ class RestaurantDetailViewController: UIViewController {
             imageView.image = tintedImage
         }
         imageView.tintColor = AppColors.main
-
+        
         return imageView
     }()
     
@@ -96,21 +117,43 @@ class RestaurantDetailViewController: UIViewController {
             imageView.image = tintedImage
         }
         imageView.tintColor = AppColors.main
-
+        
         return imageView
     }()
     
     private let deliveryPriceLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .Rubick.regular.size(of:16)
         label.textColor = AppColors.grayForTextCell
         return label
     }()
     
+    private let menuLabel: UILabel = {
+        let label = UILabel()
+        label.font = .Rubick.bold.size(of:25)
+        label.textColor = AppColors.topographyHome
+        label.text = "Menu"
+        return label
+    }()
+    
+    //MARK: - Colection Menu
+    
+    private let menuCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 16
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.register(MenuItemCell.self, forCellWithReuseIdentifier: "MenuItemCell")
+        return collectionView
+    }()
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setupCustomBackButton(for: self)
-
+        
         
     }
     
@@ -121,20 +164,35 @@ class RestaurantDetailViewController: UIViewController {
         setupConstraints()
         configureView()
         navigationController?.setupCustomBackButton(for: self)
+        likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
+        likeButton.backgroundColor = .clear
+        menuCollectionView.dataSource = self
+        menuCollectionView.delegate = self
+        menuCollectionView.isScrollEnabled = false
+        scrollView.contentInsetAdjustmentBehavior = .never
 
+
+
+
+        
+        
     }
     
     private func setupUI() {
-        view.addSubview(restaurantImageView)
-        view.addSubview(nameLabel)
-        view.addSubview(likeButton)
-        view.addSubview(descriptionLabel)
-        view.addSubview(ratingImageView)
-        view.addSubview(ratingLabel)
-        view.addSubview(deliveryTimeImage)
-        view.addSubview(deliveryTimeLabel)
-        view.addSubview(deliverImage)
-        view.addSubview(deliveryPriceLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(restaurantImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(ratingImageView)
+        contentView.addSubview(ratingLabel)
+        contentView.addSubview(deliveryTimeImage)
+        contentView.addSubview(deliveryTimeLabel)
+        contentView.addSubview(deliverImage)
+        contentView.addSubview(deliveryPriceLabel)
+        contentView.addSubview(menuLabel)
+        contentView.addSubview(menuCollectionView)
     }
     
     
@@ -147,12 +205,26 @@ class RestaurantDetailViewController: UIViewController {
         deliveryTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         deliveryPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(1700)
+        }
+        
         restaurantImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalTo(contentView.snp.top).priority(.high)
+            make.top.equalTo(scrollView.snp.top).priority(.low) // Фиксирует наверху скролла
             make.height.equalTo(300)
             make.width.equalToSuperview()
-            
         }
+
+
+
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(restaurantImageView.snp.bottom).offset(20)
@@ -163,6 +235,7 @@ class RestaurantDetailViewController: UIViewController {
             make.centerY.equalTo(nameLabel)
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(40)
+            make.width.equalTo(40)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(10)
@@ -193,6 +266,16 @@ class RestaurantDetailViewController: UIViewController {
             make.centerY.equalTo(deliverImage)
             make.left.equalTo(deliverImage.snp.right).offset(4)
         }
+        menuLabel.snp.makeConstraints { make in
+            make.top.equalTo(deliveryPriceLabel.snp.bottom).offset(30)
+            make.left.equalToSuperview().offset(20)
+        }
+        menuCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(menuLabel.snp.bottom).offset(20)
+            make.left.right.bottom.equalToSuperview().inset(16)
+        }
+
+
         
         
         
@@ -201,32 +284,79 @@ class RestaurantDetailViewController: UIViewController {
     private func configureView() {
         guard let restaurant = restaurant else { return }
 
+        // Устанавливаем данные для ресторана
         if let url = URL(string: restaurant.imageUrl) {
             restaurantImageView.sd_setImage(with: url, completed: nil)
         } else {
             print("Invalid URL: \(restaurant.imageUrl)")
         }
-
+        
         nameLabel.text = restaurant.name
         descriptionLabel.text = restaurant.description
-        ratingLabel.text = "\(restaurant.rating)"
+        ratingLabel.text = "Rating: \(restaurant.rating)"
         deliveryTimeLabel.text = "Delivery Time: \(restaurant.deliveryTime)"
-        deliveryPriceLabel.text = "Delivery Price: \(restaurant.deliveryPrice)"
+        deliveryPriceLabel.text = "Delivery Price: \(restaurant.deliveryPrice) "
+
+        // Загружаем меню из Firestore
+        db.collection("restaurants").document(restaurant.id).collection("menu_items").getDocuments(source: .server) { [weak self] (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching menu: \(error)")
+            } else {
+                self?.menuItems = querySnapshot?.documents.compactMap { document in
+                    let data = document.data()
+                    let id = document.documentID
+                    let name = data["name"] as? String ?? ""
+                    let price = data["price"] as? String ?? ""
+                    let imageUrl = data["imageUrl"] as? String ?? ""
+                    let description = data["description"] as? String ?? ""
+                    
+                    return MenuItem(id: id, name: name, price: price, imageUrl: imageUrl, description: description)
+                } ?? []
+                self?.menuCollectionView.reloadData()
+            }
+        }
+
+
     }
 
-
     
+    
+    
+
     @objc private func didTapLikeButton() {
         likeButton.isSelected.toggle()
         if likeButton.isSelected {
-            likeButton.setImage(UIImage(named: "Favorite"), for: .normal)
+            likeButton.setImage(UIImage(named: "favorite tapped"), for: .normal)
             likeButton.tintColor = AppColors.main
         } else {
-            likeButton.setImage(UIImage(named: "Favorite"), for: .normal)
-            likeButton.tintColor = .gray
-        } // Анимация перехода
-        UIView.transition(with: likeButton, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            self.likeButton.layoutIfNeeded()
-        }, completion: nil)
+            likeButton.setImage(UIImage(named: "favorite 2"), for: .normal)
+            likeButton.tintColor = AppColors.gray
+        }
     }
+    
+    
+    //MARK: - UICollectionData and Delegate
+
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return menuItems.count
+        }
+
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemCell", for: indexPath) as! MenuItemCell
+            let menuItem = menuItems[indexPath.item]
+            cell.configure(with: menuItem)
+            return cell
+        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMenuItem = menuItems[indexPath.item]
+        print("Selected menu item: \(selectedMenuItem.name)") // Печатает название выбранного пункта
+        // Здесь можно вызвать переход к новому экрану или отобразить меню
+    }
+
+    
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            return CGSize(width: collectionView.frame.width - 10, height: 160) // Установите подходящий размер
+        }
+    
+
 }

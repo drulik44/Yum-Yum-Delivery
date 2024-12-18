@@ -83,6 +83,8 @@
 		A3D605352D063E0600846F06 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D605342D063E0600846F06 /* UIImageView+Extension.swift */; };
 		A3D605512D0732B000846F06 /* CustomSegmentControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D605502D0732B000846F06 /* CustomSegmentControll.swift */; };
 		A3D605542D078DDD00846F06 /* PopularItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D605532D078DDD00846F06 /* PopularItemsCell.swift */; };
+		A3E7A3A22D11BB960086E0FD /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */; };
+		A3E7A3A42D11C2400086E0FD /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A32D11C2400086E0FD /* MenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +157,8 @@
 		A3D605342D063E0600846F06 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		A3D605502D0732B000846F06 /* CustomSegmentControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentControll.swift; sourceTree = "<group>"; };
 		A3D605532D078DDD00846F06 /* PopularItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularItemsCell.swift; sourceTree = "<group>"; };
+		A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		A3E7A3A32D11C2400086E0FD /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,7 @@
 			children = (
 				A35342392D08F98A00C91C1C /* CategoryCell.swift */,
 				A353423B2D08FC5100C91C1C /* RestaurantCell.swift */,
+				A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */,
 			);
 			path = Restaurants;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				A35342402D0B9F3000C91C1C /* Category.swift */,
+				A3E7A3A32D11C2400086E0FD /* MenuItem.swift */,
 			);
 			path = CategoryCell;
 			sourceTree = "<group>";
@@ -610,11 +616,13 @@
 				A3D605352D063E0600846F06 /* UIImageView+Extension.swift in Sources */,
 				A3D6052F2D05FCCD00846F06 /* SettingsCoordinator.swift in Sources */,
 				A3D604E82D01E29F00846F06 /* Coordinator.swift in Sources */,
+				A3E7A3A22D11BB960086E0FD /* MenuItemCell.swift in Sources */,
 				A3D604E92D01E29F00846F06 /* SearchCoordinator.swift in Sources */,
 				A3D604EA2D01E29F00846F06 /* UIFont+Extension.swift in Sources */,
 				A3D604EB2D01E29F00846F06 /* WelcomeViewController.swift in Sources */,
 				A353423E2D09201700C91C1C /* Restaurants.swift in Sources */,
 				A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */,
+				A3E7A3A42D11C2400086E0FD /* MenuItem.swift in Sources */,
 				A3D604EC2D01E29F00846F06 /* FavoriteViewController.swift in Sources */,
 				A3D604ED2D01E29F00846F06 /* UIImage+Resize.swift in Sources */,
 				A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */,
