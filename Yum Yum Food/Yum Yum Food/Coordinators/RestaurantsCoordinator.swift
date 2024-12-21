@@ -29,6 +29,11 @@ class RestaurantsCoordinator: Coordinator {
             detailVC.restaurant = restaurant
             navigationController.pushViewController(detailVC, animated: true)
         }
+    
+    
+    
+      
+    
     }
 
 

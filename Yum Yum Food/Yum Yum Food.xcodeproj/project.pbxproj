@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3035AB22D15EB45000BF8BF /* PaymentOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */; };
 		A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A32270D22CF2AA6B00D9BEC3 /* SnapKit */; };
 		A33B569D2D08786A0076375E /* CustomButtonHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */; };
 		A353423A2D08F98A00C91C1C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35342392D08F98A00C91C1C /* CategoryCell.swift */; };
@@ -70,7 +71,6 @@
 		A3D604ED2D01E29F00846F06 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D6049B2D01E29F00846F06 /* UIImage+Resize.swift */; };
 		A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D6049C2D01E29F00846F06 /* UINavigation+Extension.swift */; };
 		A3D604EF2D01E29F00846F06 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604932D01E29F00846F06 /* HomeCoordinator.swift */; };
-		A3D604F12D01E30500846F06 /* PaymentOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */; };
 		A3D604F32D01E5FB00846F06 /* SectionOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F22D01E5FB00846F06 /* SectionOption.swift */; };
 		A3D604F52D0240C300846F06 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A3D604F42D0240C300846F06 /* FirebaseFirestore */; };
 		A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */; };
@@ -85,9 +85,13 @@
 		A3D605542D078DDD00846F06 /* PopularItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D605532D078DDD00846F06 /* PopularItemsCell.swift */; };
 		A3E7A3A22D11BB960086E0FD /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */; };
 		A3E7A3A42D11C2400086E0FD /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A32D11C2400086E0FD /* MenuItem.swift */; };
+		A3E7A3A62D138C000086E0FD /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A52D138C000086E0FD /* FoodDetailsViewController.swift */; };
+		A3E7A3A82D14C3680086E0FD /* IncrementDecrementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */; };
+		A3E7A3AC2D15DD040086E0FD /* PackageCostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionCell.swift; sourceTree = "<group>"; };
 		A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yum Yum Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonHomeVC.swift; sourceTree = "<group>"; };
 		A35342392D08F98A00C91C1C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -145,7 +149,6 @@
 		A3D604B92D01E29F00846F06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D604BA2D01E29F00846F06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3D604BC2D01E29F00846F06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionCell.swift; sourceTree = "<group>"; };
 		A3D604F22D01E5FB00846F06 /* SectionOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOption.swift; sourceTree = "<group>"; };
 		A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAddressWithMapViewController.swift; sourceTree = "<group>"; };
 		A3D605282D04FCBC00846F06 /* CustomAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddressView.swift; sourceTree = "<group>"; };
@@ -159,6 +162,9 @@
 		A3D605532D078DDD00846F06 /* PopularItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularItemsCell.swift; sourceTree = "<group>"; };
 		A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 		A3E7A3A32D11C2400086E0FD /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		A3E7A3A52D138C000086E0FD /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
+		A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementDecrementView.swift; sourceTree = "<group>"; };
+		A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCostCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +210,7 @@
 				A35342392D08F98A00C91C1C /* CategoryCell.swift */,
 				A353423B2D08FC5100C91C1C /* RestaurantCell.swift */,
 				A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */,
+				A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */,
 			);
 			path = Restaurants;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 			children = (
 				A3D6048A2D01E29F00846F06 /* RestaurantsViewController.swift */,
 				A35B25F82D0E29A1004C4B69 /* RestaurantsDetailViewController.swift */,
+				A3E7A3A52D138C000086E0FD /* FoodDetailsViewController.swift */,
 			);
 			path = Restaurants;
 			sourceTree = "<group>";
@@ -447,9 +455,9 @@
 		A3D604BE2D01E29F00846F06 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */,
 				A35342382D08F96900C91C1C /* Restaurants */,
 				A3D605522D078DBA00846F06 /* HomeVC */,
-				A3D604F02D01E30500846F06 /* PaymentOptionCell.swift */,
 				A3D6052A2D05F7D400846F06 /* SettingsCell.swift */,
 			);
 			path = Cells;
@@ -461,6 +469,7 @@
 				A3D605282D04FCBC00846F06 /* CustomAddressView.swift */,
 				A3D605502D0732B000846F06 /* CustomSegmentControll.swift */,
 				A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */,
+				A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -590,15 +599,17 @@
 				A3D604D62D01E29F00846F06 /* UIColor+Extension.swift in Sources */,
 				A3D604D72D01E29F00846F06 /* RestaurantsViewController.swift in Sources */,
 				A3D604D82D01E29F00846F06 /* ProfileViewController.swift in Sources */,
+				A3E7A3A62D138C000086E0FD /* FoodDetailsViewController.swift in Sources */,
 				A3D604D92D01E29F00846F06 /* AppDelegate.swift in Sources */,
 				A3D6052D2D05F8B100846F06 /* SectionOptionSettings.swift in Sources */,
+				A3E7A3A82D14C3680086E0FD /* IncrementDecrementView.swift in Sources */,
 				A353423C2D08FC5100C91C1C /* RestaurantCell.swift in Sources */,
 				A3D604DA2D01E29F00846F06 /* ContactViewController.swift in Sources */,
 				A3D604DB2D01E29F00846F06 /* OrderViewController.swift in Sources */,
 				A3D604DC2D01E29F00846F06 /* SearchViewController.swift in Sources */,
-				A3D604F12D01E30500846F06 /* PaymentOptionCell.swift in Sources */,
 				A3D605312D063B0700846F06 /* FastestDeliveryCell.swift in Sources */,
 				A3D605332D063B2D00846F06 /* FoodItem.swift in Sources */,
+				A3E7A3AC2D15DD040086E0FD /* PackageCostCell.swift in Sources */,
 				A3D604DD2D01E29F00846F06 /* PaymentsViewController.swift in Sources */,
 				A3D604DE2D01E29F00846F06 /* SettingsViewController.swift in Sources */,
 				A3D604DF2D01E29F00846F06 /* ProfileCoordinator.swift in Sources */,
@@ -623,6 +634,7 @@
 				A353423E2D09201700C91C1C /* Restaurants.swift in Sources */,
 				A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */,
 				A3E7A3A42D11C2400086E0FD /* MenuItem.swift in Sources */,
+				A3035AB22D15EB45000BF8BF /* PaymentOptionCell.swift in Sources */,
 				A3D604EC2D01E29F00846F06 /* FavoriteViewController.swift in Sources */,
 				A3D604ED2D01E29F00846F06 /* UIImage+Resize.swift in Sources */,
 				A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */,

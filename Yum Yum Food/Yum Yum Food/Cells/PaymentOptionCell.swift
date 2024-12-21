@@ -13,7 +13,7 @@ class PaymentOptionCell: UITableViewCell {
 
     let icon: UIImageView = {
         var iv = UIImageView()
-        iv.contentMode = .scaleAspectFit  // Используем .scaleAspectFit для настройки размера иконки
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
