@@ -276,14 +276,30 @@ class FoodDetailsViewController: UIViewController {
     //MARK: - Objc func
     @objc private func didTapLikeButton() {
         likeButtonFood.isSelected.toggle()
+        
+        guard let menuItem = menuItem else { return }
+        
+        let favoriteItem = FavoriteItem(id: menuItem.id,
+                                        name: menuItem.name,
+                                        description: menuItem.description,
+                                        imageUrl: menuItem.imageUrl,
+                                        price: menuItem.price,
+                                        rating: 0,
+                                        deliveryTime: "",
+                                        deliveryPrice: "",
+                                        type: .food)
+        
         if likeButtonFood.isSelected {
             likeButtonFood.setImage(UIImage(named: "favorite tapped"), for: .normal)
             likeButtonFood.tintColor = AppColors.main
+            FavoritesManager.shared.addToFavorites(item: favoriteItem)
         } else {
             likeButtonFood.setImage(UIImage(named: "favorite 2"), for: .normal)
             likeButtonFood.tintColor = AppColors.gray
+            FavoritesManager.shared.removeFromFavorites(item: favoriteItem)
         }
     }
+
     
     @objc private func selectedButtonTapped() {
         selectedButton.isSelected.toggle()

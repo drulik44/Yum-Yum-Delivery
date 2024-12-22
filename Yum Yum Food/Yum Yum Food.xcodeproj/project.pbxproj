@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A3035AB22D15EB45000BF8BF /* PaymentOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */; };
+		A3035AB42D174097000BF8BF /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3035AB32D174097000BF8BF /* FavoriteItem.swift */; };
+		A3035AB72D174226000BF8BF /* FavoriteFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3035AB62D174226000BF8BF /* FavoriteFoodCell.swift */; };
+		A3035ABB2D175984000BF8BF /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3035ABA2D175984000BF8BF /* FavoritesManager.swift */; };
+		A3035ABD2D179C42000BF8BF /* FavoriteRestaurantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3035ABC2D179C42000BF8BF /* FavoriteRestaurantsCell.swift */; };
 		A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A32270D22CF2AA6B00D9BEC3 /* SnapKit */; };
 		A33B569D2D08786A0076375E /* CustomButtonHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */; };
 		A353423A2D08F98A00C91C1C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35342392D08F98A00C91C1C /* CategoryCell.swift */; };
@@ -92,6 +96,10 @@
 
 /* Begin PBXFileReference section */
 		A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionCell.swift; sourceTree = "<group>"; };
+		A3035AB32D174097000BF8BF /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
+		A3035AB62D174226000BF8BF /* FavoriteFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFoodCell.swift; sourceTree = "<group>"; };
+		A3035ABA2D175984000BF8BF /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		A3035ABC2D179C42000BF8BF /* FavoriteRestaurantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRestaurantsCell.swift; sourceTree = "<group>"; };
 		A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yum Yum Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonHomeVC.swift; sourceTree = "<group>"; };
 		A35342392D08F98A00C91C1C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -187,6 +195,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A3035AB52D1741DC000BF8BF /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				A3035AB62D174226000BF8BF /* FavoriteFoodCell.swift */,
+				A3035ABC2D179C42000BF8BF /* FavoriteRestaurantsCell.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		A3035AB82D174A61000BF8BF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A3035AB92D17593D000BF8BF /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				A3035AB32D174097000BF8BF /* FavoriteItem.swift */,
+				A3035ABA2D175984000BF8BF /* FavoritesManager.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		A32270B02CF2A21500D9BEC3 = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +400,7 @@
 		A3D604A02D01E29F00846F06 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A3035AB92D17593D000BF8BF /* Favorite */,
 				A353423F2D0B9F0C00C91C1C /* CategoryCell */,
 				A3D6049E2D01E29F00846F06 /* UserData.swift */,
 				A3D6049F2D01E29F00846F06 /* UserOption.swift */,
@@ -455,7 +490,8 @@
 		A3D604BE2D01E29F00846F06 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A3035AB12D15EB44000BF8BF /* PaymentOptionCell.swift */,
+				A3035AB82D174A61000BF8BF /* Profile */,
+				A3035AB52D1741DC000BF8BF /* Favorite */,
 				A35342382D08F96900C91C1C /* Restaurants */,
 				A3D605522D078DBA00846F06 /* HomeVC */,
 				A3D6052A2D05F7D400846F06 /* SettingsCell.swift */,
@@ -602,6 +638,7 @@
 				A3E7A3A62D138C000086E0FD /* FoodDetailsViewController.swift in Sources */,
 				A3D604D92D01E29F00846F06 /* AppDelegate.swift in Sources */,
 				A3D6052D2D05F8B100846F06 /* SectionOptionSettings.swift in Sources */,
+				A3035ABD2D179C42000BF8BF /* FavoriteRestaurantsCell.swift in Sources */,
 				A3E7A3A82D14C3680086E0FD /* IncrementDecrementView.swift in Sources */,
 				A353423C2D08FC5100C91C1C /* RestaurantCell.swift in Sources */,
 				A3D604DA2D01E29F00846F06 /* ContactViewController.swift in Sources */,
@@ -624,12 +661,14 @@
 				A3D604E52D01E29F00846F06 /* HelpFAQViewController.swift in Sources */,
 				A3D604E62D01E29F00846F06 /* UserData.swift in Sources */,
 				A3D604E72D01E29F00846F06 /* AuthService.swift in Sources */,
+				A3035AB72D174226000BF8BF /* FavoriteFoodCell.swift in Sources */,
 				A3D605352D063E0600846F06 /* UIImageView+Extension.swift in Sources */,
 				A3D6052F2D05FCCD00846F06 /* SettingsCoordinator.swift in Sources */,
 				A3D604E82D01E29F00846F06 /* Coordinator.swift in Sources */,
 				A3E7A3A22D11BB960086E0FD /* MenuItemCell.swift in Sources */,
 				A3D604E92D01E29F00846F06 /* SearchCoordinator.swift in Sources */,
 				A3D604EA2D01E29F00846F06 /* UIFont+Extension.swift in Sources */,
+				A3035AB42D174097000BF8BF /* FavoriteItem.swift in Sources */,
 				A3D604EB2D01E29F00846F06 /* WelcomeViewController.swift in Sources */,
 				A353423E2D09201700C91C1C /* Restaurants.swift in Sources */,
 				A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */,
@@ -639,6 +678,7 @@
 				A3D604ED2D01E29F00846F06 /* UIImage+Resize.swift in Sources */,
 				A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */,
 				A3D604EF2D01E29F00846F06 /* HomeCoordinator.swift in Sources */,
+				A3035ABB2D175984000BF8BF /* FavoritesManager.swift in Sources */,
 				A3D605542D078DDD00846F06 /* PopularItemsCell.swift in Sources */,
 				A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */,
 			);
