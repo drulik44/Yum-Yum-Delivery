@@ -51,8 +51,6 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
         button.setImage(UIImage(named: "favorite 2"), for: .normal)
         button.tintColor = AppColors.gray
         button.contentMode = .scaleAspectFit
-
-
         return button
     }()
     
@@ -234,8 +232,8 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
         likeButton.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
             make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(40)
-            make.width.equalTo(40)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(10)
@@ -325,12 +323,27 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
 
     @objc private func didTapLikeButton() {
         likeButton.isSelected.toggle()
+        
+        guard let restaurant = restaurant else { return }
+        
+        let favoriteItem = FavoriteItem(id: restaurant.id,
+                                        name: restaurant.name,
+                                        description: restaurant.description,
+                                        imageUrl: restaurant.imageUrl,
+                                        price: "",
+                                        rating: restaurant.rating,
+                                        deliveryTime: restaurant.deliveryTime,
+                                        deliveryPrice: restaurant.deliveryPrice,
+                                        type: .restaurant)
+        
         if likeButton.isSelected {
             likeButton.setImage(UIImage(named: "favorite tapped"), for: .normal)
             likeButton.tintColor = AppColors.main
+            FavoritesManager.shared.addToFavorites(item: favoriteItem)
         } else {
             likeButton.setImage(UIImage(named: "favorite 2"), for: .normal)
             likeButton.tintColor = AppColors.gray
+            FavoritesManager.shared.removeFromFavorites(item: favoriteItem)
         }
     }
     
@@ -347,10 +360,14 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
             cell.configure(with: menuItem)
             return cell
         }
+    
+    //MARK: - TAPPED FUNC
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMenuItem = menuItems[indexPath.item]
         print("Selected menu item: \(selectedMenuItem.name)") // Печатает название выбранного пункта
-        // Здесь можно вызвать переход к новому экрану или отобразить меню
+        showFoodDetail(with: selectedMenuItem)
+        
     }
 
     
@@ -358,5 +375,14 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
             return CGSize(width: collectionView.frame.width - 10, height: 160) // Установите подходящий размер
         }
     
+    
+    //MARK: - Func Show FoodDetail Controller
+    func showFoodDetail(with menuItem: MenuItem) {
+        let foodVC = FoodDetailsViewController()
+        foodVC.menuItem = menuItem // Передача данных
+        foodVC.modalPresentationStyle = .formSheet
+        present(foodVC, animated: true)
+    }
 
+    
 }

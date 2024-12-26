@@ -21,4 +21,10 @@ class FavoriteCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 
+    
+    protocol FavoriteCoordinatorDelegate: AnyObject {
+        func didAddToFavorites(item: FavoriteItem)
+        func didRemoveFromFavorites(item: FavoriteItem)
+    }
+
 }

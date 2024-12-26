@@ -103,6 +103,8 @@ class RestaurantsViewController: UIViewController {
         restaurantsCollectionView.dataSource = self
 
         fetchRestaurants()
+        restaurantsCollectionView.isScrollEnabled = false
+
     }
 
     // MARK: - Setup UI
@@ -125,7 +127,7 @@ class RestaurantsViewController: UIViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(2500) // Задайте достаточную высоту для отображения всех элементов
+            make.height.equalTo(2800) // Задайте достаточную высоту для отображения всех элементов
         }
 
         titleLabel.snp.makeConstraints { make in

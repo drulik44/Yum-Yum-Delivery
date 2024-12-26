@@ -16,6 +16,7 @@ class MenuItemCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .Rubick.bold.size(of: 16)
+        label.numberOfLines = 3
         return label
     }()
     
@@ -60,20 +61,20 @@ class MenuItemCell: UICollectionViewCell {
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
-            make.right.equalTo(itemImageView.snp.left).offset(30)
+            make.right.equalTo(itemImageView.snp.left).offset(40)
             make.left.equalToSuperview().offset(20)
         }
         
         priceLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.left.equalTo(nameLabel)
-            make.bottom.equalToSuperview().offset(-25)
+            make.bottom.equalToSuperview().offset(-20)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().offset(20)
-            make.right.equalTo(itemImageView.snp.left).offset(-15)
+            make.right.equalTo(itemImageView.snp.left).offset(-50)
         }
     }
     
