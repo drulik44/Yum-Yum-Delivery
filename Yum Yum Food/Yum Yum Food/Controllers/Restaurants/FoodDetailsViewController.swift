@@ -27,6 +27,7 @@ class FoodDetailsViewController: UIViewController {
         likeButtonFood.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         likeButtonFood.backgroundColor = .clear
         selectedButton.addTarget(self, action: #selector(selectedButtonTapped) , for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     
     private let foodImageView: UIImageView = {
@@ -138,12 +139,23 @@ class FoodDetailsViewController: UIViewController {
     private let incrementDecrementView = IncrementDecrementView()
     
     
-   
+   private let closeButton: UIButton = {
+       let button = UIButton()
+           button.setImage(UIImage(systemName: "xmark"), for: .normal)
+           button.tintColor = .white
+           button.backgroundColor = UIColor.darkGray
+           button.layer.cornerRadius = 20
+           button.clipsToBounds = true
+           button.translatesAutoresizingMaskIntoConstraints = false
+           button.layer.zPosition = 1
+           return button
+    }()
     
     
 // MARK: - Setup UI
     private func setupUI(){
         view.addSubview(foodImageView)
+        view.addSubview(closeButton)
         view.addSubview(foodTitleLabel)
         view.addSubview(likeButtonFood)
         view.addSubview(foodDescriptionLabel)
@@ -177,6 +189,13 @@ class FoodDetailsViewController: UIViewController {
              make.top.equalToSuperview()
              make.width.equalToSuperview()
              make.height.equalTo(350)
+         }
+         
+         closeButton.snp.makeConstraints { make in
+             make.top.equalToSuperview().offset(20)
+             make.right.equalToSuperview().offset(-20)
+             make.width.height.equalTo(40)
+
          }
          
          foodTitleLabel.snp.makeConstraints { make in
@@ -312,6 +331,10 @@ class FoodDetailsViewController: UIViewController {
         }
     }
    
+    @objc private func closeButtonTapped() {
+        dismiss(animated: true, completion: nil)
+
+    }
     
     //MARK: - Collection
     
