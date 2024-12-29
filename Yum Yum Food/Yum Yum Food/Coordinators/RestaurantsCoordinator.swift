@@ -31,7 +31,18 @@ class RestaurantsCoordinator: Coordinator {
         }
     
     
+   
+
     
+    func showCart() {
+        let cartVC = CartViewController()
+        let navController = UINavigationController(rootViewController: cartVC)
+        navController.modalPresentationStyle = .fullScreen
+        navigationController.present(navController, animated: true, completion: nil)
+    }
+
+
+
       
     
     }

@@ -35,12 +35,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseableId)
-        //tableView.snp.makeConstraints { make in
-           // make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            //make.right.equalToSuperview().offset(-5)
-          //  make.left.equalToSuperview().offset(5)
-           // make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-150)
-        //}
+        
     }
     // UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

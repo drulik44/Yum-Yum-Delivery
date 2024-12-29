@@ -80,22 +80,20 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         loadSavedLocation()
     }
 
+    //MARK: - Setup UI
+
     private func setupUI() {
-        // Map View
         mapView.delegate = self
         view.addSubview(mapView)
 
-        // Address Label
         addressLabel.text = "Address"
         addressLabel.font = .Rubick.bold.size(of: 18)
         view.addSubview(addressLabel)
 
-        // Address TextField
         
         addressTextField.delegate = self
         view.addSubview(addressTextField)
 
-        // Search Button
         
         
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
@@ -105,6 +103,9 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         view.addSubview(saveButton)
     }
+
+    
+    //MARK: - Setup constraints
 
     private func setupConstraints() {
         mapView.snp.makeConstraints { make in
@@ -197,7 +198,6 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
             return
         }
         saveLocationToFirebase(coordinate: selectedLocation)
-        // Логика сохранения адреса
         print("Адрес сохранён: \(selectedLocation.latitude), \(selectedLocation.longitude)")
         if let address = addressTextField.text, !address.isEmpty {
                   addressCompletion?(address) // Передача адреса через замыкание

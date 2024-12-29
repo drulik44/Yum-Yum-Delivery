@@ -28,6 +28,7 @@ class FoodDetailsViewController: UIViewController {
         likeButtonFood.backgroundColor = .clear
         selectedButton.addTarget(self, action: #selector(selectedButtonTapped) , for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        addToCartButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
     }
     
     private let foodImageView: UIImageView = {
@@ -333,10 +334,11 @@ class FoodDetailsViewController: UIViewController {
    
     @objc private func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
-
     }
     
-    //MARK: - Collection
-    
+    @objc private func addToCartButtonTapped() {
+        CartManager.shared.showCartBanner()
+
+    }
     
 }
