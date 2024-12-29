@@ -64,8 +64,7 @@ class CartBannerView: UIView {
         }
     }
     
-    
     @objc private func bannerTapped() {
-           onTap?()
-       }
+              onTap?()
+          }
 }

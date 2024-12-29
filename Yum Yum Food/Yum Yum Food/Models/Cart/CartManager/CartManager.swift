@@ -8,6 +8,9 @@
 import UIKit
 
 class CartManager {
+    
+    private var items: [CartItem] = []
+    
     static let shared = CartManager()
     private var bannerView: CartBannerView?
     weak var coordinator: MainCoordinator?
@@ -42,5 +45,22 @@ class CartManager {
     func hideCartBanner() {
         bannerView?.isHidden = true
     }
+    
+    func addToCart(item: MenuItem, quantity: Int, finalPrice: Double) {
+        let cartItem = CartItem(menuItem: item, quantity: quantity, finalPrice: finalPrice)
+        items.append(cartItem)
+    }
+
+    func updateCartItem(item: MenuItem, quantity: Int) {
+        if let index = items.firstIndex(where: { $0.menuItem.id == item.id }) {
+            items[index].quantity = quantity
+            items[index].finalPrice = Double(quantity) * (Double(item.price) ?? 0)
+        }
+    }
+
+    func getCartItems() -> [CartItem] {
+        return items
+    }
+
 }
 

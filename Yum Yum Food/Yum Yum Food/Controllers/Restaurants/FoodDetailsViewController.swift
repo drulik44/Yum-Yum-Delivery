@@ -337,8 +337,43 @@ class FoodDetailsViewController: UIViewController {
     }
     
     @objc private func addToCartButtonTapped() {
+        // Проверяем, что menuItem не равен nil
+        guard let menuItem = menuItem else {
+            print("Menu item is nil")
+            return
+        }
+
+        let cleanedPriceString = menuItem.price
+                .replacingOccurrences(of: ",", with: ".") // Заменяем запятую на точку
+                .trimmingCharacters(in: .whitespaces)
+        
+        // Преобразуем цену из строки в Double
+        let price = Double(cleanedPriceString) ?? 0.0
+
+        print("Menu item price: \(menuItem.price)") // Проверяем исходную строку
+           print("Price after conversion: \(price)")
+        
+        // Получаем количество из IncrementDecrementView
+        let quantity = incrementDecrementView.quantity
+
+        // Вычисляем общую стоимость
+        var finalPrice = Double(quantity) * price
+        
+        if selectedButton.isSelected {
+            finalPrice += 20.00
+        }else {
+            print("упаковку не добавляли")
+        }
+
+        // Добавляем товар в корзину
+        CartManager.shared.addToCart(item: menuItem, quantity: quantity, finalPrice: finalPrice)
+
+        // Показываем баннер с уведомлением
         CartManager.shared.showCartBanner()
 
+        // Выводим отладочную информацию
+        print("Added \(menuItem.name) to cart. Quantity: \(quantity), Final Price: \(finalPrice)")
     }
-    
+
+   
 }

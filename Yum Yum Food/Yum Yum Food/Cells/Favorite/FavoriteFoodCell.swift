@@ -66,7 +66,7 @@ class FavoriteFoodCell: UICollectionViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: "favorite tapped"), for: .normal)
         button.tintColor = AppColors.main
-        button.layer.zPosition = 1 // Установите приоритет z-индекса
+        button.layer.zPosition = 1
         return button
     }()
     
@@ -120,7 +120,6 @@ class FavoriteFoodCell: UICollectionViewCell {
             make.left.equalTo(priceView.snp.right).offset(8)
         }
         
-        // Констрейнты для кнопки "like"
         likeButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
             make.right.equalToSuperview().offset(-8)
