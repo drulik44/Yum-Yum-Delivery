@@ -13,11 +13,13 @@ class IncrementDecrementView: UIView {
     var quantity: Int = 1 {
         didSet {
             valueLabel.text = "\(quantity)"
-            onQuantityChange?(quantity) // Уведомление об изменении количества
+            //onQuantityChange?(quantity) // Уведомление об изменении количества
         }
     }
+    var onIncrement: (() -> Void)?
+        var onDecrement: (() -> Void)?
     
-    var onQuantityChange: ((Int) -> Void)?
+    //var onQuantityChange: ((Int) -> Void)?
 
     private let decrementButton: UIButton = {
         let button = UIButton(type: .system)
@@ -91,11 +93,14 @@ class IncrementDecrementView: UIView {
     
     @objc private func incrementValue() {
         quantity += 1
+        onIncrement?()
+
     }
     
     @objc private func decrementValue() {
-        if quantity > 1 {
-            quantity -= 1
+        quantity = max(quantity - 1, 0)
+        onDecrement?()
+
         }
     }
-}
+

@@ -10,7 +10,8 @@ import SnapKit
 import SDWebImage
 
 class ShoppingCartCell: UICollectionViewCell {
-
+    weak var delegate: ShoppingCartCellDelegate?
+    var cartItem: CartItem? 
     static let reusableId = "ShoppingCartCell"
 
     private let nameLabel: UILabel = {
@@ -74,6 +75,16 @@ class ShoppingCartCell: UICollectionViewCell {
             make.height.equalTo(40)
             make.width.equalTo(110)
         }
+        incrementDecrementView.onIncrement = { [weak self] in
+            guard let self = self, let item = self.cartItem else { return }
+            self.delegate?.didUpdateQuantity(for: item, quantity: self.incrementDecrementView.quantity)
+        }
+
+        incrementDecrementView.onDecrement = { [weak self] in
+            guard let self = self, let item = self.cartItem else { return }
+            self.delegate?.didUpdateQuantity(for: item, quantity: self.incrementDecrementView.quantity)
+        }
+
     }
 
     required init?(coder: NSCoder) {
@@ -81,11 +92,15 @@ class ShoppingCartCell: UICollectionViewCell {
     }
 
     func configure(with cartItem: CartItem) {
+        self.cartItem = cartItem
         nameLabel.text = cartItem.menuItem.name
-        priceLabel.text = "\(cartItem.finalPrice)0₴"
+        priceLabel.text = "\(cartItem.finalPrice)₴"
+        incrementDecrementView.quantity = cartItem.quantity
+
         if let url = URL(string: cartItem.menuItem.imageUrl) {
             itemImageView.sd_setImage(with: url, completed: nil)
         }
-        incrementDecrementView.quantity = cartItem.quantity
+        print("Configured cell for \(cartItem.menuItem.name), quantity: \(cartItem.quantity)") // Проверка
     }
+
 }

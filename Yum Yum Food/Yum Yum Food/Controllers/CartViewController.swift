@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+protocol ShoppingCartCellDelegate: AnyObject {
+    func didUpdateQuantity(for item: CartItem, quantity: Int)
+}
 
-class CartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class CartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ShoppingCartCellDelegate{
 
     weak var coordinator: MainCoordinator?
 
@@ -30,7 +33,30 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.register(ShoppingCartCell.self, forCellWithReuseIdentifier: ShoppingCartCell.reusableId)
         return collectionView
     }()
+    
+    private let totalPriceLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColors.textColorMain
+        label.font = .Rubick.bold.size(of: 24)
+        label.text = "Total price: "
+        return label
+    }()
+    
+    private let indicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.color = AppColors.main
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
+    private let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.isHidden = true
+        return view
+    }()
 
+    
     private var cartItems: [CartItem] = []
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +64,12 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.setupCustomBackButton(for: self)
         navigationItem.title = "Your order"
     }
+    private func updateTotalPrice() {
+        let totalPrice = cartItems.reduce(0) { $0 + $1.finalPrice  }
+        print("Total price updated: \(totalPrice)") // Проверка
+        totalPriceLabel.text = "Total price: \(totalPrice)₴"
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +78,16 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cartItems = CartManager.shared.getCartItems()
         shoppingCartView.dataSource = self
         shoppingCartView.delegate = self
+        updateTotalPrice()
     }
 
     private func setupUI() {
         view.backgroundColor = AppColors.background
         view.addSubview(titleLabel)
         view.addSubview(shoppingCartView)
+        view.addSubview(totalPriceLabel)
+        view.addSubview(indicatorView)
+        view.addSubview(overlayView)
     }
 
     private func setupConstraints() {
@@ -65,27 +101,77 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }
+        totalPriceLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.right.equalToSuperview().offset(-20)
+            make.left.equalToSuperview().offset(20)
+        }
+        indicatorView.snp.makeConstraints { make in
+            make.center.equalTo(view)
+        }
+        overlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
     }
 }
+
 
 extension CartViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cartItems.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShoppingCartCell.reusableId, for: indexPath) as? ShoppingCartCell else {
             return UICollectionViewCell()
         }
         let cartItem = cartItems[indexPath.row]
         cell.configure(with: cartItem)
+        cell.delegate = self
         return cell
     }
     
-   
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: collectionView.bounds.width - 10, height: 120)  // Размеры ячеек
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width - 10, height: 120)  // Размеры ячеек
+    }
+    
+    //MARK: - FUNC UPDATE CELL
+    func didUpdateQuantity(for item: CartItem, quantity: Int) {
+        overlayView.isHidden = false
+        view.bringSubviewToFront(indicatorView)
+        indicatorView.startAnimating()
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in // Имитация задержки (например, сетевой запрос)
+            guard let self = self else { return }
+            
+            
+            if let index = cartItems.firstIndex(where: { $0.menuItem.id == item.menuItem.id }) {
+                // Фильтрация и преобразование строки в Double прямо в коде
+                let priceString = cartItems[index].menuItem.price
+                let filteredString = priceString
+                    .replacingOccurrences(of: ",", with: ".") // Заменяем запятую на точку
+                    .trimmingCharacters(in: .whitespaces)
+                
+                if let price = Double(filteredString) {
+                    cartItems[index].quantity = quantity
+                    cartItems[index].finalPrice = price * Double(quantity) // Обновляем итоговую цену
+                }
+            }
+            
+            updateTotalPrice()
+            
+            if let index = cartItems.firstIndex(where: { $0.menuItem.id == item.menuItem.id }) {
+                let indexPath = IndexPath(item: index, section: 0)
+                shoppingCartView.reloadItems(at: [indexPath])
+            }
+            self.overlayView.isHidden = true
+            self.indicatorView.stopAnimating()
+            
         }
     }
-
-
+    
+}
