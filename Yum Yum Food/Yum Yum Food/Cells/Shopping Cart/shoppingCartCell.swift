@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import SDWebImage
 
+
+
 class ShoppingCartCell: UICollectionViewCell {
     weak var delegate: ShoppingCartCellDelegate?
     var cartItem: CartItem? 
@@ -20,10 +22,17 @@ class ShoppingCartCell: UICollectionViewCell {
         label.numberOfLines = 3
         return label
     }()
+    
+    private let removeButton: UIButton = {
+           let button = UIButton()
+           button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+           button.tintColor = AppColors.main
+           return button
+       }()
 
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .Rubick.regular.size(of: 16)
+        label.font = .Rubick.bold.size(of: 16)
         label.textColor = AppColors.main
         return label
     }()
@@ -48,8 +57,11 @@ class ShoppingCartCell: UICollectionViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(itemImageView)
         contentView.addSubview(incrementDecrementView)
+        contentView.addSubview(removeButton)
         contentView.layer.cornerRadius = 12
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = AppColors.background
+        removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
+
         
         
 
@@ -62,6 +74,12 @@ class ShoppingCartCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalTo(itemImageView.snp.right).offset(20)
+        }
+        
+        removeButton.snp.makeConstraints { make in
+            make.centerY.equalTo(nameLabel)
+            make.right.equalToSuperview().offset(-5)
+            make.height.width.equalTo(40)
         }
 
         priceLabel.snp.makeConstraints { make in
@@ -89,6 +107,12 @@ class ShoppingCartCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    @objc func removeButtonTapped(){
+        guard let item = cartItem else { return }
+                delegate?.didRemoveItem(item)
     }
 
     func configure(with cartItem: CartItem) {

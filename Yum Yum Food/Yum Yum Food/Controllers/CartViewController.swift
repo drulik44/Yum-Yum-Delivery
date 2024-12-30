@@ -9,9 +9,11 @@ import UIKit
 import SnapKit
 protocol ShoppingCartCellDelegate: AnyObject {
     func didUpdateQuantity(for item: CartItem, quantity: Int)
+    func didRemoveItem(_ item: CartItem)
+
 }
 
-class CartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ShoppingCartCellDelegate{
+class CartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ShoppingCartCellDelegate {
 
     weak var coordinator: MainCoordinator?
 
@@ -31,16 +33,22 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.register(ShoppingCartCell.self, forCellWithReuseIdentifier: ShoppingCartCell.reusableId)
+        collectionView.register(FooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterView")
+
         return collectionView
     }()
     
-    private let totalPriceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = AppColors.textColorMain
-        label.font = .Rubick.bold.size(of: 24)
-        label.text = "Total price: "
-        return label
+    private let checkoutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Checkout", for: .normal)
+        button.setTitleColor(AppColors.backgroundCell, for: .normal)
+        button.titleLabel?.font = .Rubick.bold.size(of: 24)
+        button.backgroundColor = AppColors.main
+        button.layer.cornerRadius = 24
+        return button
     }()
+    
+   
     
     private let indicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .large)
@@ -64,11 +72,14 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.setupCustomBackButton(for: self)
         navigationItem.title = "Your order"
     }
-    private func updateTotalPrice() {
-        let totalPrice = cartItems.reduce(0) { $0 + $1.finalPrice  }
-        print("Total price updated: \(totalPrice)") // Проверка
-        totalPriceLabel.text = "Total price: \(totalPrice)₴"
+    func updateTotalPrice() {
+        let totalPrice = cartItems.reduce(0) { $0 + $1.finalPrice }
+        let footerIndexPath = IndexPath(item: 0, section: 0)
+        if let footer = shoppingCartView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: footerIndexPath) as? FooterView {
+            footer.totalPriceLabel.text = " \(totalPrice)₴"
+        }
     }
+
 
 
     override func viewDidLoad() {
@@ -85,9 +96,9 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.backgroundColor = AppColors.background
         view.addSubview(titleLabel)
         view.addSubview(shoppingCartView)
-        view.addSubview(totalPriceLabel)
         view.addSubview(indicatorView)
         view.addSubview(overlayView)
+        view.addSubview(checkoutButton)
     }
 
     private func setupConstraints() {
@@ -99,18 +110,23 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         shoppingCartView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview()
+            //make.bottom.equalToSuperview().offset(70)
+            make.bottom.equalTo(checkoutButton.snp.top).offset(-20) // Отступ от кнопки
+
         }
-        totalPriceLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            make.right.equalToSuperview().offset(-20)
-            make.left.equalToSuperview().offset(20)
-        }
+       
         indicatorView.snp.makeConstraints { make in
             make.center.equalTo(view)
         }
         overlayView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        checkoutButton.snp.makeConstraints { make in
+           // make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20) // Отступ от нижнего края
+
+            make.left.right.equalToSuperview().inset(20)
+            make.height.equalTo(50)
         }
 
     }
@@ -137,6 +153,22 @@ extension CartViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 10, height: 120)  // Размеры ячеек
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 50) // Размер футера
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as! FooterView
+            footer.totalPriceLabel.text = " \(cartItems.reduce(0) { $0 + $1.finalPrice })₴"
+            return footer
+        }
+        return UICollectionReusableView()
+    }
+
+    
+    //MARK: - SETUP DELEGATE
     
     //MARK: - FUNC UPDATE CELL
     func didUpdateQuantity(for item: CartItem, quantity: Int) {
@@ -173,5 +205,14 @@ extension CartViewController: UICollectionViewDataSource {
             
         }
     }
+    
+    // MARK: - Func remove
+    func didRemoveItem(_ item: CartItem) {
+            if let index = cartItems.firstIndex(where: { $0.menuItem.id == item.menuItem.id }) {
+                cartItems.remove(at: index) // Удаляем элемент из массива
+                shoppingCartView.deleteItems(at: [IndexPath(item: index, section: 0)]) // Удаляем ячейку из коллекции
+                updateTotalPrice() // Обновляем общую стоимость
+            }
+        }
     
 }
