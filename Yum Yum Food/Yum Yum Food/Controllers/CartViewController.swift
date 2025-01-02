@@ -99,6 +99,7 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.addSubview(indicatorView)
         view.addSubview(overlayView)
         view.addSubview(checkoutButton)
+        checkoutButton.addTarget(self, action: #selector(checkoutButtonTapped), for: .touchUpInside)
     }
 
     private func setupConstraints() {
@@ -122,7 +123,6 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
             make.edges.equalToSuperview()
         }
         checkoutButton.snp.makeConstraints { make in
-           // make.bottom.equalToSuperview().offset(-20)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20) // Отступ от нижнего края
 
             make.left.right.equalToSuperview().inset(20)
@@ -214,5 +214,24 @@ extension CartViewController: UICollectionViewDataSource {
                 updateTotalPrice() // Обновляем общую стоимость
             }
         }
+    
+    //MARK: - FUNC Chackout button tapped
+    
+    @objc private func checkoutButtonTapped() {
+        guard let selectedItem = cartItems.first else { return } // Для примера, берем первый элемент из корзины
+
+        let order = Order(name: selectedItem.menuItem.name,
+                          imageUrl: selectedItem.menuItem.imageUrl,
+                          totalPrice: selectedItem.finalPrice,
+                          date: Date())
+
+        // Добавляем заказ в OrderManager
+        OrdersManager.shared.addOrder(order)
+        
+        // Переход на OrderViewController
+        let orderVC = OrderViewController()
+        navigationController?.pushViewController(orderVC, animated: true)
+    }
+
     
 }
