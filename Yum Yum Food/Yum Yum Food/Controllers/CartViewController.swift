@@ -225,13 +225,20 @@ extension CartViewController: UICollectionViewDataSource {
                           totalPrice: selectedItem.finalPrice,
                           date: Date())
 
-        // Добавляем заказ в OrderManager
         OrdersManager.shared.addOrder(order)
+
+        cartItems.removeAll()
+        print("After removal, cartItems: \(cartItems)")
         
-        // Переход на OrderViewController
-        let orderVC = OrderViewController()
-        navigationController?.pushViewController(orderVC, animated: true)
+        // Обновляем представление корзины
+        DispatchQueue.main.async { [weak self] in
+            self?.shoppingCartView.reloadData()
+            self?.shoppingCartView.layoutIfNeeded() // Добавляем layoutIfNeeded для немедленного обновления
+            self?.updateTotalPrice()
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
+
 
     
 }

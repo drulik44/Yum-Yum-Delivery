@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 import SDWebImage
 
-
-
 class OrderCell: UICollectionViewCell {
     
     static let reusableId = "OrderCell"
@@ -18,7 +16,7 @@ class OrderCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .Rubick.bold.size(of: 16)
-        label.numberOfLines = 3
+        label.numberOfLines = 0 // Разрешить несколько строк
         return label
     }()
 
@@ -62,15 +60,19 @@ class OrderCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalTo(imageView.snp.right).offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
 
         totalPriceLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(10)
+            make.top.equalTo(nameLabel.snp.bottom).offset(5)
             make.left.equalTo(imageView.snp.right).offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
+        
         dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(totalPriceLabel.snp.bottom).offset(10)
-            make.left.equalTo(imageView.snp.right)
+            make.top.equalTo(totalPriceLabel.snp.bottom).offset(5)
+            make.left.equalTo(imageView.snp.right).offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
     }
 
@@ -78,11 +80,15 @@ class OrderCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with cartItem: CartItem) {
-        nameLabel.text = cartItem.menuItem.name
-        totalPriceLabel.text = "\(cartItem.finalPrice)₴"
+    func configure(with order: Order) {
+        nameLabel.text = order.name
+        totalPriceLabel.text = "\(order.totalPrice)₴"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        dateLabel.text = dateFormatter.string(from: order.date)
         
-        if let url = URL(string: cartItem.menuItem.imageUrl) {
+        if let url = URL(string: order.imageUrl) {
             imageView.sd_setImage(with: url, completed: nil)
         }
     }

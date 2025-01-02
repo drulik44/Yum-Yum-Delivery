@@ -7,98 +7,80 @@
 
 import UIKit
 
-class OrderViewController: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class OrderViewController: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     private var orders: [Order] = []
 
     private let collectionView: UICollectionView = {
-           let layout = UICollectionViewFlowLayout()
-           layout.scrollDirection = .vertical
-           layout.minimumLineSpacing = 16
-           let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-           collectionView.showsVerticalScrollIndicator = false
-           collectionView.backgroundColor = .clear
-           collectionView.register(OrderCell.self, forCellWithReuseIdentifier: OrderCell.reusableId)
-           return collectionView
-       }()
-    
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 5
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = AppColors.background
+        collectionView.register(OrderCell.self, forCellWithReuseIdentifier: OrderCell.reusableId)
+        return collectionView
+    }()
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = AppColors.textColorMain
+        label.font = .Rubick.bold.size(of: 24)
+        label.textAlignment = .center
+        label.text = "My Orders"
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
         loadOrders()
-        
     }
-    
-        //MARK: - Setup UI
+
     private func setupUI() {
         view.backgroundColor = AppColors.background
         navigationController?.setupCustomBackButton(for: self)
+        view.addSubview(titleLabel)
         view.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
 
-    }
-    
-    
-    //MARK: - Setup Constraints
-    
     private func setupConstraints() {
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.left.equalToSuperview().offset(20)
+        }
+
         collectionView.snp.makeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview().inset(20)
+        }
     }
-    
-    
+
     private func loadOrders() {
-        // Загружаем все заказы из OrderManager
         orders = OrdersManager.shared.getOrders()
-        print("Loaded orders: \(orders)")
         collectionView.reloadData()
     }
 
-    
-    // MARK: - UICollectionViewDataSource
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-          return orders.count
-      }
+        return orders.count
+    }
       
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("Loading cell for indexPath: \(indexPath)")
-        
-        // Декьючим ячейку
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderCell.reusableId, for: indexPath) as? OrderCell else {
-            print("Failed to dequeue cell")
             return UICollectionViewCell()
         }
-        
-        // Получаем заказ
-        let order = orders[indexPath.row]
-        
-        // Преобразуем totalPrice в строку
-        let priceString = String(format: "%.2f", order.totalPrice)  // Форматируем число с двумя знаками после запятой
-        
-        // Создаем MenuItem с необходимыми параметрами
-        let menuItem = MenuItem(id: UUID().uuidString,  // Генерируем уникальный id
-                                name: order.name,
-                                price: priceString,  // Передаем цену как строку
-                                imageUrl: order.imageUrl,  // Используем URL изображения
-                                description: "")  // Описание, если нужно, можно оставить пустым
-        
-        // Создаем CartItem
-        let cartItem = CartItem(menuItem: menuItem, quantity: 1, finalPrice: order.totalPrice)
-        
-        // Конфигурируем ячейку
-        cell.configure(with: cartItem)
-        
+        cell.configure(with: orders[indexPath.row])
         return cell
     }
 
-    
-
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 10, height: 120)  // Размеры ячеек
+        return CGSize(width: collectionView.bounds.width - 10, height: 130)
     }
-    
 }
+
+
+    
+
