@@ -1,0 +1,70 @@
+//
+//  CartManager.swift
+//  Yum Yum Food
+//
+//  Created by Руслан Жидких on 27.12.2024.
+//
+
+import UIKit
+
+class CartManager {
+    
+    private var items: [CartItem] = []
+    
+    static let shared = CartManager()
+    private var bannerView: CartBannerView?
+    weak var coordinator: MainCoordinator?
+    
+    func showCartBanner() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+            return
+        }
+
+        if bannerView == nil {
+                    bannerView = CartBannerView()
+                    bannerView?.onTap = { [weak self] in
+                        self?.coordinator?.showCartScreen()
+                        self?.hideCartBanner()
+                    }
+                    window.addSubview(bannerView!)
+                    bannerView?.translatesAutoresizingMaskIntoConstraints = false
+
+            NSLayoutConstraint.activate([
+                bannerView!.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: 16),
+                bannerView!.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -16),
+                bannerView!.bottomAnchor.constraint(equalTo: window.safeAreaLayoutGuide.bottomAnchor, constant: -70),
+                bannerView!.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        }
+
+        bannerView?.isHidden = false
+    }
+
+
+    func hideCartBanner() {
+        bannerView?.isHidden = true
+    }
+    
+    func addToCart(item: MenuItem, quantity: Int, finalPrice: Double) {
+        let cartItem = CartItem(menuItem: item, quantity: quantity, finalPrice: finalPrice)
+        items.append(cartItem)
+    }
+
+    func updateCartItem(item: MenuItem, quantity: Int) {
+        if let index = items.firstIndex(where: { $0.menuItem.id == item.id }) {
+            items[index].quantity = quantity
+            items[index].finalPrice = Double(quantity) * (Double(item.price) ?? 0)
+        }
+    }
+
+    func getCartItems() -> [CartItem] {
+        return items
+    }
+    
+    func clearCart() {
+           items.removeAll()
+       }
+
+}
+

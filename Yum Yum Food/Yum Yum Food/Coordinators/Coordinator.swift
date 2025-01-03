@@ -11,6 +11,7 @@ class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     private let authService = AuthService()
+    
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -84,5 +85,14 @@ class MainCoordinator: Coordinator {
         childCoordinators.append(searchCoordinator)
         childCoordinators.append(favoriteCoordinator)
         childCoordinators.append(profileCoordinator)
+        CartManager.shared.coordinator = self
+
     }
+    
+    func showCartScreen() {
+        let cartVC = CartViewController() // Предположим, у вас есть этот контроллер
+        cartVC.coordinator = self
+        navigationController.pushViewController(cartVC, animated: true)
+    }
+
 }

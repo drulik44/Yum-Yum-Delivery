@@ -10,6 +10,17 @@ import SnapKit
 
 class IncrementDecrementView: UIView {
     
+    var quantity: Int = 1 {
+        didSet {
+            valueLabel.text = "\(quantity)"
+            //onQuantityChange?(quantity) // Уведомление об изменении количества
+        }
+    }
+    var onIncrement: (() -> Void)?
+        var onDecrement: (() -> Void)?
+    
+    //var onQuantityChange: ((Int) -> Void)?
+
     private let decrementButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("-", for: .normal)
@@ -35,25 +46,14 @@ class IncrementDecrementView: UIView {
         return button
     }()
     
-    private var value: Int = 1 {
-        didSet {
-            valueLabel.text = "\(value)"
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         setupConstraints()
-        
-        // Устанавливаем цвет фона для UIView
-        self.backgroundColor = AppColors.backgroundCell // Здесь можно задать любой цвет
-        self.layer.cornerRadius = 25 // Закругленные углы (опционально)
-        self.layer.masksToBounds = true // Обрезка содержимого за пределами углов (опционально)
-        incrementButton.addTarget(self, action: #selector(incrementValue), for: .touchUpInside)
-        decrementButton.addTarget(self, action: #selector(decrementValue), for: .touchUpInside)
-
-
+        self.backgroundColor = AppColors.backgroundCell
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
@@ -86,13 +86,21 @@ class IncrementDecrementView: UIView {
         }
     }
     
+    private func setupActions() {
+        incrementButton.addTarget(self, action: #selector(incrementValue), for: .touchUpInside)
+        decrementButton.addTarget(self, action: #selector(decrementValue), for: .touchUpInside)
+    }
+    
     @objc private func incrementValue() {
-        value += 1
+        quantity += 1
+        onIncrement?()
+
     }
     
     @objc private func decrementValue() {
-        if value > 0 {
-            value -= 1
+        quantity = max(quantity - 1, 0)
+        onDecrement?()
+
         }
     }
-}
+
