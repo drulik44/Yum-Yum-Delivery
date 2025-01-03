@@ -74,6 +74,7 @@ class ShoppingCartCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalTo(itemImageView.snp.right).offset(20)
+            make.right.equalTo(removeButton.snp.left).offset(-5)
         }
         
         removeButton.snp.makeConstraints { make in

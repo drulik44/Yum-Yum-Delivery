@@ -66,19 +66,32 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     
     private var cartItems: [CartItem] = []
+    private var totalPrice: Double = 0
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setupCustomBackButton(for: self)
         navigationItem.title = "Your order"
     }
+    
+    
+    
     func updateTotalPrice() {
-        let totalPrice = cartItems.reduce(0) { $0 + $1.finalPrice }
-        let footerIndexPath = IndexPath(item: 0, section: 0)
-        if let footer = shoppingCartView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: footerIndexPath) as? FooterView {
-            footer.totalPriceLabel.text = " \(totalPrice)₴"
-        }
-    }
+    
+           totalPrice = cartItems.reduce(0) { $0 + $1.finalPrice } // Пересчитываем общую стоимость
+           updateFooter() // Обновляем отображение в футере
+       }
+
+    private func updateFooter() { // Выносим обновление футера в отдельный метод
+          let footerIndexPath = IndexPath(item: 0, section: 0)
+          if let footer = shoppingCartView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: footerIndexPath) as? FooterView {
+              let numberFormatter = NumberFormatter()
+              numberFormatter.numberStyle = .currency
+              numberFormatter.currencySymbol = "₴"
+              numberFormatter.locale = Locale(identifier: "uk_UA") // или текущая локаль пользователя
+              footer.totalPriceLabel.text = numberFormatter.string(from: NSNumber(value: totalPrice)) ?? "0₴"
+          }
+      }
 
 
 
@@ -217,25 +230,35 @@ extension CartViewController: UICollectionViewDataSource {
     
     //MARK: - FUNC Chackout button tapped
     
+   
+    
     @objc private func checkoutButtonTapped() {
-        guard let selectedItem = cartItems.first else { return } // Для примера, берем первый элемент из корзины
+        // 1. Вычисляем totalPrice (убедитесь, что updateTotalPrice() вызывается перед этим)
+        updateTotalPrice() // Это гарантирует, что totalPrice актуален
 
-        let order = Order(name: selectedItem.menuItem.name,
-                          imageUrl: selectedItem.menuItem.imageUrl,
-                          totalPrice: selectedItem.finalPrice,
-                          date: Date())
+        // Проверка на пустую корзину перед созданием заказа (более надежно)
+        guard !cartItems.isEmpty else {
+            // Обработка пустой корзины (например, показать сообщение пользователю)
+            print("Корзина пуста!")
+            return
+        }
+
+        // 2. Создаем Order, используя totalPrice и массив всех товаров
+        let order = Order(items: cartItems) // Передаем весь массив cartItems
 
         OrdersManager.shared.addOrder(order)
 
+        CartManager.shared.clearCart()
         cartItems.removeAll()
         print("After removal, cartItems: \(cartItems)")
-        
-        // Обновляем представление корзины
+
+        // 3. Обновляем представление корзины (в главном потоке)
         DispatchQueue.main.async { [weak self] in
-            self?.shoppingCartView.reloadData()
-            self?.shoppingCartView.layoutIfNeeded() // Добавляем layoutIfNeeded для немедленного обновления
-            self?.updateTotalPrice()
-            self?.navigationController?.popViewController(animated: true)
+            guard let self = self else { return }
+            self.shoppingCartView.reloadData()
+            self.shoppingCartView.layoutIfNeeded()
+            self.updateFooter() // Обновляем только футер, т.к. остальная корзина пуста
+            self.navigationController?.popViewController(animated: true)
         }
     }
 

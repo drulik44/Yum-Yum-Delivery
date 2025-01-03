@@ -61,6 +61,10 @@ class CartManager {
     func getCartItems() -> [CartItem] {
         return items
     }
+    
+    func clearCart() {
+           items.removeAll()
+       }
 
 }
 
