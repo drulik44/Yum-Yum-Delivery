@@ -122,7 +122,7 @@ class HomeViewController: UIViewController {
         contentView.addSubview(seeAllButton)
         contentView.addSubview(fastestDeliveryCollectionView)
         contentView.addSubview(popularItemsLabel)
-        contentView.addSubview(seeAllButton2)
+       // contentView.addSubview(seeAllButton2)
         contentView.addSubview(popularItemsCollectionView)
         
         fastestDeliveryCollectionView.dataSource = self
@@ -130,7 +130,8 @@ class HomeViewController: UIViewController {
         popularItemsCollectionView.dataSource = self
         popularItemsCollectionView.delegate = self
         
-       
+        seeAllButton.addTarget(self, action: #selector(didTapFastestDeliveryButton), for: .touchUpInside)
+       // seeAllButton2.addTarget(self, action: #selector(didTapPopularItemsButton), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -181,12 +182,12 @@ class HomeViewController: UIViewController {
         }
         
         
-        seeAllButton2.snp.makeConstraints { make in
+       /* seeAllButton2.snp.makeConstraints { make in
             make.centerY.equalTo(popularItemsLabel)
             make.right.equalToSuperview().offset(-30)
             make.width.equalTo(80)
 
-        }
+        }*/
         
         popularItemsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(popularItemsLabel.snp.bottom).offset(10)
@@ -288,5 +289,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return CGSize(width: 0, height: 0) // Значение по умолчанию (может быть не достигнуто)
     }
 
+    //MARK: - OBJC FUNC
+    
+    @objc private func didTapFastestDeliveryButton() {
+        
+        coordinator?.showFastestDelivery()
+    }
+    
+    @objc private func didTapPopularItemsButton() {
+        
+        coordinator?.showPopularDelivery()
+    }
+    
 }
 

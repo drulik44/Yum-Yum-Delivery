@@ -30,6 +30,10 @@
 		A3AD03522D245274005E2F30 /* OrdersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD03512D245274005E2F30 /* OrdersManager.swift */; };
 		A3AD03552D245899005E2F30 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD03542D245899005E2F30 /* Order.swift */; };
 		A3AD03582D2472C1005E2F30 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD03572D2472C1005E2F30 /* OrderCell.swift */; };
+		A3AD035A2D284933005E2F30 /* FastestDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD03592D284933005E2F30 /* FastestDeliveryViewController.swift */; };
+		A3AD035C2D284A23005E2F30 /* PopularDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD035B2D284A23005E2F30 /* PopularDeliveryViewController.swift */; };
+		A3AD035E2D284D7F005E2F30 /* FastestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD035D2D284D7F005E2F30 /* FastestCell.swift */; };
+		A3AD03602D285FA3005E2F30 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD035F2D285FA3005E2F30 /* FoodItemCell.swift */; };
 		A3C20E6E2CF61E300082E881 /* SkyFloatingLabelTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E6D2CF61E300082E881 /* SkyFloatingLabelTextField */; };
 		A3C20E7B2CF7D6F50082E881 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E7A2CF7D6F50082E881 /* FirebaseAuth */; };
 		A3C20E7D2CF7D7060082E881 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A3C20E7C2CF7D7060082E881 /* FirebaseCore */; };
@@ -125,6 +129,10 @@
 		A3AD03512D245274005E2F30 /* OrdersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersManager.swift; sourceTree = "<group>"; };
 		A3AD03542D245899005E2F30 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		A3AD03572D2472C1005E2F30 /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
+		A3AD03592D284933005E2F30 /* FastestDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastestDeliveryViewController.swift; sourceTree = "<group>"; };
+		A3AD035B2D284A23005E2F30 /* PopularDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularDeliveryViewController.swift; sourceTree = "<group>"; };
+		A3AD035D2D284D7F005E2F30 /* FastestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastestCell.swift; sourceTree = "<group>"; };
+		A3AD035F2D285FA3005E2F30 /* FoodItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
 		A3D604772D01E29F00846F06 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		A3D604792D01E29F00846F06 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A3D6047B2D01E29F00846F06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -345,6 +353,8 @@
 			isa = PBXGroup;
 			children = (
 				A3D604792D01E29F00846F06 /* HomeViewController.swift */,
+				A3AD03592D284933005E2F30 /* FastestDeliveryViewController.swift */,
+				A3AD035B2D284A23005E2F30 /* PopularDeliveryViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -568,6 +578,7 @@
 				A35342382D08F96900C91C1C /* Restaurants */,
 				A3D605522D078DBA00846F06 /* HomeVC */,
 				A3D6052A2D05F7D400846F06 /* SettingsCell.swift */,
+				A3AD035F2D285FA3005E2F30 /* FoodItemCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -590,6 +601,7 @@
 			children = (
 				A3D605302D063B0700846F06 /* FastestDeliveryCell.swift */,
 				A3D605532D078DDD00846F06 /* PopularItemsCell.swift */,
+				A3AD035D2D284D7F005E2F30 /* FastestCell.swift */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -714,6 +726,7 @@
 				A3D604D72D01E29F00846F06 /* RestaurantsViewController.swift in Sources */,
 				A3D604D82D01E29F00846F06 /* ProfileViewController.swift in Sources */,
 				A3E7A3A62D138C000086E0FD /* FoodDetailsViewController.swift in Sources */,
+				A3AD035E2D284D7F005E2F30 /* FastestCell.swift in Sources */,
 				A3D604D92D01E29F00846F06 /* AppDelegate.swift in Sources */,
 				A3D6052D2D05F8B100846F06 /* SectionOptionSettings.swift in Sources */,
 				A3035ABD2D179C42000BF8BF /* FavoriteRestaurantsCell.swift in Sources */,
@@ -753,8 +766,10 @@
 				A3035AB42D174097000BF8BF /* FavoriteItem.swift in Sources */,
 				A3D604EB2D01E29F00846F06 /* WelcomeViewController.swift in Sources */,
 				A353423E2D09201700C91C1C /* Restaurants.swift in Sources */,
+				A3AD035A2D284933005E2F30 /* FastestDeliveryViewController.swift in Sources */,
 				A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */,
 				A3E7A3A42D11C2400086E0FD /* MenuItem.swift in Sources */,
+				A3AD03602D285FA3005E2F30 /* FoodItemCell.swift in Sources */,
 				A3035AB22D15EB45000BF8BF /* PaymentOptionCell.swift in Sources */,
 				A3AD033C2D1DC7FC005E2F30 /* CartViewController.swift in Sources */,
 				A3D604EC2D01E29F00846F06 /* FavoriteViewController.swift in Sources */,
@@ -762,6 +777,7 @@
 				A3D604EE2D01E29F00846F06 /* UINavigation+Extension.swift in Sources */,
 				A3D604EF2D01E29F00846F06 /* HomeCoordinator.swift in Sources */,
 				A3035ABB2D175984000BF8BF /* FavoritesManager.swift in Sources */,
+				A3AD035C2D284A23005E2F30 /* PopularDeliveryViewController.swift in Sources */,
 				A3D605542D078DDD00846F06 /* PopularItemsCell.swift in Sources */,
 				A3AD03492D233C3B005E2F30 /* FooterView.swift in Sources */,
 				A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */,

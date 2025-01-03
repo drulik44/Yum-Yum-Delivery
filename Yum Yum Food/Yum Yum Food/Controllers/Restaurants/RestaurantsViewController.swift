@@ -15,7 +15,7 @@ class RestaurantsViewController: UIViewController {
     weak var coordinator: RestaurantsCoordinator?
     private let db = Firestore.firestore()
     private var restaurants: [Restaurant] = []
-
+    
     
     let categories: [Category] = [
         Category(name: "Japanese cuisine", imageName: "seafood"),
@@ -30,13 +30,13 @@ class RestaurantsViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-
+    
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColors.textColorMain
@@ -45,7 +45,7 @@ class RestaurantsViewController: UIViewController {
         label.text = "Restaurants"
         return label
     }()
-
+    
     private let categoriesLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColors.textColorMain
@@ -54,9 +54,9 @@ class RestaurantsViewController: UIViewController {
         label.text = "Categories"
         return label
     }()
-
+    
     private let seeAllButton = CustomButton()
-
+    
     private let categoriesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -67,7 +67,7 @@ class RestaurantsViewController: UIViewController {
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
         return collectionView
     }()
-
+    
     private let allRestaurantsLabel: UILabel = {
         let label = UILabel()
         label.textColor = AppColors.textColorMain
@@ -76,7 +76,7 @@ class RestaurantsViewController: UIViewController {
         label.text = "All Restaurants"
         return label
     }()
-
+    
     private let restaurantsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -87,26 +87,26 @@ class RestaurantsViewController: UIViewController {
         collectionView.register(RestaurantCell.self, forCellWithReuseIdentifier: RestaurantCell.reusableId)
         return collectionView
     }()
-
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
-
+        
         setupUI()
         setupConstraints()
-
+        
         categoriesCollectionView.delegate = self
         categoriesCollectionView.dataSource = self
         restaurantsCollectionView.delegate = self
         restaurantsCollectionView.dataSource = self
-
+        
         fetchRestaurants()
         restaurantsCollectionView.isScrollEnabled = false
-
+        
     }
-
+    
     // MARK: - Setup UI
     private func setupUI() {
         view.addSubview(scrollView)
@@ -118,51 +118,51 @@ class RestaurantsViewController: UIViewController {
         contentView.addSubview(allRestaurantsLabel)
         contentView.addSubview(restaurantsCollectionView)
     }
-
+    
     private func setupConstraints() {
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-
+        
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
             make.height.equalTo(2800) // Задайте достаточную высоту для отображения всех элементов
         }
-
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.left.equalToSuperview().offset(20)
         }
-
+        
         categoriesLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(50)
             make.left.equalToSuperview().offset(20)
         }
-
+        
         seeAllButton.snp.makeConstraints { make in
             make.centerY.equalTo(categoriesLabel)
             make.right.equalToSuperview().offset(-30)
             make.width.equalTo(80)
         }
-
+        
         categoriesCollectionView.snp.makeConstraints { make in
             make.top.equalTo(categoriesLabel.snp.bottom).offset(16)
             make.left.right.equalToSuperview().offset(20)
             make.height.equalTo(160)
         }
-
+        
         allRestaurantsLabel.snp.makeConstraints { make in
             make.top.equalTo(categoriesCollectionView.snp.bottom).offset(50)
             make.left.equalToSuperview().offset(20)
         }
-
+        
         restaurantsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(allRestaurantsLabel.snp.bottom).offset(8)
             make.left.right.bottom.equalToSuperview().inset(16)
         }
     }
-
+    
     // MARK: - Fetch Restaurants
     private func fetchRestaurants() {
         db.collection("restaurants").getDocuments { [weak self] (querySnapshot, error) in
@@ -178,13 +178,14 @@ class RestaurantsViewController: UIViewController {
                     let imageUrl = data["imageUrl"] as? String ?? ""
                     let deliveryPrice = data["deliveryPrice"] as? String ?? ""
                     let description = data["description"] as? String ?? ""
-                   
+                    
                     return Restaurant(id: id, name: name, rating: rating, deliveryTime: deliveryTime, imageUrl: imageUrl, deliveryPrice: deliveryPrice, description: description )
                 } ?? []
                 self?.restaurantsCollectionView.reloadData()
             }
         }
-    }}
+    }
+}
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension RestaurantsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

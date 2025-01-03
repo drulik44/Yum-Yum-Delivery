@@ -93,27 +93,10 @@ class FastestDeliveryCell: UICollectionViewCell {
         setupViews()
         setupConstraints()
 
-        // Закругляем углы непосредственно у contentView
         contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = false
         contentView.backgroundColor = .white
-       // contentView.layer.borderWidth = 1.0
-        
-       /* layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOpacity = 0.2
-        layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowRadius = 6
-        layer.masksToBounds = false
-        
-        let shadowLayer = CALayer()
-        shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOpacity = 0.2
-        shadowLayer.shadowOffset = CGSize(width: 0, height: 3)
-        shadowLayer.shadowRadius = 6
-        shadowLayer.backgroundColor = UIColor.white.cgColor
-        shadowLayer.cornerRadius = 12
-        shadowLayer.frame = contentView.frame
-        layer.insertSublayer(shadowLayer, at: 0)*/
+       
         
     }
     

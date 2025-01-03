@@ -26,7 +26,7 @@ class CustomAddressView: UIView {
     }
 
      func setupUI() {
-        leftIconImageView.image = UIImage(named : "home address") // Или твоя кастомная иконка
+        leftIconImageView.image = UIImage(named : "home address") 
         leftIconImageView.contentMode = .scaleAspectFit
         addSubview(leftIconImageView)
 
