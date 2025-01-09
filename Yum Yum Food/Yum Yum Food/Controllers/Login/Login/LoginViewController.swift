@@ -217,7 +217,7 @@ class LoginViewController: UIViewController {
         return line
     }()
     
-    //MARK: - Зробив кнопку Google
+    //MARK: - Make button Google
     
     let googleButton: UIButton = {
         let button = UIButton()

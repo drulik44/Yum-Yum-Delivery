@@ -105,6 +105,7 @@
 		A3E7A3A62D138C000086E0FD /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A52D138C000086E0FD /* FoodDetailsViewController.swift */; };
 		A3E7A3A82D14C3680086E0FD /* IncrementDecrementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */; };
 		A3E7A3AC2D15DD040086E0FD /* PackageCostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */; };
+		A3FFD73B2D3056550099CD1A /* NoficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FFD73A2D3056550099CD1A /* NoficationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +200,7 @@
 		A3E7A3A52D138C000086E0FD /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
 		A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementDecrementView.swift; sourceTree = "<group>"; };
 		A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCostCell.swift; sourceTree = "<group>"; };
+		A3FFD73A2D3056550099CD1A /* NoficationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoficationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +398,7 @@
 		A3D604892D01E29F00846F06 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				A3FFD7382D30562E0099CD1A /* Settings */,
 				A3D604F62D038B5500846F06 /* DeliveryAddressWithMapViewController.swift */,
 				A3D604822D01E29F00846F06 /* ContactViewController.swift */,
 				A3D604832D01E29F00846F06 /* HelpFAQViewController.swift */,
@@ -606,6 +609,22 @@
 			path = HomeVC;
 			sourceTree = "<group>";
 		};
+		A3FFD7382D30562E0099CD1A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A3FFD7392D3056390099CD1A /* Nofication */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A3FFD7392D3056390099CD1A /* Nofication */ = {
+			isa = PBXGroup;
+			children = (
+				A3FFD73A2D3056550099CD1A /* NoficationViewController.swift */,
+			);
+			path = Nofication;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -769,6 +788,7 @@
 				A3AD035A2D284933005E2F30 /* FastestDeliveryViewController.swift in Sources */,
 				A3D605292D04FCBC00846F06 /* CustomAddressView.swift in Sources */,
 				A3E7A3A42D11C2400086E0FD /* MenuItem.swift in Sources */,
+				A3FFD73B2D3056550099CD1A /* NoficationViewController.swift in Sources */,
 				A3AD03602D285FA3005E2F30 /* FoodItemCell.swift in Sources */,
 				A3035AB22D15EB45000BF8BF /* PaymentOptionCell.swift in Sources */,
 				A3AD033C2D1DC7FC005E2F30 /* CartViewController.swift in Sources */,

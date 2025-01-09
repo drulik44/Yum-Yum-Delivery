@@ -18,7 +18,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private let cellIdentifier = "ProfileOptionCell"
     
-    // Данные для таблицы
     private let options = UserOption.options
     
     override func loadView() {

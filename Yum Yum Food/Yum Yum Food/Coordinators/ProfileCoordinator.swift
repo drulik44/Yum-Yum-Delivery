@@ -55,8 +55,13 @@ class ProfileCoordinator: Coordinator {
     }
     
     func showSettingsScreen() {
-        let settingsViewController = SettingsViewController();navigationController.pushViewController(settingsViewController, animated: true)
+        let settingsCoordinator = SettingsCoordinator(navigationController: navigationController)
+        settingsCoordinator.parentCoordinator = parentCoordinator
+        childCoordinators.append(settingsCoordinator)
+        settingsCoordinator.start()
     }
+
+
     
     func showHelpScreen() {
         let helpViewController = HelpFAQViewController();navigationController.pushViewController(helpViewController, animated: true)

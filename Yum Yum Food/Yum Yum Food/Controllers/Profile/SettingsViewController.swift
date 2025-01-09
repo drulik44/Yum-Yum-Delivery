@@ -27,17 +27,25 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.title = "Settings"
         
         setupTableView()
+        setupConstaints()
     }
 
     private func setupTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseableId)
         
     }
-    // UITableViewDataSource Methods
+    
+    private func setupConstaints() {
+        tableView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    //MARK: - UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
@@ -48,9 +56,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.setup(for: option)
         return cell
     }
-
-    // UITableViewDelegate Methods
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Логика при выборе ячейки
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
-}
+
+    //MARK: - UITableViewDelegate Methods
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case  0:
+            print ("language selection")
+            case  1:
+            print ("Showing SettingsVC")
+            case 2:
+            self.coordinator?.showNotificationVC()
+        default:
+            break
+        }
+        }
+    }
+
