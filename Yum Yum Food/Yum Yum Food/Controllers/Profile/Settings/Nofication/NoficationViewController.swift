@@ -17,12 +17,12 @@ class NoficationViewController: UIViewController {
         view.backgroundColor = AppColors.background
         setupUI()
         setupConstraints()
+        updateSwitchState()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setupCustomBackButton(for: self)
-
     }
     
     private let titleLabel: UILabel = {
@@ -45,20 +45,17 @@ class NoficationViewController: UIViewController {
         return label
     }()
     
-    
     private let pushImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit // Важно для правильного масштабирования
-
+        imageView.contentMode = .scaleAspectFit
         if let originalImage = UIImage(named: "Smartphone Icon") {
             let resizedImage = originalImage.resized(to: CGSize(width: 26, height: 26))
-            imageView.image = resizedImage // Правильно устанавливаем изображение
+            imageView.image = resizedImage
         } else {
             print("Error: Smartphone Icon not found!")
-            imageView.image = UIImage(systemName: "xmark.octagon.fill") // Или другое placeholder изображение
+            imageView.image = UIImage(systemName: "xmark.octagon.fill")
             imageView.tintColor = .red
         }
-
         return imageView
     }()
     
@@ -74,35 +71,28 @@ class NoficationViewController: UIViewController {
     
     private let pushSwitch: UISwitch = {
         let switchView = UISwitch()
-        switchView.isOn = true
         switchView.onTintColor = AppColors.main
+        switchView.isOn = true
         return switchView
     }()
     
     //MARK: - Setup UI
-    
     private func setupUI() {
-        navigationItem.title = "Nofication"
-
+        navigationItem.title = "Notification"
         view.addSubview(titleLabel)
         view.addSubview(pancholderlabel)
         view.addSubview(pushImageView)
         view.addSubview(pushLabel)
         view.addSubview(pushSwitch)
-        
-        
+        pushSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+
     }
 
-    
-    
-    
     //MARK: - Setup Constraints
-    
     private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             make.left.equalToSuperview().offset(20)
-            
         }
         
         pancholderlabel.snp.makeConstraints { make in
@@ -126,4 +116,34 @@ class NoficationViewController: UIViewController {
             make.right.equalToSuperview().offset(-20)
         }
     }
+    
+    //MARK: - Switch Handling
+    @objc private func switchValueChanged() {
+        let isOn = pushSwitch.isOn
+        UserDefaults.standard.set(isOn, forKey: "pushNotificationsEnabled")
+        
+        if isOn {
+            requestNotificationsAuthorization()
+        } else {
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            print("Push notifications disabled")
+        }
+    }
+    
+    private func requestNotificationsAuthorization() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if granted {
+                print("Notifications enabled")
+            } else {
+                print("Notifications authorization denied")
+            }
+        }
+    }
+    
+    private func updateSwitchState() {
+        let isEnabled = UserDefaults.standard.bool(forKey: "pushNotificationsEnabled")
+        pushSwitch.isOn = isEnabled
+    }
 }
+

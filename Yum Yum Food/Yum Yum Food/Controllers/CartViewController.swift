@@ -233,18 +233,13 @@ extension CartViewController: UICollectionViewDataSource {
    
     
     @objc private func checkoutButtonTapped() {
-        // 1. Вычисляем totalPrice (убедитесь, что updateTotalPrice() вызывается перед этим)
-        updateTotalPrice() // Это гарантирует, что totalPrice актуален
-
-        // Проверка на пустую корзину перед созданием заказа (более надежно)
+        updateTotalPrice()
         guard !cartItems.isEmpty else {
-            // Обработка пустой корзины (например, показать сообщение пользователю)
             print("Корзина пуста!")
             return
         }
 
-        // 2. Создаем Order, используя totalPrice и массив всех товаров
-        let order = Order(items: cartItems) // Передаем весь массив cartItems
+        let order = Order(items: cartItems)
 
         OrdersManager.shared.addOrder(order)
 
@@ -252,16 +247,35 @@ extension CartViewController: UICollectionViewDataSource {
         cartItems.removeAll()
         print("After removal, cartItems: \(cartItems)")
 
-        // 3. Обновляем представление корзины (в главном потоке)
+        let isNotificationsEnabled = UserDefaults.standard.bool(forKey: "pushNotificationsEnabled")
+        if isNotificationsEnabled {
+            scheduleLocalNotification()
+        }
+
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.shoppingCartView.reloadData()
             self.shoppingCartView.layoutIfNeeded()
-            self.updateFooter() // Обновляем только футер, т.к. остальная корзина пуста
             self.navigationController?.popViewController(animated: true)
         }
     }
 
+    func scheduleLocalNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Order Accepted"
+        content.body = "A courier will contact you soon, please wait)"
+        content.sound = .default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "localNotification", content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Ошибка при создании уведомления: \(error.localizedDescription)")
+            }
+        }
+    }
 
     
 }
