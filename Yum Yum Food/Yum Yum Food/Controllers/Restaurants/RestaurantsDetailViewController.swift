@@ -130,7 +130,7 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
         let label = UILabel()
         label.font = .Rubick.bold.size(of:25)
         label.textColor = AppColors.topographyHome
-        label.text = "Menu"
+        label.text = "Menu".localized()
         return label
     }()
     
@@ -289,11 +289,14 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
             print("Invalid URL: \(restaurant.imageUrl)")
         }
         
-        nameLabel.text = restaurant.name
-        descriptionLabel.text = restaurant.description
-        ratingLabel.text = "Rating: \(restaurant.rating)"
-        deliveryTimeLabel.text = "Delivery Time: \(restaurant.deliveryTime)"
-        deliveryPriceLabel.text = "Delivery Price: \(restaurant.deliveryPrice) "
+        nameLabel.text = restaurant.name.localized()
+        descriptionLabel.text = restaurant.description.localized()
+        ratingLabel.text = String(format: "rating_format".localized(), String(restaurant.rating));
+        deliveryTimeLabel.text = formattedDeliveryTime(restaurant.deliveryTime)
+
+        deliveryPriceLabel.text = String(format: "delivery_price_format".localized(), restaurant.deliveryPrice)
+               
+
 
         // Загружаем меню из Firestore
         db.collection("restaurants").document(restaurant.id).collection("menu_items").getDocuments(source: .server) { [weak self] (querySnapshot, error) in
@@ -382,6 +385,12 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
         foodVC.menuItem = menuItem // Передача данных
         foodVC.modalPresentationStyle = .formSheet
         present(foodVC, animated: true)
+    }
+
+    
+    func formattedDeliveryTime(_ time: String) -> String {
+        let cleanedTime = time.replacingOccurrences(of: "min", with: "")
+        return String(format: "delivery_time_format".localized(), cleanedTime.trimmingCharacters(in: .whitespaces))
     }
 
     

@@ -33,7 +33,7 @@ class CustomAddressView: UIView {
         addressLabel.font = .systemFont(ofSize: 16)
          
          addressLabel.textColor = AppColors.textColorMain
-        addressLabel.text = "Select your address"
+         addressLabel.text = "Select your address".localized()
          addressLabel.font = .Rubick.regular.size(of:16)
         addSubview(addressLabel)
 

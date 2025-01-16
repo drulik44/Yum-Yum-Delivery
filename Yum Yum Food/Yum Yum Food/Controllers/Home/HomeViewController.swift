@@ -46,6 +46,12 @@ class HomeViewController: UIViewController {
         
         fetchFastestDelivery()
         fetchPopularItems()
+        
+        // Добавляем наблюдателя, чтобы обновить UI, когда сменится язык
+              NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: .init("LanguageChanged"), object: nil)
+              
+              updateUI()
+
     }
     
     // MARK: - UI Elements
@@ -61,7 +67,7 @@ class HomeViewController: UIViewController {
     
     private let fastestDeliveryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Fastest delivery 🔥"
+        label.text = "Fastest delivery 🔥".localized()
         label.font = .Rubick.bold.size(of: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -85,7 +91,7 @@ class HomeViewController: UIViewController {
     
     private let popularItemsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Popular items 🥳"
+        label.text = "Popular items 🥳".localized()
         label.font = .Rubick.bold.size(of: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -131,7 +137,6 @@ class HomeViewController: UIViewController {
         popularItemsCollectionView.delegate = self
         
         seeAllButton.addTarget(self, action: #selector(didTapFastestDeliveryButton), for: .touchUpInside)
-       // seeAllButton2.addTarget(self, action: #selector(didTapPopularItemsButton), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -181,13 +186,6 @@ class HomeViewController: UIViewController {
             make.left.equalToSuperview().offset(20)
         }
         
-        
-       /* seeAllButton2.snp.makeConstraints { make in
-            make.centerY.equalTo(popularItemsLabel)
-            make.right.equalToSuperview().offset(-30)
-            make.width.equalTo(80)
-
-        }*/
         
         popularItemsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(popularItemsLabel.snp.bottom).offset(10)
@@ -301,5 +299,14 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         coordinator?.showPopularDelivery()
     }
     
+    @objc func updateUI() {
+        self.view.setNeedsLayout()  // Принудительное обновление UI
+        fastestDeliveryLabel.text = "Fastest delivery 🔥".localized()
+           popularItemsLabel.text = "Popular items 🥳".localized()
+           // Добавьте сюда другие метки и компоненты для перезагрузки текста
+           
+           fastestDeliveryCollectionView.reloadData()
+           popularItemsCollectionView.reloadData()
+    }
 }
 

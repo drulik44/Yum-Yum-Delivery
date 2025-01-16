@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private let cellIdentifier = "ProfileOptionCell"
     
-    private let options = UserOption.options
+    private var options = UserOption.options
     
     override func loadView() {
         super.loadView()
@@ -33,7 +33,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         fetchUserData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(userProfileUpdated), name: NSNotification.Name("UserProfileUpdated"), object: nil)
+
+
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .init("ReloadRootViewController"), object: nil)
+    }
+
+    /*@objc private func updateLocalizedStrings() {
+        print("Updating localized strings")  // Для отладки
+        reloadOptions()  // Перезагружаем данные для таблицы
+        DispatchQueue.main.async {
+            self.tableView.reloadData()  // Перезагружаем таблицу с новыми данными
+        }
+    }*/
+
     
     // MARK: - USER INFO
     
@@ -75,7 +90,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log Out", for: .normal)
+        button.setTitle("Log Out".localized(), for: .normal)
         button.setTitleColor(AppColors.main, for: .normal)
         button.titleLabel?.font = .Rubick.regular.size(of: 18)
         button.imageView?.contentMode = .scaleAspectFit
@@ -189,7 +204,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let option = options[indexPath.row]
-        cell.textLabel?.text = option.title
+        cell.textLabel?.text = option.title.localized()
         cell.imageView?.image = option.icon
         cell.textLabel?.font = .Rubick.regular.size(of: 18)
         cell.textLabel?.textColor = AppColors.textColorMain
@@ -202,29 +217,42 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedOption = options[indexPath.row].title
+        let selectedOption = options[indexPath.row].title.localized()
         DispatchQueue.main.async {
             switch selectedOption {
-            case "My Profile":
+            case "My Profile".localized():
                 self.coordinator?.showUserProfile()
-            case "My Orders":
+            case "My Orders".localized():
                 self.coordinator?.showOrderScreen()
-            case "Delivery Address":
+            case "Delivery Address".localized():
                 self.coordinator?.showDeliveryScreen()
-            case "Payments Methods":
+            case "Payments Methods".localized():
                 self.coordinator?.showPaymentsScreen()
-            case "Contact Us":
+            case "Contact Us".localized():
                 self.coordinator?.showContactScreen()
-            case "Settings":
+            case "Settings".localized():
                 self.coordinator?.showSettingsScreen()
-            case "Help & FAQ":
+            case "Help & FAQ".localized():
                 self.coordinator?.showHelpScreen()
             default:
                 break
             }
         }
     }
-    
+
+    private func reloadOptions() {
+        options = [
+            UserOption(title: "My Profile".localized(), icon: UIImage(named: "profile vc")),
+            UserOption(title: "My Orders".localized(), icon: UIImage(named: "order")),
+            UserOption(title: "Delivery Address".localized(), icon: UIImage(named: "delivery address")),
+            UserOption(title: "Payments Methods".localized(), icon: UIImage(named: "wallet")),
+            UserOption(title: "Contact Us".localized(), icon: UIImage(named: "contact")),
+            UserOption(title: "Settings".localized(), icon: UIImage(named: "settings")),
+            UserOption(title: "Help & FAQ".localized(), icon: UIImage(systemName: "questionmark.circle.fill"))
+        ]
+    }
+
+
     // MARK: - Log Out
     
     @objc private func logOutTapped() {

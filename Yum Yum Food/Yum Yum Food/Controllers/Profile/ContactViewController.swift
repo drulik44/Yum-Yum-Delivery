@@ -23,7 +23,7 @@ class ContactViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Contact Us"
+        label.text = "Contact Us".localized()
         label.font = .Rubick.bold.size(of: 40)
         label.textColor = AppColors.textColorMain
         label.textAlignment = .center
@@ -33,7 +33,7 @@ class ContactViewController: UIViewController {
     
     private lazy var addressLabel: UILabel = {
         let label = UILabel()
-        label.text = "Kyiv, Ukraine"
+        label.text = "Kyiv, Ukraine".localized()
         label.font = .Rubick.regular.size(of: 20)
         label.textColor = AppColors.subTitleColor
         label.textAlignment = .center
@@ -43,7 +43,7 @@ class ContactViewController: UIViewController {
    
     private lazy var emailButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Email Us: ruslanzhidkih@gmail.com", for: .normal)
+        button.setTitle("Email Us: ruslanzhidkih@gmail.com".localized(), for: .normal)
         button.addTarget(self, action: #selector(emailUs), for: .touchUpInside)
         button.tintColor = AppColors.main
         button.titleLabel?.font = .Rubick.regular.size(of: 18)
@@ -53,7 +53,7 @@ class ContactViewController: UIViewController {
     
     let socialMediaLabel: UILabel = {
         let label = UILabel()
-        label.text = "Follow Me"
+        label.text = "Follow Me".localized()
         label.font = .Rubick.bold.size(of: 20)
         label.textColor = AppColors.subTitleColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -126,7 +126,7 @@ class ContactViewController: UIViewController {
     
     private lazy var teamDescription: UILabel = {
         let label = UILabel()
-        label.text = "I am an aspiring developer who is passionate about bringing food to your doorstep. My goal is to make your life more comfortable and delicious, with fast and reliable delivery of the food you love."
+        label.text = "I am an aspiring developer who is passionate about bringing food to your doorstep. My goal is to make your life more comfortable and delicious, with fast and reliable delivery of the food you love.".localized()
         label.font = .Rubick.regular.size(of: 18)
         label.textColor = AppColors.subTitleColor
         label.textAlignment = .center

@@ -106,6 +106,10 @@
 		A3E7A3A82D14C3680086E0FD /* IncrementDecrementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */; };
 		A3E7A3AC2D15DD040086E0FD /* PackageCostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */; };
 		A3FFD73B2D3056550099CD1A /* NoficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FFD73A2D3056550099CD1A /* NoficationViewController.swift */; };
+		A3FFD7432D315CF50099CD1A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3FFD7412D315CF50099CD1A /* Localizable.strings */; };
+		A3FFD7462D3162B60099CD1A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FFD7452D3162B60099CD1A /* String+Extension.swift */; };
+		A3FFD7492D383D340099CD1A /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FFD7482D383D340099CD1A /* LocalizationManager.swift */; };
+		A3FFD74C2D383E600099CD1A /* LocalizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FFD74B2D383E600099CD1A /* LocalizationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,6 +205,12 @@
 		A3E7A3A72D14C3680086E0FD /* IncrementDecrementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementDecrementView.swift; sourceTree = "<group>"; };
 		A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCostCell.swift; sourceTree = "<group>"; };
 		A3FFD73A2D3056550099CD1A /* NoficationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoficationViewController.swift; sourceTree = "<group>"; };
+		A3FFD73C2D3149EB0099CD1A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A3FFD7422D315CF50099CD1A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A3FFD7442D315F8F0099CD1A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A3FFD7452D3162B60099CD1A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		A3FFD7482D383D340099CD1A /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		A3FFD74B2D383E600099CD1A /* LocalizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +262,7 @@
 		A32270B02CF2A21500D9BEC3 = {
 			isa = PBXGroup;
 			children = (
+				A3FFD7412D315CF50099CD1A /* Localizable.strings */,
 				A3D604BD2D01E29F00846F06 /* Yum Yum Food */,
 				A3C20E792CF7D6F50082E881 /* Frameworks */,
 				A32270BA2CF2A21500D9BEC3 /* Products */,
@@ -475,6 +486,7 @@
 				A3D6049B2D01E29F00846F06 /* UIImage+Resize.swift */,
 				A3D6049C2D01E29F00846F06 /* UINavigation+Extension.swift */,
 				A3D605342D063E0600846F06 /* UIImageView+Extension.swift */,
+				A3FFD7452D3162B60099CD1A /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -482,6 +494,7 @@
 		A3D604A02D01E29F00846F06 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A3FFD7472D383D0E0099CD1A /* Settings */,
 				A3AD03532D245879005E2F30 /* Order */,
 				A3AD03452D21AE6D005E2F30 /* Cart */,
 				A3035AB92D17593D000BF8BF /* Favorite */,
@@ -612,6 +625,7 @@
 		A3FFD7382D30562E0099CD1A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				A3FFD74A2D383E3F0099CD1A /* Localization */,
 				A3FFD7392D3056390099CD1A /* Nofication */,
 			);
 			path = Settings;
@@ -623,6 +637,22 @@
 				A3FFD73A2D3056550099CD1A /* NoficationViewController.swift */,
 			);
 			path = Nofication;
+			sourceTree = "<group>";
+		};
+		A3FFD7472D383D0E0099CD1A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A3FFD7482D383D340099CD1A /* LocalizationManager.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A3FFD74A2D383E3F0099CD1A /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				A3FFD74B2D383E600099CD1A /* LocalizationViewController.swift */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -677,6 +707,7 @@
 			knownRegions = (
 				en,
 				Base,
+				uk,
 			);
 			mainGroup = A32270B02CF2A21500D9BEC3;
 			minimizedProjectReferenceProxies = 1;
@@ -714,6 +745,7 @@
 				A3D604C92D01E29F00846F06 /* Rubik-Medium.ttf in Resources */,
 				A3D604CA2D01E29F00846F06 /* Rubik-Black.ttf in Resources */,
 				A3D604CB2D01E29F00846F06 /* Rubik-ExtraBold.ttf in Resources */,
+				A3FFD7432D315CF50099CD1A /* Localizable.strings in Resources */,
 				A3D604CC2D01E29F00846F06 /* GoogleService-Info.plist in Resources */,
 				A3D604CD2D01E29F00846F06 /* Rubik-Regular.ttf in Resources */,
 				A3D604CE2D01E29F00846F06 /* Rubik-MediumItalic.ttf in Resources */,
@@ -762,6 +794,7 @@
 				A3D604DD2D01E29F00846F06 /* PaymentsViewController.swift in Sources */,
 				A3D604DE2D01E29F00846F06 /* SettingsViewController.swift in Sources */,
 				A3D604DF2D01E29F00846F06 /* ProfileCoordinator.swift in Sources */,
+				A3FFD7462D3162B60099CD1A /* String+Extension.swift in Sources */,
 				A3AD03412D1E16AB005E2F30 /* CartManager.swift in Sources */,
 				A353423A2D08F98A00C91C1C /* CategoryCell.swift in Sources */,
 				A3D604E02D01E29F00846F06 /* SceneDelegate.swift in Sources */,
@@ -782,6 +815,7 @@
 				A3E7A3A22D11BB960086E0FD /* MenuItemCell.swift in Sources */,
 				A3D604E92D01E29F00846F06 /* SearchCoordinator.swift in Sources */,
 				A3D604EA2D01E29F00846F06 /* UIFont+Extension.swift in Sources */,
+				A3FFD7492D383D340099CD1A /* LocalizationManager.swift in Sources */,
 				A3035AB42D174097000BF8BF /* FavoriteItem.swift in Sources */,
 				A3D604EB2D01E29F00846F06 /* WelcomeViewController.swift in Sources */,
 				A353423E2D09201700C91C1C /* Restaurants.swift in Sources */,
@@ -800,6 +834,7 @@
 				A3AD035C2D284A23005E2F30 /* PopularDeliveryViewController.swift in Sources */,
 				A3D605542D078DDD00846F06 /* PopularItemsCell.swift in Sources */,
 				A3AD03492D233C3B005E2F30 /* FooterView.swift in Sources */,
+				A3FFD74C2D383E600099CD1A /* LocalizationViewController.swift in Sources */,
 				A3D604F72D038B5500846F06 /* DeliveryAddressWithMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -811,8 +846,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				A3D604BA2D01E29F00846F06 /* Base */,
+				A3FFD73C2D3149EB0099CD1A /* uk */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A3FFD7412D315CF50099CD1A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3FFD7422D315CF50099CD1A /* en */,
+				A3FFD7442D315F8F0099CD1A /* uk */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -877,6 +922,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -940,6 +986,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

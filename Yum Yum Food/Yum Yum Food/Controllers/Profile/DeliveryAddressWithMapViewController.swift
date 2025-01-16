@@ -20,7 +20,7 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
     private let addressTextField: SkyFloatingLabelTextField = {
         let textField = SkyFloatingLabelTextField()
         textField.configureBorderTextField(
-            placeholder: "   Enter your address",
+            placeholder: "   Enter your address".localized(),
             tintColor: AppColors.backgroundCell,
             textColor: AppColors.textColorMain,
             borderColor: AppColors.gray,
@@ -34,7 +34,7 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
     
     private let saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save", for: .normal)
+        button.setTitle("Save".localized(), for: .normal)
         button.titleLabel?.font = .Rubick.bold.size(of:20)
         button.setTitleColor(AppColors.backgroundCell, for: .normal)
         button.backgroundColor = AppColors.main
@@ -86,7 +86,7 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         mapView.delegate = self
         view.addSubview(mapView)
 
-        addressLabel.text = "Address"
+        addressLabel.text = "Address".localized()
         addressLabel.font = .Rubick.bold.size(of: 18)
         view.addSubview(addressLabel)
 

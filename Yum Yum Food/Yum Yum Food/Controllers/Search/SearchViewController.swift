@@ -14,7 +14,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Search"
+        searchBar.placeholder = "Search".localized()
         searchBar.backgroundImage = UIImage() // Убирает границы
         searchBar.barTintColor = AppColors.background
         searchBar.tintColor = AppColors.textColorMain

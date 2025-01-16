@@ -29,9 +29,9 @@ class NoficationViewController: UIViewController {
         let label = UILabel()
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 22)
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "Current order information"
+        label.text = "Current order information".localized()
         return label
     }()
     
@@ -41,7 +41,7 @@ class NoficationViewController: UIViewController {
         label.font = .Rubick.regular.size(of: 16)
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "The most important events and messages from the courier and support service related to your current order"
+        label.text = "The most important events and messages from the courier and support service related to your current order".localized()
         return label
     }()
     
@@ -65,7 +65,7 @@ class NoficationViewController: UIViewController {
         label.font = .Rubick.regular.size(of: 18)
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "Push notifications"
+        label.text = "Push notifications".localized()
         return label
     }()
     
@@ -78,7 +78,7 @@ class NoficationViewController: UIViewController {
     
     //MARK: - Setup UI
     private func setupUI() {
-        navigationItem.title = "Notification"
+        navigationItem.title = "Notification".localized()
         view.addSubview(titleLabel)
         view.addSubview(pancholderlabel)
         view.addSubview(pushImageView)
@@ -93,6 +93,7 @@ class NoficationViewController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
         
         pancholderlabel.snp.makeConstraints { make in

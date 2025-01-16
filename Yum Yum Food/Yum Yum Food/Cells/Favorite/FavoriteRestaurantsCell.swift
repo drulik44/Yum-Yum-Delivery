@@ -191,11 +191,11 @@ class FavoriteRestaurantCell: UICollectionViewCell {
     }
     
     func configure(with favoriteItem: FavoriteItem) {
-        nameLabel.text = favoriteItem.name
-        descriptionLabel.text = favoriteItem.description
-        deliveryPriceLabel.text = "\(favoriteItem.deliveryPrice)₴"
-        descriptionLabel.text = favoriteItem.description
-        deliveryTimeLabel.text = favoriteItem.deliveryTime
+        nameLabel.text = favoriteItem.name.localized()
+        descriptionLabel.text = favoriteItem.description.localized()
+        deliveryPriceLabel.text = "\(favoriteItem.deliveryPrice)"
+        descriptionLabel.text = favoriteItem.description.localized()
+        deliveryTimeLabel.text = favoriteItem.deliveryTime.localized()
         ratingLabel.text = "\(favoriteItem.rating)"
             
         if let url = URL(string: favoriteItem.imageUrl) {

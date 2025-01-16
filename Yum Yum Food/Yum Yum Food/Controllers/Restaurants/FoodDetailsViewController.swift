@@ -78,7 +78,7 @@ class FoodDetailsViewController: UIViewController {
     
     private let packageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Package"
+        label.text = "Package".localized()
         label.font = .Rubick.bold.size(of: 20)
         label.textColor = AppColors.topographyHome
         return label
@@ -94,7 +94,7 @@ class FoodDetailsViewController: UIViewController {
     
     private let costLabel: UILabel = {
         let label = UILabel()
-        label.text = "Package box cost"
+        label.text = "Package box cost".localized()
         label.font = .Rubick.regular.size(of: 16)
         label.textColor = AppColors.grayForTextCell
         return label
@@ -121,7 +121,7 @@ class FoodDetailsViewController: UIViewController {
     
     private let addToCartButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add to order", for: .normal)
+        button.setTitle("Add to order".localized(), for: .normal)
         button.titleLabel?.font = .Rubick.bold.size(of:18)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = AppColors.main
@@ -281,8 +281,8 @@ class FoodDetailsViewController: UIViewController {
         
         guard let menuItem else { return }
         
-        foodTitleLabel.text = menuItem.name
-        foodDescriptionLabel.text = menuItem.description
+        foodTitleLabel.text = menuItem.name.localized()
+        foodDescriptionLabel.text = menuItem.description.localized()
         foodPriceLabel.text = "\(menuItem.price)₴"
         
         if let url = URL(string: menuItem.imageUrl) {

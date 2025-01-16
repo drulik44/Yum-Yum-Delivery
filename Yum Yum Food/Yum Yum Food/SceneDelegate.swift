@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReloadRootViewController), name: .init("ReloadRootViewController"), object: nil)
+        
         let appearance = UINavigationBar.appearance()
         appearance.tintColor = AppColors.textColorMain
         appearance.titleTextAttributes = [
@@ -32,7 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window?.makeKeyAndVisible()
     }
-    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -60,6 +61,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    func reloadRootViewController() {
+        guard let windowScene = window?.windowScene else { return }
+
+        // Создаём новый навигационный контроллер и координатор
+        let navigationController = UINavigationController()
+        mainCoordinator = MainCoordinator(navigationController: navigationController)
+
+        // Устанавливаем обновлённый rootViewController
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = navigationController
+        mainCoordinator?.start()
+
+        // Делаем окно видимым
+        window?.makeKeyAndVisible()
+    }
 
 
+    @objc private func handleReloadRootViewController() {
+        reloadRootViewController()
+    }
 }

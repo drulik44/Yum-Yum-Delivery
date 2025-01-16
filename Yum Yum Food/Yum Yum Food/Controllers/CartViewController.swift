@@ -21,7 +21,7 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let label = UILabel()
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 24)
-        label.text = "Order items"
+        label.text = "Order items".localized()
         return label
     }()
 
@@ -40,7 +40,7 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     private let checkoutButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Checkout", for: .normal)
+        button.setTitle("Checkout".localized(), for: .normal)
         button.setTitleColor(AppColors.backgroundCell, for: .normal)
         button.titleLabel?.font = .Rubick.bold.size(of: 24)
         button.backgroundColor = AppColors.main
@@ -71,7 +71,7 @@ class CartViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setupCustomBackButton(for: self)
-        navigationItem.title = "Your order"
+        navigationItem.title = "Your order".localized()
     }
     
     
@@ -164,7 +164,7 @@ extension CartViewController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 10, height: 120)  // Размеры ячеек
+        return CGSize(width: collectionView.bounds.width - 10, height: 135)  // Размеры ячеек
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -262,8 +262,8 @@ extension CartViewController: UICollectionViewDataSource {
 
     func scheduleLocalNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Order Accepted"
-        content.body = "A courier will contact you soon, please wait)"
+        content.title = "Order Accepted".localized()
+        content.body = "A courier will contact you soon, please wait)".localized()
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)

@@ -24,7 +24,7 @@ class FooterView: UICollectionReusableView {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 20)
         label.textAlignment = .left
-        label.text = "Total"
+        label.text = "Total".localized()
         return label
     }()
 

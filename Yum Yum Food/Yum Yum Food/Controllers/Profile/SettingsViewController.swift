@@ -15,16 +15,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     lazy var tableView = UITableView()
 
     var options: [SectionOptionSettings] = [
-        SectionOptionSettings(name: "Language", icon: "Language Icons"),
-        SectionOptionSettings(name: "Themecolor", icon: "Theme Icons 48"),
-        SectionOptionSettings(name: "Setting up mailings", icon: "Notification Icon")
+        SectionOptionSettings(name: "Language".localized(), icon: "Language Icons"),
+        SectionOptionSettings(name: "Themecolor".localized(), icon: "Theme Icons 48"),
+        SectionOptionSettings(name: "Setting up mailings".localized(), icon: "Notification Icon")
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
         navigationController?.setupCustomBackButton(for: self)
-        navigationItem.title = "Settings"
+        navigationItem.title = "Settings".localized()
         
         setupTableView()
         setupConstaints()
@@ -65,7 +65,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case  0:
-            print ("language selection")
+            self.coordinator?.showLocalizationVC()
             case  1:
             print ("Showing SettingsVC")
             case 2:

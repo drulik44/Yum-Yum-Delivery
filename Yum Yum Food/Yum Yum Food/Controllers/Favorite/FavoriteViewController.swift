@@ -15,7 +15,7 @@ class FavoriteViewController: UIViewController {
     private var favoriteRestaurantItems: [FavoriteItem] = []
     
     let segmentedControl: CustomSegmentedControl = {
-        let items = ["Food", "Restaurants"]
+        let items = ["Food".localized(), "Restaurants".localized()]
         let sc = CustomSegmentedControl(items: items)
         sc.selectedSegmentIndex = 0
         sc.translatesAutoresizingMaskIntoConstraints = false

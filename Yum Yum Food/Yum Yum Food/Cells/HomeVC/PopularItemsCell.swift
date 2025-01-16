@@ -121,8 +121,8 @@ class PopularItemsCell: UICollectionViewCell {
     private func manageData() {
         guard let item = data else { return }
         imageView.loadImage(from: item.imageUrl)
-        titleLabel.text = item.name
-        nameRestaurantLabel.text = item.nameRestaurant
+        titleLabel.text = item.name.localized()
+        nameRestaurantLabel.text = item.nameRestaurant.localized()
         priceLabel.text = item.price
     }
 }

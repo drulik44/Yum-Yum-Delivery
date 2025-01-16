@@ -12,7 +12,7 @@ class CustomButton: UIButton {
         super.init(frame: frame)
         
         backgroundColor = AppColors.backgroundCell
-        setTitle("See all", for: .normal)
+        setTitle("See all".localized(), for: .normal)
         setTitleColor(AppColors.main, for: .normal)
         titleLabel?.font = .Rubick.regular.size(of: 14)
         layer.cornerRadius = 10

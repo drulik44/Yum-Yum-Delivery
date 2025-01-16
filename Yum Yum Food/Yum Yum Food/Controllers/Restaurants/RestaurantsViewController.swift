@@ -18,11 +18,11 @@ class RestaurantsViewController: UIViewController {
     
     
     let categories: [Category] = [
-        Category(name: "Japanese cuisine", imageName: "seafood"),
-        Category(name: "Bar and Pub", imageName: "pub"),
-        Category(name: "Italian cuisine", imageName: "pizza"),
-        Category(name: "Fastfood", imageName: "fastfood"),
-        Category(name: "Desserts", imageName: "desserts")
+        Category(name: "Japanese cuisine".localized(), imageName: "seafood"),
+        Category(name: "Bar and Pub".localized(), imageName: "pub"),
+        Category(name: "Italian cuisine".localized(), imageName: "pizza"),
+        Category(name: "Fastfood".localized(), imageName: "fastfood"),
+        Category(name: "Desserts".localized(), imageName: "desserts")
     ]
     
     private let scrollView: UIScrollView = {
@@ -42,7 +42,7 @@ class RestaurantsViewController: UIViewController {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 30)
         label.textAlignment = .left
-        label.text = "Restaurants"
+        label.text = "Restaurants".localized()
         return label
     }()
     
@@ -51,7 +51,7 @@ class RestaurantsViewController: UIViewController {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 25)
         label.textAlignment = .left
-        label.text = "Categories"
+        label.text = "Categories".localized()
         return label
     }()
     
@@ -73,7 +73,7 @@ class RestaurantsViewController: UIViewController {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 25)
         label.textAlignment = .left
-        label.text = "All Restaurants"
+        label.text = "All Restaurants".localized()
         return label
     }()
     

@@ -118,14 +118,14 @@ class ShoppingCartCell: UICollectionViewCell {
 
     func configure(with cartItem: CartItem) {
         self.cartItem = cartItem
-        nameLabel.text = cartItem.menuItem.name
+        nameLabel.text = cartItem.menuItem.name.localized()
         priceLabel.text = "\(cartItem.finalPrice)₴"
         incrementDecrementView.quantity = cartItem.quantity
 
         if let url = URL(string: cartItem.menuItem.imageUrl) {
             itemImageView.sd_setImage(with: url, completed: nil)
         }
-        print("Configured cell for \(cartItem.menuItem.name), quantity: \(cartItem.quantity)") // Проверка
+        print("Configured cell for \(cartItem.menuItem.name), quantity: \(cartItem.quantity)") 
     }
 
 }
