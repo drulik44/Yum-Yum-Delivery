@@ -873,10 +873,14 @@
 				DEVELOPMENT_TEAM = CXJSS8KYX5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Yum Yum Food/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Это приложение требует доступа к вашему местоположению для предоставления точной информации о доставке даже когда оно работает в фоновом режиме.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Это приложение требует доступа к вашему местоположению для предоставления точной информации о доставке.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -900,10 +904,14 @@
 				DEVELOPMENT_TEAM = CXJSS8KYX5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Yum Yum Food/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Это приложение требует доступа к вашему местоположению для предоставления точной информации о доставке даже когда оно работает в фоновом режиме.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Это приложение требует доступа к вашему местоположению для предоставления точной информации о доставке.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

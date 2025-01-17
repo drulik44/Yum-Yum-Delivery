@@ -21,7 +21,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         return searchBar
     }()
     
-    private var results: [FoodItem] = [] // Массив для хранения результатов поиска
+    private var results: [FoodItem] = [] 
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()

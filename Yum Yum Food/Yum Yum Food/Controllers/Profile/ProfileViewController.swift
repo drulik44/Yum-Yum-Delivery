@@ -41,13 +41,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         NotificationCenter.default.removeObserver(self, name: .init("ReloadRootViewController"), object: nil)
     }
 
-    /*@objc private func updateLocalizedStrings() {
-        print("Updating localized strings")  // Для отладки
-        reloadOptions()  // Перезагружаем данные для таблицы
+    @objc private func updateLocalizedStrings() {
+        print("Updating localized strings")  
+        reloadOptions()
         DispatchQueue.main.async {
-            self.tableView.reloadData()  // Перезагружаем таблицу с новыми данными
+            self.tableView.reloadData()
         }
-    }*/
+    }
 
     
     // MARK: - USER INFO

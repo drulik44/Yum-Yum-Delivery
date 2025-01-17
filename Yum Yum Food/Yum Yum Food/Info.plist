@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Это приложение требует доступа к вашему местоположению для предоставления точной информации о доставке даже когда оно работает в фоновом режиме.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Это приложение требует доступа к вашему местоположению для предоставления точной информации о доставке.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Rubik-Black.ttf</string>

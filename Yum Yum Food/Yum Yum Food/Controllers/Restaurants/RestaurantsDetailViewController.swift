@@ -171,8 +171,6 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
 
 
 
-
-        
         
     }
     
@@ -216,7 +214,7 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
         
         restaurantImageView.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).priority(.high)
-            make.top.equalTo(scrollView.snp.top).priority(.low) // Фиксирует наверху скролла
+            make.top.equalTo(scrollView.snp.top).priority(.low)
             make.height.equalTo(300)
             make.width.equalToSuperview()
         }
@@ -282,7 +280,6 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
     private func configureView() {
         guard let restaurant = restaurant else { return }
 
-        // Устанавливаем данные для ресторана
         if let url = URL(string: restaurant.imageUrl) {
             restaurantImageView.sd_setImage(with: url, completed: nil)
         } else {
@@ -298,7 +295,6 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
                
 
 
-        // Загружаем меню из Firestore
         db.collection("restaurants").document(restaurant.id).collection("menu_items").getDocuments(source: .server) { [weak self] (querySnapshot, error) in
             if let error = error {
                 print("Error fetching menu: \(error)")
@@ -368,7 +364,7 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMenuItem = menuItems[indexPath.item]
-        print("Selected menu item: \(selectedMenuItem.name)") // Печатает название выбранного пункта
+        print("Selected menu item: \(selectedMenuItem.name)")
         showFoodDetail(with: selectedMenuItem)
         
     }
@@ -382,7 +378,7 @@ class RestaurantDetailViewController: UIViewController, UICollectionViewDataSour
     //MARK: - Func Show FoodDetail Controller
     func showFoodDetail(with menuItem: MenuItem) {
         let foodVC = FoodDetailsViewController()
-        foodVC.menuItem = menuItem // Передача данных
+        foodVC.menuItem = menuItem
         foodVC.modalPresentationStyle = .formSheet
         present(foodVC, animated: true)
     }

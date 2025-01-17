@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseableId)
+        tableView.backgroundColor = AppColors.background
         
     }
     

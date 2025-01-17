@@ -251,9 +251,6 @@ class FoodDetailsViewController: UIViewController {
          }
          
          
-         
-         
-         
          bottomPanel.snp.makeConstraints { make in
              make.left.right.bottom.equalToSuperview()
              make.height.equalTo(100)
@@ -337,26 +334,21 @@ class FoodDetailsViewController: UIViewController {
     }
     
     @objc private func addToCartButtonTapped() {
-        // Проверяем, что menuItem не равен nil
         guard let menuItem = menuItem else {
             print("Menu item is nil")
             return
         }
 
         let cleanedPriceString = menuItem.price
-                .replacingOccurrences(of: ",", with: ".") // Заменяем запятую на точку
+                .replacingOccurrences(of: ",", with: ".")
                 .trimmingCharacters(in: .whitespaces)
         
-        // Преобразуем цену из строки в Double
         let price = Double(cleanedPriceString) ?? 0.0
 
-        print("Menu item price: \(menuItem.price)") // Проверяем исходную строку
-           print("Price after conversion: \(price)")
         
-        // Получаем количество из IncrementDecrementView
+        
         let quantity = incrementDecrementView.quantity
 
-        // Вычисляем общую стоимость
         var finalPrice = Double(quantity) * price
         
         if selectedButton.isSelected {
@@ -365,15 +357,14 @@ class FoodDetailsViewController: UIViewController {
             print("упаковку не добавляли")
         }
 
-        // Добавляем товар в корзину
         CartManager.shared.addToCart(item: menuItem, quantity: quantity, finalPrice: finalPrice)
 
-        // Показываем баннер с уведомлением
+        dismiss(animated: true, completion: nil)
+
         CartManager.shared.showCartBanner()
 
-        // Выводим отладочную информацию
-        print("Added \(menuItem.name) to cart. Quantity: \(quantity), Final Price: \(finalPrice)")
+        
     }
 
-   
+    
 }

@@ -10,13 +10,12 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
 
     var addressCompletion: ((String) -> Void)?
 
-    
     private let locationManager = CLLocationManager()
     private let mapView = MKMapView()
     private let addressLabel = UILabel()
     private var selectedLocation: CLLocationCoordinate2D?
     private let user = Auth.auth().currentUser
-    
+
     private let addressTextField: SkyFloatingLabelTextField = {
         let textField = SkyFloatingLabelTextField()
         textField.configureBorderTextField(
@@ -31,16 +30,14 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         return textField
     }()
 
-    
     private let saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save".localized(), for: .normal)
-        button.titleLabel?.font = .Rubick.bold.size(of:20)
+        button.titleLabel?.font = .Rubick.bold.size(of: 20)
         button.setTitleColor(AppColors.backgroundCell, for: .normal)
         button.backgroundColor = AppColors.main
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
 
@@ -49,21 +46,13 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         button.setImage(UIImage(named: "Search"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.layer.cornerRadius = 20
-        
         if let originalImage = UIImage(named: "Search") {
             let resizedImage = originalImage.resized(to: CGSize(width: 30, height: 30))
             button.setImage(resizedImage, for: .normal)
         }
-        
-        
-        
-        
-        
         return button
     }()
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
@@ -73,14 +62,26 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         setupConstraints()
         setupLocationManager()
         setupMapGesture()
-        
+
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-        
+        addressTextField.delegate = self
+
         loadSavedLocation()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    //MARK: - Setup UI
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    // MARK: - Setup UI
 
     private func setupUI() {
         mapView.delegate = self
@@ -90,22 +91,17 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         addressLabel.font = .Rubick.bold.size(of: 18)
         view.addSubview(addressLabel)
 
-        
         addressTextField.delegate = self
         view.addSubview(addressTextField)
 
-        
-        
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         view.addSubview(searchButton)
 
-        
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         view.addSubview(saveButton)
     }
 
-    
-    //MARK: - Setup constraints
+    // MARK: - Setup Constraints
 
     private func setupConstraints() {
         mapView.snp.makeConstraints { make in
@@ -144,19 +140,35 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
-        // Запрос разрешений на использование местоположения
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
-
         locationManager.startUpdatingLocation()
     }
-    
+
     private func setupMapGesture() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(longPressGesture)
     }
-    
+
+    // MARK: - Keyboard Handling
+
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let keyboardHeight = keyboardFrame.height
+        let bottomInset = keyboardHeight - view.safeAreaInsets.bottom
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -bottomInset
+        }
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+
+    // MARK: - Map Handling
+
     @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
             let touchPoint = gestureRecognizer.location(in: mapView)
@@ -166,17 +178,14 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
     }
 
     private func addAnnotation(at coordinate: CLLocationCoordinate2D) {
-        // Удаляем все предыдущие аннотации
         mapView.removeAnnotations(mapView.annotations)
-        
-        // Добавляем новую аннотацию
+
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
-        
+
         selectedLocation = coordinate
-        
-        // Обратное геокодирование для получения адреса
+
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
@@ -192,6 +201,8 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         }
     }
 
+    // MARK: - Button Actions
+
     @objc private func saveButtonTapped() {
         guard let selectedLocation = selectedLocation else {
             print("Местоположение не выбрано")
@@ -200,14 +211,13 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         saveLocationToFirebase(coordinate: selectedLocation)
         print("Адрес сохранён: \(selectedLocation.latitude), \(selectedLocation.longitude)")
         if let address = addressTextField.text, !address.isEmpty {
-                  addressCompletion?(address) // Передача адреса через замыкание
-                  navigationController?.popViewController(animated: true) // Возврат назад
-              } else {
-                  print("Адрес не введен")
-              }
-          }
-    
-    
+            addressCompletion?(address)
+            navigationController?.popViewController(animated: true)
+        } else {
+            print("Адрес не введен")
+        }
+    }
+
     @objc private func searchButtonTapped() {
         guard let address = addressTextField.text, !address.isEmpty else { return }
         searchForAddress(address)
@@ -231,7 +241,9 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
             }
         }
     }
-    
+
+    // MARK: - Firebase Handling
+
     private func saveLocationToFirebase(coordinate: CLLocationCoordinate2D) {
         guard let user = user else { return }
         let userRef = Firestore.firestore().collection("users").document(user.uid)
@@ -246,7 +258,7 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
             }
         }
     }
-    
+
     private func loadSavedLocation() {
         guard let user = user else { return }
         let userRef = Firestore.firestore().collection("users").document(user.uid)
@@ -274,16 +286,20 @@ class DeliveryAddressWithMapViewController: UIViewController, CLLocationManagerD
         guard let location = locations.first else { return }
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
-        
-        // Устанавливаем маркер на текущем местоположении пользователя
+
         addAnnotation(at: location.coordinate)
-        
-        // Останавливаем обновление местоположения после получения начальной координаты
         locationManager.stopUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Ошибка обновления местоположения: \(error.localizedDescription)")
+    }
+
+    // MARK: - UITextFieldDelegate
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

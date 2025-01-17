@@ -9,7 +9,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
     weak var coordinator: MainCoordinator?
     private let service = AuthService()
     var email : String? {
@@ -28,12 +28,19 @@ class SignInViewController: UIViewController {
         passwordTextField.rightView = passwordToggleButton
             passwordTextField.rightViewMode = .always
         
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
         view.backgroundColor = AppColors.background
         setupAddToSuperview()
         setupConstraints()
         setupAccountSection()
         tapped()
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     //MARK: - Label
@@ -383,9 +390,10 @@ class SignInViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        
-        
-       
-        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

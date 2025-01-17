@@ -12,9 +12,9 @@ import FirebaseFirestore
 import SnapKit
 import SkyFloatingLabelTextField
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController, UITextFieldDelegate {
     
-   
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +25,15 @@ class UserProfileViewController: UIViewController {
         fetchUserData()
         navigationController?.setupCustomBackButton(for: self)
 
+        emailTextField.delegate = self
+        nameTextField.delegate = self
+        surnameTextField.delegate = self
+        
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     private let emailTextField: SkyFloatingLabelTextField = {
         let textField = SkyFloatingLabelTextField()
@@ -224,6 +230,12 @@ class UserProfileViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+    
+  
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
