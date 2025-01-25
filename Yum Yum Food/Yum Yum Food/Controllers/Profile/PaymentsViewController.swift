@@ -25,7 +25,7 @@ class PaymentsViewController: UIViewController {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 30) 
         label.textAlignment = .left
-        label.text = "Payment Methods"
+        label.text = "Payment Methods".localized()
         return label
     }()
 

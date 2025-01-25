@@ -7,56 +7,92 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
-class SearchViewController: UIViewController, UITextFieldDelegate {
+import UIKit
+import FirebaseFirestore
+
+class SearchViewController: UIViewController {
     weak var coordinator: SearchCoordinator?
+
+    private let searchView = SearchView()
+    private let searchModel = SearchModel()
+    private var results: [FoodItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = AppColors.background
-        setupUI()
+        view = searchView
+        setupSearchBar()
+        setupTableView()
+        setupKeyboardHandling()
     }
 
-    private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "Search"
-        searchBar.backgroundImage = UIImage() // Убирает границы
-        searchBar.barTintColor = AppColors.background
-        searchBar.tintColor = AppColors.textColorMain
-        return searchBar
-    }()
-
-   
-
-   
-    // MARK: - Setup UI
-    private func setupUI() {
-        view.addSubview(searchBar)
-
-        setupConstraints()
+    private func setupSearchBar() {
+        searchView.searchBar.delegate = self
+        navigationItem.titleView = searchView.searchBar
     }
 
-    // MARK: - Setup Constraints
-    private func setupConstraints() {
-        searchBar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
-            make.left.right.equalTo(view).inset(20)
-            make.height.equalTo(40)
+    private func setupTableView() {
+        searchView.tableView.dataSource = self
+        searchView.tableView.delegate = self
+    }
+
+    private func setupKeyboardHandling() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
+    private func performSearch(query: String) {
+        searchModel.searchFoodItems(query: query) { [weak self] (results, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Ошибка при поиске: \(error.localizedDescription)")
+                return
+            }
+            self.results = results ?? []
+            self.searchView.tableView.reloadData()
         }
-
-       
-    }
-
-    // MARK: - UITextFieldDelegate
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Показать клавиатуру при нажатии на текстовое поле
-        textField.becomeFirstResponder()
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Скрыть клавиатуру при нажатии на Return
-        textField.resignFirstResponder()
-        return true
     }
 }
 
+// MARK: - UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            results.removeAll()
+            searchView.tableView.reloadData()
+        } else {
+            performSearch(query: searchText)
+        }
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let query = searchBar.text, !query.isEmpty else { return }
+        performSearch(query: query)
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return results.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodItemCell", for: indexPath)
+        let foodItem = results[indexPath.row]
+        cell.textLabel?.text = foodItem.name
+        cell.detailTextLabel?.text = "Rating: \(foodItem.rating)"
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension SearchViewController: UITableViewDelegate {
+}

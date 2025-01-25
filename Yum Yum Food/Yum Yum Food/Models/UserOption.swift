@@ -12,12 +12,12 @@ struct UserOption {
     var icon: UIImage?
     
     static let options: [UserOption] = [
-        UserOption(title: "My Profile", icon: UIImage(named: "profile vc")),
-        UserOption(title: "My Orders", icon: UIImage(named: "order")),
-        UserOption(title: "Delivery Address", icon: UIImage(named: "delivery address")),
-        UserOption(title: "Payments Methods", icon: UIImage(named: "wallet")),
-        UserOption(title: "Contact Us", icon: UIImage(named: "contact")),
-        UserOption(title: "Settings", icon: UIImage(named: "settings")),
-        UserOption(title: "Help & FAQ", icon: UIImage(systemName: "questionmark.circle.fill"))
+        UserOption(title: "My Profile".localized(), icon: UIImage(named: "profile vc")),
+        UserOption(title: "My Orders".localized(), icon: UIImage(named: "order")),
+        UserOption(title: "Delivery Address".localized(), icon: UIImage(named: "delivery address")),
+        UserOption(title: "Payments Methods".localized(), icon: UIImage(named: "wallet")),
+        UserOption(title: "Contact Us".localized(), icon: UIImage(named: "contact")),
+        UserOption(title: "Settings".localized(), icon: UIImage(named: "settings")),
+        UserOption(title: "Help & FAQ".localized(), icon: UIImage(systemName: "questionmark.circle.fill"))
     ]
 }

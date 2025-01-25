@@ -21,6 +21,13 @@ class HomeCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 
-    // Добавьте методы для управления навигацией в рамках Home вкладки
+    
+    func showFastestDelivery() {
+        let vc = FastestDeliveryViewController()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+   
 }
 

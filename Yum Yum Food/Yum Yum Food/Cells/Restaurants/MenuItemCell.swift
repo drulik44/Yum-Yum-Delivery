@@ -83,9 +83,9 @@ class MenuItemCell: UICollectionViewCell {
     }
     
     func configure(with menuItem: MenuItem) {
-        nameLabel.text = menuItem.name
+        nameLabel.text = menuItem.name.localized()
         priceLabel.text = "\(menuItem.price)₴"
-        descriptionLabel.text = menuItem.description
+        descriptionLabel.text = menuItem.description.localized()
         if let url = URL(string: menuItem.imageUrl) {
             itemImageView.sd_setImage(with: url)
         }

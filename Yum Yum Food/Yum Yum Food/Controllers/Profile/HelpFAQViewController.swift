@@ -21,47 +21,47 @@ class HelpFAQViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
 
     private let faqData = [
-        ("General Questions", [
-            "How to place an order?",
-            "What payment methods are accepted?",
-            "How to track my order?"
+        ("General Questions".localized(), [
+            "How to place an order?".localized(),
+            "What payment methods are accepted?".localized(),
+            "How to track my order?".localized(),
         ]),
-        ("Delivery Questions", [
-            "What are the delivery zones?",
-            "How long does delivery take?",
-            "What if my order is late?"
+        ("Delivery Questions".localized(), [
+            "What are the delivery zones?".localized(),
+            "How long does delivery take?".localized(),
+            "What if my order is late?".localized()
         ]),
-        ("Account & Profile", [
-            "How to sign up?",
-            "How to update account information?",
-            "How to reset my password?"
+        ("Account & Profile".localized(), [
+            "How to sign up?".localized(),
+            "How to update account information?".localized(),
+            "How to reset my password?".localized()
         ]),
-        ("Payment Methods", [
-            "What cards are accepted?",
-            "Can I use PayPal or other methods?"
+        ("Payment Methods".localized(), [
+            "What cards are accepted?".localized(),
+            "Can I use PayPal or other methods?".localized()
         ]),
-        ("Returns & Cancellations", [
-            "How to cancel an order?",
-            "How to request a refund?"
+        ("Returns & Cancellations".localized(), [
+            "How to cancel an order?".localized(),
+            "How to request a refund?".localized()
         ]),
-        ("Order Issues", [
-            "What if my order is incorrect?",
-            "What if the food is cold?"
+        ("Order Issues".localized(), [
+            "What if my order is incorrect?".localized(),
+            "What if the food is cold?".localized()
         ]),
-        ("Discounts & Promotions", [
-            "How to use promo codes?",
-            "Are there any loyalty programs?"
+        ("Discounts & Promotions".localized(), [
+            "How to use promo codes?".localized(),
+            "Are there any loyalty programs?".localized()
         ]),
-        ("Contact Us", [
-            "Support phone number",
-            "Email address",
-            "Social media links"
+        ("Contact Us".localized(), [
+            "Support phone number".localized(),
+            "Email address".localized(),
+            "Social media links".localized()
         ])
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Help & FAQ"
+        title = "Help & FAQ".localized()
         view.backgroundColor = AppColors.background
         setupTableView()
         navigationController?.setupCustomBackButton(for: self)

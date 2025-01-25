@@ -24,7 +24,7 @@ class FooterView: UICollectionReusableView {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 20)
         label.textAlignment = .left
-        label.text = "Total"
+        label.text = "Total".localized()
         return label
     }()
 
@@ -38,7 +38,6 @@ class FooterView: UICollectionReusableView {
                    make.top.equalToSuperview().offset(10) // Уменьшаем отступ сверху
                    make.left.equalToSuperview().offset(20)
                    make.bottom.equalToSuperview().offset(-10)
-                   //make.width.equalTo(50)
                }
 
                totalPriceLabel.snp.makeConstraints { make in

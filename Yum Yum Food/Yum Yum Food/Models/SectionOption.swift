@@ -15,6 +15,6 @@ struct SectionOption{
 
  var paymentMethodData:[SectionOption] = [
     SectionOption(name: "Apple Pay", icon: "Apple Pay Icon",selected: false),
-    SectionOption(name: "Cash", icon: "Cash Icons",selected: false),
-    SectionOption(name: "Add debit/credit card", icon: "Plus",selected: false)
+    SectionOption(name: "Cash".localized(), icon: "Cash Icons",selected: false),
+    SectionOption(name: "Add debit/credit card".localized(), icon: "Plus",selected: false)
 ]

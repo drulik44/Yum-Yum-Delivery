@@ -81,7 +81,7 @@ class OrderCell: UICollectionViewCell {
     }
 
     func configure(with order: Order) {
-        nameLabel.text = order.name
+        nameLabel.text = order.name.localized()
         totalPriceLabel.text = "\(order.totalPrice)₴"
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium

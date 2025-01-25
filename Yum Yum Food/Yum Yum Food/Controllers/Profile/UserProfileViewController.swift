@@ -12,9 +12,9 @@ import FirebaseFirestore
 import SnapKit
 import SkyFloatingLabelTextField
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController, UITextFieldDelegate {
     
-   
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +25,20 @@ class UserProfileViewController: UIViewController {
         fetchUserData()
         navigationController?.setupCustomBackButton(for: self)
 
+        emailTextField.delegate = self
+        nameTextField.delegate = self
+        surnameTextField.delegate = self
+        
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     private let emailTextField: SkyFloatingLabelTextField = {
         let textField = SkyFloatingLabelTextField()
         textField.configureBorderTextField(
-            placeholder: "   Your email",
+            placeholder: "   Your email".localized(),
             tintColor: AppColors.backgroundCell,
             textColor: AppColors.textColorMain,
             borderColor: AppColors.gray,
@@ -46,7 +52,7 @@ class UserProfileViewController: UIViewController {
     private let nameTextField: SkyFloatingLabelTextField = {
         let textField = SkyFloatingLabelTextField()
         textField.configureBorderTextField(
-            placeholder: "   Your name",
+            placeholder: "   Your name".localized(),
             tintColor: AppColors.backgroundCell,
             textColor: AppColors.textColorMain,
             borderColor: AppColors.gray,
@@ -60,7 +66,7 @@ class UserProfileViewController: UIViewController {
     private let surnameTextField: SkyFloatingLabelTextField = {
         let textField = SkyFloatingLabelTextField()
         textField.configureBorderTextField(
-            placeholder: "   Your surname",
+            placeholder: "   Your surname".localized(),
             tintColor: AppColors.backgroundCell,
             textColor: AppColors.textColorMain,
             borderColor: AppColors.gray,
@@ -73,7 +79,7 @@ class UserProfileViewController: UIViewController {
     
     lazy var saveButton: UIButton = {
             let button = UIButton()
-            button.setTitle("Save", for: .normal)
+            button.setTitle("Save".localized(), for: .normal)
         button.backgroundColor = AppColors.main
         button.setTitleColor(AppColors.backgroundCell, for: .normal)
             button.titleLabel?.font = .Rubick.regular.size(of: 20)
@@ -89,7 +95,7 @@ class UserProfileViewController: UIViewController {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 30)
         label.textAlignment = .center
-        label.text = "Edit Profile"
+        label.text = "Edit Profile".localized()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -104,7 +110,7 @@ class UserProfileViewController: UIViewController {
     
     lazy var  nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
+        label.text = "Name".localized()
         label.textColor = AppColors.subTitleColor
         label.font = .Rubick.bold.size(of:16)
         return label
@@ -112,7 +118,7 @@ class UserProfileViewController: UIViewController {
     
     lazy var  surnameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Surname"
+        label.text = "Surname".localized()
         label.textColor = AppColors.subTitleColor
         label.font = .Rubick.bold.size(of:16)
         return label
@@ -224,6 +230,12 @@ class UserProfileViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+    
+  
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

@@ -14,7 +14,7 @@ class CartBannerView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Go to cart"
+        label.text = "Go to cart".localized()
         label.font = .Rubick.bold.size(of:16)
         label.textColor = .white
         return label

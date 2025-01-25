@@ -1,0 +1,276 @@
+/* 
+  Localizable.strings
+  Yum Yum Food
+
+  Created by Руслан Жидких on 10.01.2025.
+  
+*/
+
+
+"Home" = "Home";
+"Restaurants" = "Restaurants";
+"Search" = "Search";
+"Favorite" = "Favorite";
+"Profile" =  "Profile";
+
+
+//MARK: - Localize Home VC
+
+"Select your address" = "Select your address";
+"Fastest delivery 🔥" = "Fastest delivery 🔥";
+"Popular items 🥳" = "Popular items 🥳";
+"See all" = "See all";
+
+
+//MARK: - LOCALIZE FASTEST CELL
+"A chain of restaurants serving Japanese and Pan-Asian cuisine, offering a wide selection of fresh and delicious dishes" = "A chain of restaurants serving Japanese and Pan-Asian cuisine, offering a wide selection of fresh and delicious dishes"; "Is not just a chain of coffee shops, it is a real paradise for those with a sweet tooth. Our calling card is the freshest cinnamon buns, prepared according to a unique recipe." = "Is not just a chain of coffee shops, it is a real paradise for those with a sweet tooth. Our calling card is the freshest cinnamon buns, prepared according to a unique recipe."; "Сoffee shop for dreamers and creators. Our atmosphere inspires new achievements, and aromatic coffee helps to focus and reveal your potential." = "Сoffee shop for dreamers and creators. Our atmosphere inspires new achievements, and aromatic coffee helps to focus and reveal your potential." ; "It is one of the most famous and largest fast food chains in the world." = "It is one of the most famous and largest fast food chains in the world.";
+"40-50 mins" = "40-50 mins"; "10-15 mins" = "10-15 mins"; "25-30 mins" = "25-30 mins"; "15-20 mins" = "15-20 mins";
+
+//MARK: - Localize popular cell
+"Italian Editorial Team" = "Italian Editorial Team";
+
+"Black Spaghetti Ovens" = "Black Spaghetti Ovens"; "Willy pink" = "Willy pink"; "McCrispy deluxe menu" = "McCrispy deluxe menu"; "Jamon Salad" = "Jamon Salad"; "Frying pan \"Myslyvska\"" = "Frying pan \"Myslyvska\""; "VIitello Tonnato" = "VIitello Tonnato";
+
+//MARK: - Restaurant VC
+
+"Categories" = "Categories";
+
+"Japanese cuisine" = "Japanese cuisine"; "Bar and Pub" = "Bar and Pub"; "Italian cuisine" = "Italian cuisine"; "Fastfood" = "Fastfood"; "Desserts" = "Desserts";
+
+
+"All Restaurants" = "All Restaurants";
+
+
+"Aunt Bella" = " Aunt Bella";
+
+"The cozy Italian cafe \"Dough, Cheese and Aunt Bella\" invites you to enjoy delicious homemade food in the atmosphere of a warm Italian trattoria." = "The cozy Italian cafe \"Dough, Cheese and Aunt Bella\" invites you to enjoy delicious homemade food in the atmosphere of a warm Italian trattoria."; "This is a well-known restaurant chain that offers a wide range of Japanese and Pan-Asian cuisine." = "This is a well-known restaurant chain that offers a wide range of Japanese and Pan-Asian cuisine."; "The Salad is a place where every salad is a work of art. We offer fresh, bright and incredibly delicious salads for every taste. In our menu you will find classic recipes and signature combinations that will surprise even the most sophisticated gourmets." = "The Salad is a place where every salad is a work of art. We offer fresh, bright and incredibly delicious salads for every taste. In our menu you will find classic recipes and signature combinations that will surprise even the most sophisticated gourmets."; "Place where the atmosphere of friendly gatherings, live music and aromatic beer reigns. This is not just a pub, but a real corner for those who appreciate quality craft beer, delicious food and good company." = "Place where the atmosphere of friendly gatherings, live music and aromatic beer reigns. This is not just a pub, but a real corner for those who appreciate quality craft beer, delicious food and good company."; "Milk Bar TSUM: iconic desserts, delicious breakfasts all day long and signature pizza in the heart of Kyiv." = "Milk Bar TSUM: iconic desserts, delicious breakfasts all day long and signature pizza in the heart of Kyiv."; "The Italian Editorial Team invites you on an unforgettable journey through the flavors of sunny Italy! Our restaurant is a small corner of Rome in the very heart" = "The Italian Editorial Team invites you on an unforgettable journey through the flavors of sunny Italy! Our restaurant is a small corner of Rome in the very heart"; "Can't resist the aroma of freshly baked goods? Stop by Cinnabon and try our famous cinnamon buns" = "Can't resist the aroma of freshly baked goods? Stop by Cinnabon and try our famous cinnamon buns"; "Noodle Doodle is a vibrant and inviting restaurant that celebrates the diverse and delicious world of noodles. From classic ramen to innovative fusion dishes, our menu offers a wide range of options to satisfy every craving." = "Noodle Doodle is a vibrant and inviting restaurant that celebrates the diverse and delicious world of noodles. From classic ramen to innovative fusion dishes, our menu offers a wide range of options to satisfy every craving.";
+
+"25–30 min" = "25–30 min"; "10-30 min" = "10-30 min"; "50–55 min" = "50–55 min"; "30–35 min" = "30–35 min"; "15–20 min" = "15–20 min"; "55–60 min" = "55–60 min"; "30–35 min" = "30–35 min"; "10–15 min" = "10–15 min";
+
+
+
+// MARK: - DETAILVC
+
+"rating_format" = "Rating: %@";
+"delivery_time_format" = "Delivery Time: %@ min";
+"delivery_price_format" = "Delivery Price: %@";
+
+
+"Menu" = "Menu";
+
+"Aunt Bella" = " Aunt Bella";
+
+"McCrispy Deluxe" = "McCrispy Deluxe";
+"Chicken Strips, 6 pieces" = "Chicken Strips, 6 pieces";
+"Big Mac" = "Big Mac";
+"Cheeseburger Happy Meal" = "Cheeseburger Happy Meal";
+"CHERRY MCPIRIG" = "CHERRY MCPIRIG";
+
+
+"McCrispy Deluxe which includes the burger itself, fries (small, medium or large to choose from) and a drink (such as Coca-Cola, Fanta, Sprite or others)." = "McCrispy Deluxe which includes the burger itself, fries (small, medium or large to choose from) and a drink (such as Coca-Cola, Fanta, Sprite or others)."; "Pieces of tender and juicy chicken fillet fried in crispy breading. 160 g | 400 kcal" = "Pieces of tender and juicy chicken fillet fried in crispy breading. 160 g | 400 kcal";  "Two beefsteaks with yalevichny, cibul, pickled ham, cheddar cheese, fresh salad, dressed with Big Mac sauce, on a sesame bun. 212 g | 526 kcal" = "Two beefsteaks with yalevichny, cibul, pickled ham, cheddar cheese, fresh salad, dressed with Big Mac sauce, on a sesame bun. 212 g | 526 kcal"; "This is a special set for children from the famous McDonald's fast food chain. It is an ideal combination of delicious food and entertainment." = "This is a special set for children from the famous McDonald's fast food chain. It is an ideal combination of delicious food and entertainment."; "Crispy, freshly baked McPie® with cherry filling. 80 g | 272 kcal" = "Crispy, freshly baked McPie® with cherry filling. 80 g | 272 kcal";
+
+
+"Margarita" = "Margarita";
+"Prosciutto" = "Prosciutto";
+"Mussels from Bella" = "Mussels from Bella";
+"Panzanella" = "Panzanella";
+"Bolognese" = "Bolognese";
+
+
+"tomato sauce, mozzarella, parmesan, basil, garlic oil" = "tomato sauce, mozzarella, parmesan, basil, garlic oil"; "tomato sauce, prosciutto, parmesan, sun-dried tomatoes, truffle paste, pesto sauce, arugula, garlic oil" = "tomato sauce, prosciutto, parmesan, sun-dried tomatoes, truffle paste, pesto sauce, arugula, garlic oil";"large Chilean mussels in a creamy sauce with orange and thyme" = "large Chilean mussels in a creamy sauce with orange and thyme";"with prosciutto, croutons, cucumber, cherry tomatoes, arugula and parmesan under balsamic cream with olive oil" = "with prosciutto, croutons, cucumber, cherry tomatoes, arugula and parmesan under balsamic cream with olive oil";"pasta, bolognese sauce, basil and parmesan" = "pasta, bolognese sauce, basil and parmesan";
+
+
+"Seth Banzai" = "Seth Banzai";
+"Seth Gurman" = "Seth Gurman";
+"Top Set" = "Top Set";
+"Sushi burger" = "Sushi burger";
+"Roll dog" = "Roll dog";
+
+
+"1010 g Philadelphia duo, Futomaki with shrimp in tempura, California with crab mix in sesame, California Chicken. Soy sauce - 80 ml (2 pcs). Ginger - 20 g. Wasabi - 10 g." = "1010 g Philadelphia duo, Futomaki with shrimp in tempura, California with crab mix in sesame, California Chicken. Soy sauce - 80 ml (2 pcs). Ginger - 20 g. Wasabi - 10 g."; "880 g Philadelphia with salmon, Crunch with shrimp, California with salmon in sesame, Maki with tuna. Soy sauce - 80 ml (2 pcs). Ginger - 20 g. Wasabi - 10 g." = "880 g Philadelphia with salmon, Crunch with shrimp, California with salmon in sesame, Maki with tuna. Soy sauce - 80 ml (2 pcs). Ginger - 20 g. Wasabi - 10 g."; "900 g California Chicken, Maki with cucumber, Tempura roll with chicken, Tender with chicken. Soy sauce - 80 ml (2 pcs). Ginger - 20 g. Wasabi - 10 g." = "900 g California Chicken, Maki with cucumber, Tempura roll with chicken, Tender with chicken. Soy sauce - 80 ml (2 pcs). Ginger - 20 g. Wasabi - 10 g.";"320 g Rice, shrimp, cucumber, avocado, iceberg lettuce, cheese, tempura flour, panko breadcrumbs, light chili sauce, unagi sauce, mayonnaise, tobiko caviar" = "320 g Rice, shrimp, cucumber, avocado, iceberg lettuce, cheese, tempura flour, panko breadcrumbs, light chili sauce, unagi sauce, mayonnaise, tobiko caviar";"310 g Rice, shrimp tempura, cucumber, iceberg lettuce, bell pepper, tempura flour, panko breadcrumbs, light chili sauce, unagi sauce, sesame seeds, chili thread, nori" = "310 g Rice, shrimp tempura, cucumber, iceberg lettuce, bell pepper, tempura flour, panko breadcrumbs, light chili sauce, unagi sauce, sesame seeds, chili thread, nori";
+
+
+"Surf & Turf Salad" = "Surf & Turf Salad";
+"Salmon & Brie Salad" = "Salmon & Brie Salad";
+"Doner Mexicano" = "Doner Mexicano";
+"Pumpkin cream soup with smoked salmon" = "Pumpkin cream soup with smoked salmon";
+
+
+"Salad mix, jamon, mango, blue cheese, cherry tomatoes, olives, baby spinach, balsamic dressing" = "Salad mix, jamon, mango, blue cheese, cherry tomatoes, olives, baby spinach, balsamic dressing";"430g Salad mix, lightly salted salmon, tomatoes, cucumber, egg, Brie cheese, olives, balsamic dressing" = "430g Salad mix, lightly salted salmon, tomatoes, cucumber, egg, Brie cheese, olives, balsamic dressing";"285g Tortilla, cabbage, carrots, Aioli sauce, Spicy sauce, veal, bell pepper, corn" = "285g Tortilla, cabbage, carrots, Aioli sauce, Spicy sauce, veal, bell pepper, corn";"390 g Pumpkin, onion, carrot, cream, parmesan cheese, smoked salmon, pumpkin seeds" = "390 g Pumpkin, onion, carrot, cream, parmesan cheese, smoked salmon, pumpkin seeds";
+
+
+
+"Ipa beer (India Pale Ale)" = "Ipa beer (India Pale Ale)";
+"Porky baked with potatoes" = "Porky baked with potatoes";
+"Beer basket" = "Beer basket";
+"Greek salad" = "Greek salad";
+
+
+"Light, unfiltered with a fruity taste. TTX: 13-14.5%, alcohol content not less than 4.5% vol." = "Light, unfiltered with a fruity taste. TTX: 13-14.5%, alcohol content not less than 4.5% vol.";"Baked neck, potatoes, cheese, tomato, mushrooms, onion, spices" = "Baked neck, potatoes, cheese, tomato, mushrooms, onion, spices";"Lettuce leaves, tomato, cucumber, bell pepper, feta cheese, olives, onion, oil." = "Lettuce leaves, tomato, cucumber, bell pepper, feta cheese, olives, onion, oil.";
+
+
+
+"Toast with avocado  crash  and salomon" = "Toast with avocado  crash  and salomon";
+"Tuna salad" = "Tuna salad";
+"TWINS BABY VIKA" = "TWINS BABY VIKA";
+"KYIV bar" = "KYIV bar";
+
+"The most tender beef in a fish cream sauce with red onion, mustard, chili flakes and thyme." = "The most tender beef in a fish cream sauce with red onion, mustard, chili flakes and thyme.";"Bread of your choice, avocado crumble, lightly salted salmon gravlax, topped with boiled egg, mustard seeds and pickled capers. Garnish with green butter, lemon and furikake spices" = "Bread of your choice, avocado crumble, lightly salted salmon gravlax, topped with boiled egg, mustard seeds and pickled capers. Garnish with green butter, lemon and furikake spices";"A light and nutritious salad with juicy tuna steak based on a mix of lettuce and Romaine leaves, complemented with asparagus beans, boiled potatoes with skin, a mix of olives, baked cherries and eggs. Served with aromatic Dill sauce and spices." = "A light and nutritious salad with juicy tuna steak based on a mix of lettuce and Romaine leaves, complemented with asparagus beans, boiled potatoes with skin, a mix of olives, baked cherries and eggs. Served with aromatic Dill sauce and spices.";"545 g Inside are 2 raspberry sponge cakes, 1 almond sponge cake, a layer of fresh strawberries, and a cream based on white chocolate and strawberries." = "545 g Inside are 2 raspberry sponge cakes, 1 almond sponge cake, a layer of fresh strawberries, and a cream based on white chocolate and strawberries.";"Super Kyiv bar with cashews, almonds, cream, hazelnuts in caramel and three types of ganache with milk, white and dark chocolate." = "Super Kyiv bar with cashews, almonds, cream, hazelnuts in caramel and three types of ganache with milk, white and dark chocolate.";
+
+
+"Pizza Salmone" = "Pizza Salmone";
+"Truffle burrata with mushroom cream and black truffle" = "Truffle burrata with mushroom cream and black truffle";
+"Grilled Tuna Salad" = "Grilled Tuna Salad";
+"Shu with Vanilla Cream" = "Shu with Vanilla Cream";
+
+"with cream cheese and red caviar" = "with cream cheese and red caviar";
+"with mushroom cream and black truffle" = "with mushroom cream and black truffle";
+"almost classic nicoise, fresh Italian tuna" = "almost classic nicoise, fresh Italian tuna";
+"with shrimp, baby squid, tomatoes, capers and white wine" = "with shrimp, baby squid, tomatoes, capers and white wine";
+"and hot chocolate" = "and hot chocolate";
+
+
+
+
+"Classic Cinnabon" = "Classic Cinnabon";
+"Roll on the go" = "Roll on the go";
+"Caramel Pecan Bonbon" = "Caramel Pecan Bonbon";
+"Mini-shocker" = "Mini-shocker";
+"Blueberry minibon" = "Blueberry minibon";
+
+"Cinnamon Bun with Cream Cheese Allergens: Wheat, Milk, Soy and Eggs. May contain tree nuts and peanuts." = "Cinnamon Bun with Cream Cheese Allergens: Wheat, Milk, Soy and Eggs. May contain tree nuts and peanuts.";
+"a bun cut into pieces for easy eating on the go" = "a bun cut into pieces for easy eating on the go";
+"Bun with cinnamon, two types of caramel and nuts Pecan" = "Bun with cinnamon, two types of caramel and nuts Pecan";
+"Small bun with chocolate and cream cheese" = "Small bun with chocolate and cream cheese";
+"Warm pastry filled with blueberries, covered with a delicate cream cheese frosting" = "Warm pastry filled with blueberries, covered with a delicate cream cheese frosting";
+
+
+
+
+
+"Pork in Kim Chii XL sauce with egg noodles" = "Pork in Kim Chii XL sauce with egg noodles";
+"Chicken in Oyster Sauce XL with Egg Noodles" = "Chicken in Oyster Sauce XL with Egg Noodles";
+"Shrimp in Kimchi sauce XL with bean noodles" = "Shrimp in Kimchi sauce XL with bean noodles";
+"Tom Yam Noodle Soup with Shrimp" = "Tom Yam Noodle Soup with Shrimp";
+"Fried rice with beef" = "Fried rice with beef";
+
+
+"Spicy taste. Pork, bell pepper, carrots, shiitake mushrooms, green peas, green onions, ginger, sesame seeds, microgreens, sauce." = "Spicy taste. Pork, bell pepper, carrots, shiitake mushrooms, green peas, green onions, ginger, sesame seeds, microgreens, sauce.";
+"Sweet and sour taste. Chicken fillet, broccoli, mini corn, carrots, wood mushroom, shiitake, bell pepper, ginger, sesame, microgreens, sauce." = "Sweet and sour taste. Chicken fillet, broccoli, mini corn, carrots, wood mushroom, shiitake, bell pepper, ginger, sesame, microgreens, sauce.";
+"Spicy taste. Shrimp, bell pepper, carrot, shiitake mushrooms, green peas, green onion, ginger, sesame, microgreens, sauce." = "Spicy taste. Shrimp, bell pepper, carrot, shiitake mushrooms, green peas, green onion, ginger, sesame, microgreens, sauce.";
+"Spicy meat-based coconut soup with bean noodles, wood mushroom, shiitake mushrooms, corn, and beans." = "Spicy meat-based coconut soup with bean noodles, wood mushroom, shiitake mushrooms, corn, and beans.";
+"Basmati rice fried in a sauce with broccoli, onion, bell pepper, shiitake mushrooms, carrots and beans, sesame oil, ginger, sesame seeds, microgreens, and an optional omelet." = "Basmati rice fried in a sauce with broccoli, onion, bell pepper, shiitake mushrooms, carrots and beans, sesame oil, ginger, sesame seeds, microgreens, and an optional omelet.";
+
+
+    //MARK: - Detail VC
+
+"Package" = "Package";
+"Package box cost" = "Package box cost";
+"Add to order" = "Add to order";
+
+"Go to cart" = "Go to cart";
+
+// MARK: - cartVC
+
+"Order items" = "Order items";
+"Checkout" = "Checkout";
+"Your order" = "Your order";
+"Total" = "Total";
+
+
+//MARK: - Nofication
+
+"Order Accepted" = "Order Accepted";
+"A courier will contact you soon, please wait)" = "A courier will contact you soon, please wait)";
+
+//MARK: - Favorite vc
+
+"Food" = "Food";
+
+//MARK: - Profile VC
+
+"Log Out" = "Log Out";
+"My Profile" = "My Profile";
+"My Orders" = "My Orders";
+"Delivery Address" = "Delivery Address";
+"Payments Methods" = "Payments Methods";
+"Contact Us" = "Contact Us";
+"Settings" = "Settings";
+"Help & FAQ" = "Help & FAQ";
+
+
+//MARK: -  User profile VC
+
+"   Your email" = "   Your email";
+"   Your name" =  "   Your name";
+"   Your surname" = "   Your surname";
+"Save" = "Save";
+"Edit Profile" = "Edit Profile";
+"Name" = "Name";
+"Surname" = "Surname";
+
+//MARK: - Adress delivery
+"Address" = "Address";
+"   Enter your address" = "   Enter your address";
+
+//MARK: - Payments VC
+
+"Payment Methods" = "Payment Methods";
+"Add debit/credit card" = "Add debit/credit card";
+"Cash" = "Cash";
+
+//MARK: - Contact vc
+"Contact Us" = "Contact Us";
+"About the team" = "About the team";
+        "Kyiv, Ukraine" = "Kyiv, Ukraine";
+"Email Us: ruslanzhidkih@gmail.com" = "Email Us: ruslanzhidkih@gmail.com";
+"Follow Me" = "Follow Me";
+"I am an aspiring developer who is passionate about bringing food to your doorstep. My goal is to make your life more comfortable and delicious, with fast and reliable delivery of the food you love." = "I am an aspiring developer who is passionate about bringing food to your doorstep. My goal is to make your life more comfortable and delicious, with fast and reliable delivery of the food you love.";
+
+//MARK: - Settings VC
+"Settings" = "Settings";
+"Language" = "Language";
+"Themecolor" = "Themecolor";
+"Setting up mailings" = "Setting up mailings";
+
+
+"Notification" = "Notification";
+"Current order information" = "Current order information" ;
+"The most important events and messages from the courier and support service related to your current order" = "The most important events and messages from the courier and support service related to your current order";
+"Push notifications" = "Push notifications";
+
+
+//MARK: - Help VC
+"General Questions" = "General Questions";
+"How to place an order?" = "How to place an order?";
+"What payment methods are accepted?" = "What payment methods are accepted?";
+"How to track my order?" = "How to track my order?";
+
+"Delivery Questions" = "Delivery Questions";
+"What are the delivery zones?" = "What are the delivery zones?";
+"How long does delivery take?" = "How long does delivery take?";
+"What if my order is late?" = "What if my order is late?";
+
+"Account & Profile" = "Account & Profile";
+"How to sign up?" = "How to sign up?";
+"How to update account information?" = "How to update account information?";
+"How to reset my password?" = "How to reset my password?";
+
+"What cards are accepted?" = "What cards are accepted?";
+"Can I use PayPal or other methods?" = "Can I use PayPal or other methods?";
+
+"Returns & Cancellations" = "Returns & Cancellations";
+"How to cancel an order?" = "How to cancel an order?";
+"How to request a refund?" = "How to request a refund?";
+
+"Order Issues" = "Order Issues";
+"What if my order is incorrect?" = "What if my order is incorrect?";
+"What if the food is cold?" = "What if the food is cold?";
+
+"Discounts & Promotions" = "Discounts & Promotions";
+"How to use promo codes?" = "How to use promo codes?";
+"Are there any loyalty programs?" = "Are there any loyalty programs?";
+
+"Support phone number" = "Support phone number";
+"Email address" = "Email address";
+"Social media links" = "Social media links";

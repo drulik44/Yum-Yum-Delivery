@@ -26,7 +26,7 @@ class OrderViewController: UIViewController, UIGestureRecognizerDelegate, UIColl
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 24)
         label.textAlignment = .center
-        label.text = "My Orders"
+        label.text = "My Orders".localized()
         return label
     }()
 

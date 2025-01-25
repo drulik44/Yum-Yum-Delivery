@@ -128,9 +128,9 @@ class FavoriteFoodCell: UICollectionViewCell {
     }
     
     func configure(with favoriteItem: FavoriteItem) {
-        nameLabel.text = favoriteItem.name
+        nameLabel.text = favoriteItem.name.localized()
         priceLabel.text = "\(favoriteItem.price)₴"
-        descriptionLabel.text = favoriteItem.description
+        descriptionLabel.text = favoriteItem.description.localized()
             
         if let url = URL(string: favoriteItem.imageUrl) {
             FoodImageView.sd_setImage(with: url, completed: nil)

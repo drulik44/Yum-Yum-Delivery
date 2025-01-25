@@ -8,7 +8,7 @@
 import UIKit
 import SkyFloatingLabelTextField
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     weak var coordinator: MainCoordinator?
     private let service = AuthService()
     
@@ -36,12 +36,16 @@ class LoginViewController: UIViewController {
         setupAddToSuperview()
         setupConstraints()
         setupAccountSection()
-        
+        emailTextField.delegate = self
+        nameTextField.delegate = self
+        passwordTextField.delegate = self
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
     
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     
     //MARK: - Label
@@ -179,6 +183,9 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    let googleButton = GoogleButton()
+    let facebookButton = FacebookButton()
+    
     func setupAccountSection() {
         let containerView = UIStackView(arrangedSubviews: [accountLabel, loginButton])
         containerView.axis = .horizontal
@@ -217,47 +224,8 @@ class LoginViewController: UIViewController {
         return line
     }()
     
-    //MARK: - Зробив кнопку Google
-    
-    let googleButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("  Continue with Google", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        button.setImage(UIImage(named: "Gicon"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        if let originalImage = UIImage(named: "Gicon") {
-            let resizedImage = originalImage.resized(to: CGSize(width: 26, height: 26))
-            button.setImage(resizedImage, for: .normal)
-        }
-        return button
-    }()
-    
-    //MARK: - Кнопка Facebook
-    
-    let facebookButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(" Continue with Facebook", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        button.setImage(UIImage(named: "Facebook"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        if let originalImage = UIImage(named: "Facebook") {
-            let resizedImage = originalImage.resized(to: CGSize(width: 30, height: 30))
-            button.setImage(resizedImage, for: .normal)
-        }
-        return button
-    }()
+   
+
     
     
     func setupAddToSuperview() {
@@ -419,8 +387,12 @@ class LoginViewController: UIViewController {
                 make.height.equalTo(40)
             }
             
-            
-            
         }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     }
 

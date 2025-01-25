@@ -20,5 +20,7 @@ class SearchCoordinator: Coordinator {
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
+    
+    
 
 }

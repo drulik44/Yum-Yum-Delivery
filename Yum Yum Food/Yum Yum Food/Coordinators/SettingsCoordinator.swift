@@ -24,6 +24,16 @@ class SettingsCoordinator: Coordinator {
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
+    
+    func showNotificationVC() {
+        let vc = NoficationViewController()
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showLocalizationVC() {
+        let vc = LocalizationViewController()
+        navigationController.pushViewController(vc, animated: true)
+    }
 
    }
 
