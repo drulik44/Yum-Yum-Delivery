@@ -21,5 +21,7 @@ struct FoodItem {
     let nameRestaurant: String
     let price: String
     
+    
+    
 }
 

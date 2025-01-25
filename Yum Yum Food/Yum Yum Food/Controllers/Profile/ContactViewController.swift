@@ -117,7 +117,7 @@ class ContactViewController: UIViewController {
     
     private lazy var teamLabel: UILabel = {
         let label = UILabel()
-        label.text = "Meet Our Team"
+        label.text = "About the team".localized()
         label.font = .boldSystemFont(ofSize: 24)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

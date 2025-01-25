@@ -7,202 +7,79 @@
 
 import UIKit
 import FirebaseAuth
-import Firebase
-import FirebaseFirestore
-import SnapKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     weak var coordinator: ProfileCoordinator?
-    private let service = AuthService()
     
-    private let cellIdentifier = "ProfileOptionCell"
+    private let profileView = ProfileView()
+    private let profileModel = ProfileModel()
     
     private var options = UserOption.options
     
     override func loadView() {
         super.loadView()
+        view = profileView
         view.backgroundColor = AppColors.background
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
-        setupConstraints()
+        profileView.tableView.delegate = self
+        profileView.tableView.dataSource = self
+        profileView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProfileOptionCell")
+        
+        profileView.logOutButton.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
+        
         fetchUserData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(userProfileUpdated), name: NSNotification.Name("UserProfileUpdated"), object: nil)
-
-
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .init("ReloadRootViewController"), object: nil)
     }
-
+    
     @objc private func updateLocalizedStrings() {
-        print("Updating localized strings")  
+        print("Updating localized strings")
         reloadOptions()
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.profileView.tableView.reloadData()
         }
     }
-
-    
-    // MARK: - USER INFO
-    
-    private lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 50 // Половина ширины/высоты для круговой маски
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = AppColors.main.cgColor
-        imageView.image = UIImage(named: "Profile imageView")
-        imageView.tintColor = AppColors.gray
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
-    
-    private lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = AppColors.textColorMain
-        label.font = .Rubick.bold.size(of: 25)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var emailLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = AppColors.gray
-        label.font = .Rubick.regular.size(of: 18)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let logOut: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log Out".localized(), for: .normal)
-        button.setTitleColor(AppColors.main, for: .normal)
-        button.titleLabel?.font = .Rubick.regular.size(of: 18)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        // Установка обводки
-        button.layer.borderWidth = 1
-        button.layer.borderColor = AppColors.main.cgColor
-        
-        if let originalImage = UIImage(named: "Log out") {
-            let resizedImage = originalImage.resized(to: CGSize(width: 26, height: 26))
-            let tintedImage = resizedImage.withRenderingMode(.alwaysTemplate)
-            button.setImage(tintedImage, for: .normal)
-        }
-        
-        button.tintColor = AppColors.main
-        return button
-    }()
-    
-    // MARK: - Setup user info
     
     private func fetchUserData() {
-        if let user = Auth.auth().currentUser {
-            let userRef = Firestore.firestore().collection("users").document(user.uid)
-            userRef.getDocument { document, error in
-                if let error = error {
-                    print("Ошибка получения данных пользователя: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let document = document, document.exists, let data = document.data() else { return }
-                self.nameLabel.text = data["name"] as? String ?? "No name"
-                self.emailLabel.text = data["email"] as? String
-                
-                
-                
-                }
-            }
+        profileModel.fetchUserData { [weak self] name, email in
+            guard let self = self else { return }
+            self.profileView.nameLabel.text = name
+            self.profileView.emailLabel.text = email
         }
-    
+    }
     
     @objc private func userProfileUpdated() {
         fetchUserData()
     }
     
-    
-  
-
-    lazy var tableView: UITableView = {
-        let tv = UITableView(frame: .zero, style: .grouped)
-        tv.delegate = self
-        tv.dataSource = self
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tv.showsVerticalScrollIndicator = false
-        tv.scrollsToTop = false
-        tv.separatorColor = UIColor.clear
-        tv.separatorStyle = .none
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.backgroundColor = AppColors.background
-        return tv
-    }()
-    
-    // MARK: - Setup UI
-    
-    private func setupUI() {
-        view.addSubview(profileImageView)
-        view.addSubview(nameLabel)
-        view.addSubview(emailLabel)
-        view.addSubview(tableView)
-        view.addSubview(logOut)
-        
-        logOut.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
-    }
-    
-    // MARK: - Setup Constraints
-    
-    private func setupConstraints() {
-        profileImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.width.equalTo(100)
-            make.top.equalToSuperview().offset(100)
-        }
-        
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        }
-        
-        emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(5)
-            make.centerX.equalToSuperview()
-        }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(emailLabel.snp.bottom).offset(20)
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-75)
-        }
-        
-        logOut.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50) // Убедитесь, что кнопка
-            make.height.equalTo(40)
-            make.width.equalTo(120)
-        }
+    private func reloadOptions() {
+        options = [
+            UserOption(title: "My Profile".localized(), icon: UIImage(named: "profile vc")),
+            UserOption(title: "My Orders".localized(), icon: UIImage(named: "order")),
+            UserOption(title: "Delivery Address".localized(), icon: UIImage(named: "delivery address")),
+            UserOption(title: "Payments Methods".localized(), icon: UIImage(named: "wallet")),
+            UserOption(title: "Contact Us".localized(), icon: UIImage(named: "contact")),
+            UserOption(title: "Settings".localized(), icon: UIImage(named: "settings")),
+            UserOption(title: "Help & FAQ".localized(), icon: UIImage(systemName: "questionmark.circle.fill"))
+        ]
     }
     
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileOptionCell", for: indexPath)
         let option = options[indexPath.row]
         cell.textLabel?.text = option.title.localized()
         cell.imageView?.image = option.icon
@@ -239,32 +116,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
-
-    private func reloadOptions() {
-        options = [
-            UserOption(title: "My Profile".localized(), icon: UIImage(named: "profile vc")),
-            UserOption(title: "My Orders".localized(), icon: UIImage(named: "order")),
-            UserOption(title: "Delivery Address".localized(), icon: UIImage(named: "delivery address")),
-            UserOption(title: "Payments Methods".localized(), icon: UIImage(named: "wallet")),
-            UserOption(title: "Contact Us".localized(), icon: UIImage(named: "contact")),
-            UserOption(title: "Settings".localized(), icon: UIImage(named: "settings")),
-            UserOption(title: "Help & FAQ".localized(), icon: UIImage(systemName: "questionmark.circle.fill"))
-        ]
-    }
-
-
+    
     // MARK: - Log Out
     
     @objc private func logOutTapped() {
         do {
             try Auth.auth().signOut()
-            coordinator?.showWelcomeScreen() // Переход к экрану входа
+            coordinator?.showWelcomeScreen()
         } catch let error as NSError {
             print("Ошибка выхода из аккаунта: \(error.localizedDescription)")
         }
     }
 }
-
-
-
-

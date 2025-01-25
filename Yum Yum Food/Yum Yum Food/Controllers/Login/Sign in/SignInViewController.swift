@@ -199,47 +199,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return line
     }()
     
-    //MARK: - Зробив кнопку Google
-    
-    let googleButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("  Continue with Google", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        button.setImage(UIImage(named: "Gicon"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
+    let googleButton = GoogleButton()
         
-        if let originalImage = UIImage(named: "Gicon") {
-            let resizedImage = originalImage.resized(to: CGSize(width: 26, height: 26))
-            button.setImage(resizedImage, for: .normal)
-        }
-        return button
-    }()
-    
-    //MARK: - Кнопка Facebook
-    
-    let facebookButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(" Continue with Facebook", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        button.setImage(UIImage(named: "Facebook"), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        
-        if let originalImage = UIImage(named: "Facebook") {
-            let resizedImage = originalImage.resized(to: CGSize(width: 30, height: 30))
-            button.setImage(resizedImage, for: .normal)
-        }
-        return button
-    }()
+    let facebookButton = FacebookButton()
+
     
     //MARK: - Lazy alert
     

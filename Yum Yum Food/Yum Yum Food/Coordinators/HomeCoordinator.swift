@@ -28,10 +28,6 @@ class HomeCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showPopularDelivery() {
-        let vc = PopularDeliveryViewController()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
+   
 }
 

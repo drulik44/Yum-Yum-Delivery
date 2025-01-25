@@ -16,7 +16,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     var options: [SectionOptionSettings] = [
         SectionOptionSettings(name: "Language".localized(), icon: "Language Icons"),
-        SectionOptionSettings(name: "Themecolor".localized(), icon: "Theme Icons 48"),
         SectionOptionSettings(name: "Setting up mailings".localized(), icon: "Notification Icon")
     ]
 
@@ -67,9 +66,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switch indexPath.row {
         case  0:
             self.coordinator?.showLocalizationVC()
-            case  1:
-            print ("Showing SettingsVC")
-            case 2:
+            
+            case 1:
             self.coordinator?.showNotificationVC()
         default:
             break

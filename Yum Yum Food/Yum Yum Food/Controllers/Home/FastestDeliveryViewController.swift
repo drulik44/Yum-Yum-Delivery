@@ -23,7 +23,7 @@ class FastestDeliveryViewController: UIViewController {
         label.textColor = AppColors.textColorMain
         label.font = .Rubick.bold.size(of: 24)
         label.textAlignment = .center
-        label.text = "Fastest delivery 🔥"
+        label.text = "Fastest delivery 🔥".localized()
         return label
     }()
     lazy var FastestCollectionView: UICollectionView = {
@@ -86,7 +86,7 @@ class FastestDeliveryViewController: UIViewController {
         
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
-            make.width.equalTo(scrollView) // Ширина должна совпадать с шириной экрана
+            make.width.equalTo(scrollView)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -97,8 +97,8 @@ class FastestDeliveryViewController: UIViewController {
         FastestCollectionView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(1000) // Укажите фиксированную высоту или измените в зависимости от контента
-            make.bottom.equalToSuperview().offset(-20) // Убедитесь, что контент завершает contentView
+            make.height.equalTo(1000)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
 
@@ -136,17 +136,16 @@ extension FastestDeliveryViewController: UICollectionViewDataSource, UICollectio
         if collectionView == FastestCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FastestDeliveryCell.reusableId, for: indexPath) as! FastestDeliveryCell
             cell.data = fastestDeliveryItems[indexPath.item]
-            return cell // Исправлено: return
+            return cell
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == FastestCollectionView {
-            // Размер для ячеек в fastestDeliveryCollectionView
             return CGSize(width: 350, height: 210)
         }
-        return CGSize(width: 0, height: 0) // Значение по умолчанию (может быть не достигнуто)
+        return CGSize(width: 0, height: 0)
 
     }
 }
