@@ -1,6 +1,6 @@
 # Yum-Yum-Delivery
 
-![Simulator Screenshot - iPhone 16 - 2025-01-26 at 22 18 10](https://github.com/user-attachments/assets/2b7c7581-bdef-4f1c-82ad-3486ed735a22)
+![image](https://github.com/user-attachments/assets/5df2b9ee-45d3-445f-b663-af6c13453cff)
 
 Мобільний додаток для замовлення їжі, розроблений на Swift за допомогою UIKit.
 
