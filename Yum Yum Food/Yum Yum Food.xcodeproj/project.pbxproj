@@ -18,12 +18,12 @@
 		A32270D32CF2AA6B00D9BEC3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A32270D22CF2AA6B00D9BEC3 /* SnapKit */; };
 		A33B569D2D08786A0076375E /* CustomButtonHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */; };
 		A353423A2D08F98A00C91C1C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35342392D08F98A00C91C1C /* CategoryCell.swift */; };
-		A353423C2D08FC5100C91C1C /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353423B2D08FC5100C91C1C /* RestaurantCell.swift */; };
 		A353423E2D09201700C91C1C /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353423D2D09201700C91C1C /* Restaurants.swift */; };
 		A35342412D0B9F3000C91C1C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35342402D0B9F3000C91C1C /* Category.swift */; };
 		A35B25F92D0E29A1004C4B69 /* RestaurantsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35B25F82D0E29A1004C4B69 /* RestaurantsDetailViewController.swift */; };
 		A35B25FC2D0E464D004C4B69 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A35B25FB2D0E464D004C4B69 /* SDWebImage */; };
 		A35B25FE2D0E464D004C4B69 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A35B25FD2D0E464D004C4B69 /* SDWebImageMapKit */; };
+		A36669902DCF7B5600964A60 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A366698F2DCF7B5600964A60 /* RestaurantCell.swift */; };
 		A3AD033C2D1DC7FC005E2F30 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD033B2D1DC7FC005E2F30 /* CartViewController.swift */; };
 		A3AD033E2D1E1509005E2F30 /* CartBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD033D2D1E1509005E2F30 /* CartBannerView.swift */; };
 		A3AD03412D1E16AB005E2F30 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AD03402D1E16AB005E2F30 /* CartManager.swift */; };
@@ -140,10 +140,10 @@
 		A32270B92CF2A21500D9BEC3 /* Yum Yum Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yum Yum Food.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33B569C2D08786A0076375E /* CustomButtonHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonHomeVC.swift; sourceTree = "<group>"; };
 		A35342392D08F98A00C91C1C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		A353423B2D08FC5100C91C1C /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantCell.swift; path = /Users/ruslanzidkih/Documents/dev/RestaurantCell.swift; sourceTree = "<absolute>"; };
 		A353423D2D09201700C91C1C /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
 		A35342402D0B9F3000C91C1C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		A35B25F82D0E29A1004C4B69 /* RestaurantsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsDetailViewController.swift; sourceTree = "<group>"; };
+		A366698F2DCF7B5600964A60 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		A3AD033B2D1DC7FC005E2F30 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		A3AD033D2D1E1509005E2F30 /* CartBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartBannerView.swift; sourceTree = "<group>"; };
 		A3AD03402D1E16AB005E2F30 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
@@ -322,9 +322,9 @@
 			isa = PBXGroup;
 			children = (
 				A35342392D08F98A00C91C1C /* CategoryCell.swift */,
-				A353423B2D08FC5100C91C1C /* RestaurantCell.swift */,
 				A3E7A3A12D11BB960086E0FD /* MenuItemCell.swift */,
 				A3E7A3AB2D15DD040086E0FD /* PackageCostCell.swift */,
+				A366698F2DCF7B5600964A60 /* RestaurantCell.swift */,
 			);
 			path = Restaurants;
 			sourceTree = "<group>";
@@ -925,8 +925,8 @@
 				A3D6052D2D05F8B100846F06 /* SectionOptionSettings.swift in Sources */,
 				A3035ABD2D179C42000BF8BF /* FavoriteRestaurantsCell.swift in Sources */,
 				A3E7A3A82D14C3680086E0FD /* IncrementDecrementView.swift in Sources */,
+				A36669902DCF7B5600964A60 /* RestaurantCell.swift in Sources */,
 				A3B6B82E2D446A5100E27642 /* DeliveryAddressView.swift in Sources */,
-				A353423C2D08FC5100C91C1C /* RestaurantCell.swift in Sources */,
 				A3AD03582D2472C1005E2F30 /* OrderCell.swift in Sources */,
 				A3D604DA2D01E29F00846F06 /* ContactViewController.swift in Sources */,
 				A3D604DB2D01E29F00846F06 /* OrderViewController.swift in Sources */,
